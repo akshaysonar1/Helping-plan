@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Provide_Help;
 
 class RegisterController extends Controller
 {
@@ -67,14 +68,26 @@ class RegisterController extends Controller
         // $randomNumber = random_int(1000, 9999999999);
    
        // $randomNumber->merge(['customer_id' => $customer_id]);
-       
-        return User::create([
+        
+       $user =  User::create([
       
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'customer_id' => $data['customer_id'],
+            'user_type' => $data['user_type'],
             
         ]);
+       
+        $providerHelp = new Provide_Help;
+        $providerHelp->user_id = $user->id;
+        $providerHelp->customer_id = $user->customer_id; 
+        $providerHelp->save(); 
+        //dd($user->id);
+        
+       
+
+        return $user ; 
+
     }
 }

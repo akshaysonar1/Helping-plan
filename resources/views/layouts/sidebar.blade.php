@@ -37,13 +37,13 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="{{ route('customer_details.CustomerDetails') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Customer Details</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="">
             <i class="fas fa-fw fa-table"></i>
             <span>Pin History</span></a>
     </li>

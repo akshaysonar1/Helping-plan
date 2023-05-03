@@ -1,8 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\admin\GenrateUniqueCodeController;
 use App\Http\Controllers\HomeController;
+
+
+use App\Http\Controllers\admin\CustomerDetailsController;
+use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DemoController;
+use App\Http\Controllers\Auth\LoginController;
+ use Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,20 +24,12 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
-Route::get('/', function () {
-    return view('auth.login');
-});
 
 
 Auth::routes();
+  
+    Route::get('/demo', [DemoController::class, 'demo']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::group(['middleware' => 'auth'], function () {
 
 
 Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
@@ -41,3 +42,21 @@ Route::prefix('admin')->controller(HomeController::class)->group(function () {
 });
 
 });
+
+// Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+   
+    route::name('customer_details.')->prefix('customer_details')->group(function(){
+   
+        route::get('CustomerDetails',[CustomerDetailsController::class,'CustomerDetails'])->name('CustomerDetails');
+
+
+       
+    });
+
+
+});
+ 
+
