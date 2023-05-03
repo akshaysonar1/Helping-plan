@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\admin\GenrateUniqueCodeController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +30,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => 'auth'], function () {
 
+
+Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
+    Route::get('/genratepin','generateUniqueCode')->name('genratepin');
+    Route::post('/genratepin/data', 'storepin')->name('genratepin.data');
+});
+Route::prefix('admin')->controller(HomeController::class)->group(function () {
+    Route::get('/helpswitch','HelpSwitch')->name('helpswitch');
+    Route::get('status/change/{user_Id}','UserStatus')->name('status');
+});
 
 });
