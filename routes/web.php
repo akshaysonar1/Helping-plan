@@ -27,7 +27,12 @@ use App\Http\Controllers\Auth\LoginController;
 
 
 
+
   
+
+Auth::routes();
+  Route::get('/',[HomeController::class,'home'])->name('home');
+
     Route::get('/demo', [DemoController::class, 'demo']);
 
 
