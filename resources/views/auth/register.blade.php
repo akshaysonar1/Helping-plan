@@ -55,6 +55,7 @@
                                     $randomNumber = random_int(1000, 9999999999);
                                 @endphp
                                 <input  type="hidden" class="form-control"   name="customer_id" value="{{ $randomNumber }}">
+                                <input   type="hidden" class="form-control form-control-user" name="user_type" value="0"  >
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
