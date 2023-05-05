@@ -40,7 +40,7 @@
                                 @csrf
                                 
                                     <div class="form-group">
-                                        <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="User Name">
+                                        <input id="name" pattern="[a-zA-Z]*" oninvalid="setCustomValidity('Please enter on alphabets only. ')" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="User Name">
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

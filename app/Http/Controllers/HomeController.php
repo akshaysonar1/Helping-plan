@@ -27,7 +27,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // dd('hello');
+        //  dd('hello');
         if(Auth::user()->user_type=='1'){
    $users = Auth::user()->first();
          if(!empty($users)){
