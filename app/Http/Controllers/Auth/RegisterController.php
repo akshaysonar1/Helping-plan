@@ -53,7 +53,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -65,7 +65,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-         
+        // $randomNumber = random_int(1000, 9999999999);
+   
+       // $randomNumber->merge(['customer_id' => $customer_id]);
+        
        $user =  User::create([
       
             'name' => $data['name'],
@@ -76,16 +79,15 @@ class RegisterController extends Controller
             
         ]);
        
-        $providerHelp = new Provide_Help;
-        $providerHelp->user_id = $user->id;
-        $providerHelp->customer_id = $user->customer_id; 
-        $providerHelp->save(); 
-        //dd($user->id);
+        // $providerHelp = new Provide_Help;
+        // $providerHelp->user_id = $user->id;
+        // $providerHelp->customer_id = $user->customer_id; 
+        // $providerHelp->save(); 
+        // //dd($user->id);
         
        
 
-        return $user ; 
-         
+        // return $user ; 
 
     }
 }
