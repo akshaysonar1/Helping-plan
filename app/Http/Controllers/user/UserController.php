@@ -8,7 +8,16 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     //
-    public function demo(){
-        return view('user.demo');
+    public function index(){
+        return view('user.layouts.index');
+       
+    }
+
+    public function login(){
+        return view('user.login');
+    }
+    public function register(){
+        return view('user.register');
     }
 }
+

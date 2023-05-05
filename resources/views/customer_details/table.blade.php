@@ -61,16 +61,7 @@
           
         </tbody>
         <tfoot>
-            <tr>
-                <th>Sr.no</th>
-                <th>Date</th>
-                <th>ID No</th>
-                <th>Name</th>
-                <th>Mobile No.</th>
-                <th>Provide Help</th>
-                <th>Get Help</th>
-                <th>Remark</th>
-            </tr>
+            
         </tfoot>
     </table>
     <script>
