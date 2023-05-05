@@ -1,0 +1,45 @@
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="author" content="Yinka Enoch Adedokun">
+	<meta name="description" content="Simple Forgot Password Page Using HTML and CSS">
+	<meta name="keywords" content="forgot password page, basic html and css">
+    <link href="{{ asset('assets/css/password-3.css') }}" rel="stylesheet">
+	<title>Forgot Password Page - HTML + CSS</title>
+</head>
+<body>
+    @if(Session::has('message'))
+    <p class="alert alert-info">{{ Session::get('message') }}</p>
+    @endif
+	<div class="row">
+       
+		<h1>Forgot Password</h1>
+		<h6 class="information-text">Enter your registered mobile number to reset your password.</h6>
+        <form action="{{ route('auth.store') }}" method="POST">
+            @csrf
+            @method('POST')
+		<div class="form-group">
+			<input type="text" name="mobile" oninput="process(this)" maxlength="10" id="phone" >
+			<p><label for="username">Mobile</label></p>
+
+            <input type="text" name="message"  >
+			<p><label for="username">Message</label></p>
+			<button type="submit" onclick="showSpinner()">Reset Password</button>
+		</div>
+    </form>
+		<div class="footer">
+			{{-- <h5>New here? <a href="#">Sign Up.</a></h5> --}}
+			<h5>Already have an account? <a href="{{ route('login') }}">Sign In.</a></h5>
+			<p class="information-text"><span class="symbols" title="Lots of love from me to YOU!">&hearts; </span><a href="#" target="_blank" title="Connect with me on Facebook">Helping Plan</a></p>
+		</div>
+	</div>
+   
+   <script>        
+   function process(input){
+  let value = input.value;
+  let numbers = value.replace(/[^0-9]/g, "");
+  input.value = numbers;
+}
+     
+    </script>
+</body>  

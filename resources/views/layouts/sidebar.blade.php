@@ -4,9 +4,9 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+            {{-- <i class="fas fa-laugh-wink"></i> --}}
         </div>
-        <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        <div class="sidebar-brand-text mx-3">HELPING PLAN</div>
     </a>
 
     <!-- Divider -->
@@ -61,6 +61,11 @@
 
           <i class="fas fa-fw fa-cog"></i>
             <span>Help Switch ON/OFF</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('forgotpassword.forgotpassword') }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Forgot Password List</span></a>
     </li>
 
 
