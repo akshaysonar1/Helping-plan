@@ -26,11 +26,13 @@
     <div class="sidebar-heading">
         Interface
     </div>
-    
+
     <!-- Nav Item - Pages Collapse Menu -->
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+
+        <a class="nav-link" href="{{route('genratepin')}}">
+
             <i class="fas fa-fw fa-cog"></i>
             <span>Pin Genrate</span></a>
     </li>
@@ -41,7 +43,7 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Customer Details</span></a>
     </li>
-    
+
     <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-table"></i>
@@ -55,7 +57,9 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+ 
+        <a class="nav-link" href="{{route('helpswitch')}}">
+ 
             <i class="fas fa-fw fa-cog"></i>
             <span>Help Switch ON/OFF</span></a>
     </li>
@@ -67,7 +71,7 @@
 
 
 
-   
+
 
 </ul>
 <!-- End of Sidebar -->
