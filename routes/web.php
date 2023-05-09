@@ -1,13 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\admin\GenrateUniqueCodeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\admin\PinHistoryController;
+
+
+
+
 use App\Http\Controllers\admin\CustomerDetailsController;
 use App\Http\Controllers\admin\ForgotPasswordController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\deshboard\DeshboardController;
-use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\DemoController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
@@ -27,6 +32,30 @@ use App\Http\Controllers\user\PinActiveController;
 */
 //user side index route call by defalut
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => 'auth'], function () {
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/genratepin', [GenrateUniqueCodeController::class, 'generateUniqueCode'])->name('genratepin');
+    Route::post('/genratepin/data', [GenrateUniqueCodeController::class, 'storepin'])->name('genratepin.data');
+    Route::get('/helpswitch', [HomeController::class, 'HelpSwitch'])->name('helpswitch');
+    Route::get('status/change/{user_Id}', [HomeController::class,'UserStatus'])->name('status');
+    Route::get('/pinhistory', [PinHistoryController::class,'SearchPin'])->name('pinhistory');
+
+});
 Route::get('/',[UserController::class,'index'])->name('index');
 
 

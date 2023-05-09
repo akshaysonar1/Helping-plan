@@ -52,10 +52,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
             //  'mobile' => ['required', 'number', 'number', 'max:255', 'unique:users'],
             'mobile' => ['required', 'integer','digits:10','unique:users'],
             
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            // 'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -67,7 +69,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-       
+        // $randomNumber = random_int(1000, 9999999999);
+   
+       // $randomNumber->merge(['customer_id' => $customer_id]);
+        
        $user =  User::create([
          
             'name' => $data['name'],
@@ -81,18 +86,15 @@ class RegisterController extends Controller
             
         ]);
        
-        $providerHelp = new Provide_Help;
-        $providerHelp->users_id = $user->id;
-        $providerHelp->customer_id = $user->customer_id; 
-        $providerHelp->provide_help_ammount = '0.00';
-        $providerHelp->get_help_ammount = '0.00';
-        $providerHelp->ammount_Received = '0.00';
-        $providerHelp->ammount_pendding = '0.00';
-        $providerHelp->save(); 
-
-        return $user; 
+        // $providerHelp = new Provide_Help;
+        // $providerHelp->user_id = $user->id;
+        // $providerHelp->customer_id = $user->customer_id; 
+        // $providerHelp->save(); 
+        // //dd($user->id);
         
-         
+       
+
+        // return $user ; 
 
     }
 }
