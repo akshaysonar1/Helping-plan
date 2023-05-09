@@ -2,117 +2,150 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>SB Admin 2 - Register</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>umoneyhelp | Sign Up</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-
+        <link href="{{ asset ('user/assets/vendor/aos/aos.css') }}" rel="stylesheet">
+        <link href="{{ asset ('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset ('user/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset ('user/assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
+        <link href="{{ asset ('user/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+        <link href="{{ asset ('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+        <!-- Template Main CSS File -->
+        <link href="{{ asset ('user/assets/css/style.css') }}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 
-<body class="bg-gradient-primary">
-
-    <div class="container">
-
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
-                            </div>
-                            <form class="user" method="post">
-                                @csrf
+<body>
+    <div class="login-section sign-section">
+        <div class="container-fluid ps-md-0">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <div class="login-imgages">
+                        <img src="{{ asset ('user/assets/img/login-img.png') }}">
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="login-box">
+                        <form class="user" method="POST">
+                            @csrf
+                        <h1>Sign Up</h1>
+                        
+                        <div class="row mb-3">
+                          
                                 
-                                    <div class="form-group">
-                                        <input id="name" pattern="[a-zA-Z]*" oninvalid="setCustomValidity('Please enter on alphabets only. ')" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="User Name">
-                                        @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    </div>
-                                  
-                              
-                                <div class="form-group">
-                                    <input id="email" type="email" class="form-control form-control-user @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Email Address">
-                                @php
-                                    $randomNumber = random_int(1000, 9999999999);
-                                @endphp
-                                <input  type="hidden" class="form-control"   name="customer_id" value="{{ $randomNumber }}">
-                                <input   type="hidden" class="form-control form-control-user" name="user_type" value="0"  >
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password"placeholder="password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="Repeat password">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-user btn-block">Register now</button>
-                                {{-- <a href="" >
-                                    Register Account
-                                </a> --}}
-                                <hr>
-                                {{-- <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a> --}}
-                            </form>
-                            <hr>
-                            <div class="text-center">
-                                <a class="small" href="forgot-password.html">Forgot Password?</a>
+                            <div class="col-12">
+                                <label>Name</label>      
+                                <input id="name"   type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus placeholder="Name by bank name" >
+                                @error('name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             </div>
-                            <div class="text-center">
-                                <a class="small" href="{{ route('login') }}">Already have an account? Login!</a>
+                      
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label>Mobile No.</label>
+                            
+                                <input id="mobile"   type="text" class="form-control form-control-user  @error('mobile') is-invalid @enderror numbers" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus placeholder="10 digit mobile no."oninput="process(this)" maxlength="10">
+                                @error('mobile')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            @php
+                            $randomNumber = random_int(1000, 9999999999);
+                        @endphp
+                        <input  type="hidden" class="form-control"   name="customer_id" value="{{ $randomNumber }}">
+                        <input   type="hidden" class="form-control form-control-user" name="user_type" value="0"  >
                             </div>
                         </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label>Create password</label>
+                                
+                                <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="123456789">
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label>Confirm password</label>
+      
+                                <input id="password-confirm" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="123456789">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>State</label>
+                                        <input class="form-control" name="state" placeholder="Punjab" required></input>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                        <input class="form-control" name="city" placeholder="Ludhiana" required></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col-12">
+                                <label>Pin Code</label>
+                                <input type="text" name="pin_code" placeholder="853698" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit">Submit</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <a href="{{ route('user.login') }}" class="sign-up">Login</a>
+                            </div>
+                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+ 
+     <script>        
+		function process(input){
+	   let value = input.value;
+	   let numbers = value.replace(/[^0-9]/g, "");
+	   input.value = numbers;
+	 }
+     </script>
+    <div id="preloader"></div>
+    <!-- Vendor JS Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ asset ('user/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
+    <script src="{{ asset ('user/assets/vendor/php-email-form/validate.js') }}"></script>
+    <!-- Template Main JS File -->
+    <script src="{{ asset ('user/assets/js/main.js') }}"></script>
 </body>
 
 </html>

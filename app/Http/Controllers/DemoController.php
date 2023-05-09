@@ -13,7 +13,7 @@ class DemoController extends Controller
         if(Auth::user()->user_type=='0'){
             $users = Auth::user()->first();
                   if(!empty($users)){
-                 return view('demo');
+                 return view('user.dashboard');
                      }else{
                          return view('auth.login');
                      }
