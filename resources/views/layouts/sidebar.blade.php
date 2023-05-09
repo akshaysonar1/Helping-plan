@@ -32,20 +32,19 @@
     <li class="nav-item">
 
         <a class="nav-link" href="{{route('genratepin')}}">
-
             <i class="fas fa-fw fa-cog"></i>
             <span>Pin Genrate</span></a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('customer_details.CustomerDetails') }}">
+        <a class="nav-link" href="#">
             <i class="fas fa-fw fa-table"></i>
             <span>Customer Details</span></a>
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('pinhistory')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Pin History</span></a>
     </li>
@@ -57,10 +56,10 @@
     </li>
 
     <li class="nav-item">
- 
+
         <a class="nav-link" href="{{route('helpswitch')}}">
- 
-            <i class="fas fa-fw fa-cog"></i>
+
+          <i class="fas fa-fw fa-cog"></i>
             <span>Help Switch ON/OFF</span></a>
     </li>
     <li class="nav-item">

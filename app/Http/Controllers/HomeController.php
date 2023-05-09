@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-
-use Auth;
 use App\Models\User;
 
 class HomeController extends Controller
@@ -27,20 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-      
-        if(Auth::user()->user_type=='1'){
-   $users = Auth::user()->first();
-         if(!empty($users)){
         return view('layouts.master');
-            }else{
-                return view('auth.login');
-            }
-            }else{
-                return view('auth.login');
-            }
-        }
-
-  
+    }
 
     //This function use For fetch data 
     public function HelpSwitch()
