@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('provide__helps', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->unsigned(); 
-            $table->foreign('user_id')->references('id')->on('users');
             $table->string('provide_help_ammount')->nullable();
             $table->string('get_help_ammount')->nullable(); 
             $table->string('ammount_Received')->nullable();
             $table->string('ammount_pendding')->nullable();
             $table->string('customer_id');
             $table->enum('status',[0,1])->nullable();
+            $table->unsignedBigInteger('users_id');
+            $table->foreign('users_id')->on('users')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

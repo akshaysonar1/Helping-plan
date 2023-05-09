@@ -30,6 +30,7 @@ class GenrateUniqueCodeController extends Controller
             $newPin->total_pin = $request->total_pin;
             $newPin->save();
         }
+      
         return redirect()->back();
     }
 }

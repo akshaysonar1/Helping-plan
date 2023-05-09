@@ -6,7 +6,7 @@
         <div class="section-title">
             <h2>Dashboard</h2>
             <h3>Find Out More <span>Dashboard</span></h3>
-        </div>
+        </div> 
     </div>
 </section>
 <section class="adjust-margin">
@@ -49,8 +49,14 @@
                             </li>
                         </ul>
                     </div>
+                   
+            
+                   
                     <div class="Log-out-btn">
-                        <button type="button" class="btn btn-logout w-100">Logout</button>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        <button type="submit" class="btn btn-logout w-100">Logout</button>
+                    </form>
                     </div>
                     <!-- </div> -->
                 </div>
@@ -238,8 +244,12 @@
                         </div>
                     </div>
                     <!-- profile-tab-content -->
+                   
                     <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
                         tabindex="0">
+                        <form action="{{ route('user.profileupdate',Auth::user()->id) }}" method="POST">
+                            @csrf
+                            @method('post')
                         <div class="row mb-5">
                             <div class="">
                                 <div class="col-xl-12">
@@ -249,25 +259,25 @@
                             <div class="row">
                                 <div class="col-xl-6 form-adjust">
                                     <label>Name</label>
-                                    <input type="text" placeholder="Name by Bank name" class="form-control">
+                                    <input type="text" placeholder="Name by Bank name" class="form-control" name="name" value="{{ Auth::user()->name }}">
                                 </div>
                                 <div class="col-xl-6 mb-3 form-adjust">
                                     <label>Mobile No.</label>
-                                    <input type="text" placeholder="10 digit mobile no." class="form-control">
+                                    <input type="text" placeholder="10 digit mobile no." class="form-control" value="{{ Auth::user()->mobile }}" readonly>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-4 mb-3 form-class form-adjust">
                                     <label>State</label>
-                                    <input class="form-control" placeholder="Punjab"></input>
+                                    <input class="form-control" placeholder="Punjab" name="state" value="{{ Auth::user()->state }}"></input>
                                 </div>
                                 <div class="col-xl-4 mb-3 form-class form-adjust">
                                     <label>City</label>
-                                    <input class="form-control" placeholder="Ludhiana"></input>
+                                    <input class="form-control" placeholder="Ludhiana" name="city" value="{{ Auth::user()->city }}"></input>
                                 </div>
                                 <div class="col-xl-4 mb-3 form-class form-adjust">
                                     <label>Pin Code</label>
-                                    <input class="form-control" placeholder="853698"></input>
+                                    <input class="form-control" placeholder="853698" name="pin_code"value="{{ Auth::user()->pin_code }}"></input>
                                 </div>
                             </div>
                         </div>
@@ -278,41 +288,47 @@
                             <div class="row">
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>Bank Name</label>
-                                    <input type="text" placeholder="Name by bank name" class="form-control">
+                                    <input type="text" placeholder="Name by bank name" class="form-control" name="bank_name" value="{{ Auth::user()->bank_name}}">
                                 </div>
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>A/C No.</label>
-                                    <input type="text" placeholder="xxxxxxxxxxxxxxxx" class="form-control">
+                                    <input type="text" placeholder="xxxxxxxxxxxxxxxx" class="form-control" name="account_no" value="{{ Auth::user()->account_no}}" oninput="process(this)" maxlength="20">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>IFSC CODE</label>
-                                    <input type="text" placeholder="SBIN001992" class="form-control">
+                                    <input type="text" placeholder="SBIN001992" class="form-control" name="ifsc_code" value="{{ Auth::user()->ifsc_code}}" onkeyup="
+                                    var start = this.selectionStart;
+                                    var end = this.selectionEnd;
+                                    this.value = this.value.toUpperCase();
+                                    this.setSelectionRange(start, end);
+                                  ">
                                 </div>
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>Phone pay No.</label>
-                                    <input type="text" placeholder="99854854589" class="form-control">
+                                    <input type="text" placeholder="99854854589" class="form-control" name="phone_pay_no" value="{{ Auth::user()->phone_pay_no}}" oninput="process(this)" maxlength="10">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>Google pay No.</label>
-                                    <input type="text" placeholder="99854854589" class="form-control">
+                                    <input type="text" placeholder="99854854589" class="form-control" name="google_pay_no" value="{{ Auth::user()->google_pay_no}}" oninput="process(this)" maxlength="10">
                                 </div>
                                 <div class="col-xl-6 mb-3 form-class form-adjust">
                                     <label>Upi Link</label>
-                                    <input type="text" placeholder="99854854589@yb" class="form-control">
+                                    <input type="text" placeholder="99854854589@yb" class="form-control" name="upi_link" value="{{ Auth::user()->upi_link}}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-xl-12">
-                                    <button type="button" class="btn btn-form">Edit</button>
-                                    <button type="button" class="btn btn-form-1">Save</button>
+                                    {{-- <button type="button" class="btn btn-form">Edit</button> --}}
+                                    <button type="submit" class="btn btn-form-1">Save</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>   </div>
+               
                     <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab"
                         tabindex="0">
                         <div class="row">
@@ -855,5 +871,96 @@
         </div>
     </div>
 </section>
+{{-- <div id="preloader"></div> --}}
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
+    class="bi bi-arrow-up-short"></i></a>
+<!-- Modal-1 -->
+<div class="modal fade" id="modal-2" tabindex="-1" role="dialog" aria-labelledby="modal-2Label" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+        <div class="modal-header header-modify">
+            <h3 class="modal-head text-center mb-0">Welcome!</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          
+            <div class="row">
+                <div class="col-auto">
+                    <div class="">
+                        <h4 class="name-text-1">Pin:</h4>
+                    </div>
+                    <h4 class="name-text-1">Provide Help:</h4>
+                    <h4 class="name-text-1">Get Help:</h4>
+                </div>
+                <div class="col-auto">
+                    <div>
+                        <h4 class="name-para-1">Rs.500</h4>
+                    </div>
+                    <h4 class="name-para-1">Rs.1000</h4>
+                    <h4 class="name-para-1">Rs.2000</h4>
+                </div>
+                <div class="mt-3 d-flex justify-content-center">
+                    <button type="button" class="btn btn-form-1 w-100" data-bs-dismiss="modal"
+                        aria-label="Close">Start</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- Modal-2 -->
+ @if(!empty(Auth::user()->unique_pin))
 
+@else
+
+ 
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    @if(Session::has('error'))
+<p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">{{ Session::get('error') }}
+    
+</p>
+@endif
+    <form action="{{ route('user.pinactive',Auth::user()->id) }}" method="post">
+        @csrf
+        @method('POST')
+<div class="modal-dialog modal-dialog-centered" role="document">
+    
+    <div class="modal-content">
+        <div class="modal-header header-modify">
+           
+            <p class="text-center modal-head mb-0">Enter Pin</p>
+          
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-xl-12 mb-3 form-class form-adjust">
+                    <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
+                    <input type='hidden' id='hasta' value='<?php echo date('Y-m-d');?>' name="date">
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal"
+                            aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-2">Activate</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</form>
+</div>
+ 
+ 
+@endif
 @endsection
+
+<script>        
+    function process(input){
+   let value = input.value;
+   let numbers = value.replace(/[^0-9]/g, "");
+   input.value = numbers;
+
+   
+ }
+ </script>
+ 
