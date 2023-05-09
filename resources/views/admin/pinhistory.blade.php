@@ -67,6 +67,8 @@
                                                 <td>{{$list->pin_number}}</td>
                                                 <td>{{$list->pin_ammount}}</td>
                                                 <td></td>
+                                                <td></td>
+                                                <td></td>
                                             </tr>
                                             @endforeach
                                             @endif
@@ -84,4 +86,22 @@
     </div>
 </div>
 
+@endsection
+
+@section('custom.js')
+
+
+<script>
+    $(document).ready(function() {
+        $('#dataTable').DataTable({
+            dom: 'frtip',
+            buttons: [
+                'copyHtml5',
+                'excelHtml5',
+                'csvHtml5',
+                'pdfHtml5'
+            ]
+        });
+    });
+</script>
 @endsection

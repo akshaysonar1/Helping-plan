@@ -27,7 +27,7 @@ class PinHistoryController extends Controller
             $filter = $filter->where('pin_number', $pinData);
         }
         if (!empty($startDate) || !empty($endDate)) {
-            $filter = $filter->where('created_at','>=', $startDate)->where('created_at','<=', $endDate);
+            $filter = $filter->where('created_at', '>=', $startDate)->where('created_at', '<=', $endDate);
         }
 
         if (isset($countdata) && !empty($countdata)) {
@@ -47,11 +47,7 @@ class PinHistoryController extends Controller
         // $data = $filter;
         // $data = PinModel::where('pin_ammount', $currency)->orderBy('id', 'asc')->take($countdata)->get();
 
-
-
-
-
-
         return view('admin.pinhistory', compact('data'));
     }
+    
 }

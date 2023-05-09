@@ -22,7 +22,8 @@
 
                             <label>Enter The Pin </label>
                             <div class="col-sm-6">
-                                <input type="text" name="total_pin" id="total_pin" required autocomplete="new-total_pin" placeholder="Enter The pin" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)">
+                                <input type="text" name="total_pin" id="total_pin" maxlength="2" required autocomplete="new-total_pin" placeholder="Enter The pin" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="">
+                                <!-- <label id="total_pin-error" class="error" for="total_pin"> -->
                             </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -72,25 +73,37 @@
 @section('custom-js')
 <script>
     $(document).ready(function() {
+        $('#total_pin').keyup(function() {
+            if ($(this).val() > 10) {
+                alert("No numbers above 10");
+                $(this).val('10');
+            }
+        });
+    });
+</script>
+<!-- <script>
+    $(document).ready(function() {
                 $('#genratePin').validate({
-                        ignore: [],
-                        rules: {
+                    ignore: [],
+                    rules: {
+                        total_pin: {
+                            required: true,
+                            maxlength: true,
+                        },
+
+                        messages: {
                             total_pin: {
-                                required: true,
-                                maxlength: true, 
+                                required: 'Please Enter To Genrate Pin',
+                                maxlength: 2,
                             },
 
-                            messages: {
-                                total_pin: {
-                                    required: 'Please Enter To Genrate Pin',
-                                    maxlength: 3 , 
-                                },
+                        }
 
-                            }
+                    }
 
-                        });
                 });
-</script>
+            });
+</script> -->
 
 
 @endsection
