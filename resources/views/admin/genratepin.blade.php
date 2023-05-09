@@ -77,6 +77,7 @@
                 </div>
                 <div class="container-fluid">
                     
+
                         <div class="p-4">
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Genrated Pin</h1>
