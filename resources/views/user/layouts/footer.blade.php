@@ -1,12 +1,15 @@
+
+
+
 <footer id="footer">
     <div class="container py-4">
       <div class="row">
         <div class="col-xl-12">
           <div class="d-flex gap-3 flex-center">
-            <a href="privacy.html">
+            <a href="{{ route('user.privacy') }}">
               <p class="mb-0">Privacy Policy</p>
             </a>
-            <a href="terms.html">
+            <a href="{{ route('user.term') }}">
               <p class="mb-0">Terms & Conditions</p>
             </a>
           </div>
@@ -24,3 +27,6 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+
+
+  

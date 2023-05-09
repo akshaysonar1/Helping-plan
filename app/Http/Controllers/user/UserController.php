@@ -13,6 +13,20 @@ class UserController extends Controller
        
     }
 
+    public function contact(){
+        return view('user.contact');
+       
+    }
+
+    public function privacy(){
+        return view('user.privacy');
+       
+    }
+    public function term(){
+        return view('user.term');
+       
+    }
+
     public function login(){
         return view('user.login');
     }

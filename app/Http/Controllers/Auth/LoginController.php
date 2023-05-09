@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
+
 use Illuminate\Http\Request;
 class LoginController extends Controller
 {
@@ -44,17 +46,61 @@ class LoginController extends Controller
     public function logout(Request $request) {
         
         Auth::logout();
-        return redirect('/login');
+        return redirect('/');
       }
+
+
+      public function mobilelogin(Request $request){
+       
+        $this->validate($request, [
+
+          'mobile' => 'required',
+          'password' => 'required',
+        ]);
+
+          $pass=$request->password;
+         
+        $user = User::where('mobile',$request->get('mobile'))->first();
+        
+     
+      
+        
+        if($user){
+          if($request->get('mobile') != $user->mobile){
+            return redirect('user/login')->with('error','Please register first mobile number!');
+          }
+        }else{
+
+          return redirect('user/login')->with('error','phone number not register');
+        }
+        if(!Hash::check($pass, $user->password) ){
+          return redirect('user/login')->with('error','password is wrong');
+        }else{
+
+        
+        if(Hash::check($pass, $user->password) ){
+          \Auth::login($user);
+
+          return redirect ('user/dashboard');
+        }else{
+          return redirect('user/login')->with('error','phone number not register');
+        }
+      }
+
+      }
+
     protected function redirectTo()
     {
+      
        
   if (Auth::user()->user_type == '1')
   {
     return '/home';  // admin dashboard path
   } else {
+
+    
   
-    return '/demo'; // member dashboard path
+    return '/user/dashboard'; // member dashboard path
   }
 }
 }

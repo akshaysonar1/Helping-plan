@@ -54,6 +54,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            //  'mobile' => ['required', 'number', 'number', 'max:255', 'unique:users'],
+            'mobile' => ['required', 'integer','digits:10','unique:users'],
+            
+            // 'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -70,12 +74,15 @@ class RegisterController extends Controller
        // $randomNumber->merge(['customer_id' => $customer_id]);
         
        $user =  User::create([
-      
+         
             'name' => $data['name'],
-            'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'mobile' => $data['mobile'],
             'customer_id' => $data['customer_id'],
             'user_type' => $data['user_type'],
+            'state' => $data['state'],
+            'city' => $data['city'],
+            'pin_code' => $data['pin_code']
             
         ]);
        

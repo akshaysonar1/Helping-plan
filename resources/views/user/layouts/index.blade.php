@@ -279,7 +279,7 @@
           <div class="support_home_img position-relative wow fadeInUp" data-wow-delay="0.9s"
             style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
             <div class="chat-btn-wrapper">
-              <a href="contact.html" class="pos_btn btn-zigzag">
+              <a href="{{ route('user.contact') }}" class="pos_btn btn-zigzag">
                 <i class="fe-phone-call mr-2"></i> Get In Touch
               </a>
               <a href="" class="pos_btn btn-zigzag btn-whatsapp">

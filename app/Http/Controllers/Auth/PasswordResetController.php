@@ -16,6 +16,7 @@ class PasswordResetController extends Controller
         // $validatedData = $request->validate([
            
         // ]);
+       
         $user = User::where('mobile', '=', $request->mobile)->first();
         if ($user === null) {
             return redirect('auth/reset')->with('message',"This number is not exist");

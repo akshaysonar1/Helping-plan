@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('customer_id')->unique();
-            $table->string('mobile')->nullable();
+            $table->string('mobile')->unique();
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('pin_code')->nullable();
@@ -32,6 +32,7 @@ return new class extends Migration
             $table->string('google_pay_no')->nullable();
             $table->string('upi_link')->nullable();
             $table->enum('status',['0','1'])->nullable();
+            $table->string('unique_pin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

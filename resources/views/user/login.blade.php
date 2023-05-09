@@ -22,6 +22,11 @@
     <link href="{{ asset ('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset ('user/assets/css/style.css') }}" rel="stylesheet">
+    <style>
+        .alert{
+            color:red;
+        }
+    </style>
 </head>
 
 <body>
@@ -29,45 +34,65 @@
         <div class="container-fluid ps-md-0">
             <div class="row align-items-center">
                 <div class="col-md-7 login-imgages">
-                    <img src="assets/img/login-img.png">
+                    <img src="{{ asset('user/assets/img/login-img.png') }}">
                 </div>
+               
                 <div class="col-md-5">
+                    <form action="{{ route('user.log') }}" method="POST">
+                        @csrf
+                        @method('POST')
                     <div class="login-box">
                         <h1>Login</h1>
+                        @if(Session::has('error'))
+                        <p class="alert {{ Session::get('alert-class', 'alert-info') }}">{{ Session::get('error') }}</p>
+                        @endif
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label>Mobile Number</label>
-                                <input type="text" class="form-control">
+                                <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="phone">
+                                
                             </div>
                         </div>
                         <div class="row mb-1">
                             <div class="col-12">
                                 <label>Password</label>
-                                <input type="password" class="form-control">
+                                <input type="password" class="form-control" name="password">
                             </div>
                         </div>
                         <div class="row justify-content-between mb-4">
                             <div class="col-6">
-                                <a href="forgot-pass.html">Forget password</a>
+                                <a href="{{ route('auth.reset') }}">Forget password</a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12">
-                                <a href=""> <button type="button">login</button></a>
+                                <a href=""> <button type="submit">login</button></a>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-12 text-center">
-                                <a href="{{ route('user.register') }}" class="sign-up">Sign Up</a>
+                                <a href="{{ route('register') }}" class="sign-up">Sign Up</a>
                             </div>
                         </div>
                     </div>
+                </form>
                 </div>
+        
             </div>
         </div>
     </div>
+   
+		
     <div id="preloader"></div>
+    <script>        
+		function process(input){
+	   let value = input.value;
+	   let numbers = value.replace(/[^0-9]/g, "");
+	   input.value = numbers;
+	 }
+     </script>
     <!-- Vendor JS Files -->
+
     <script src="{{ asset ('user/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset ('user/assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset ('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
