@@ -28,7 +28,7 @@
                             <td>{{$list->id}}</td>
                             <td>{{$list->created_at}}</td>
                             <td>{{$list->customer_id}}</td>
-                            <td>{{$list->bank_name}}</td>
+                            <td>{{$list->name}}</td>
                             <td>{{$list->mobile}}</td>
 
                             <td>
