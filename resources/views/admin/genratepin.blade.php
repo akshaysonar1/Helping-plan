@@ -13,7 +13,7 @@
         }
         
        
-        form {
+        .pad-bg {
         width: 86%; 
         padding: 20px;
         margin-bottom: 20px;
@@ -44,6 +44,9 @@
     
     <div class="card o-hidden border-0 shadow-lg my-5">
         <div class="card-body p-0">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
+            </div>
             <!-- Nested Row within Card Body -->
             <div class="row">
                 <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
@@ -51,10 +54,10 @@
                     <div class="p-5">
  
  
-                        <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Genrate Pin </h1>
-                        </div>
-                        <form class="form-group" method="post" action="{{route('genratepin.data')}}" id="genratePin">
+                        
+                   
+                        
+                        <form class="form-group pad-bg" method="post" action="{{route('genratepin.data')}}" id="genratePin">
  
                             @csrf
                             Select Price For Pin
@@ -74,9 +77,7 @@
                             <div class="col-sm-6">
  
                                
- 
-                                <input type="text" name="total_pin" id="total_pin" maxlength="2" required autocomplete="new-total_pin" placeholder="Enter The pin" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" value="">
-                                <!-- <label id="total_pin-error" class="error" for="total_pin"> -->
+  
  
                             </div>
                     </div>

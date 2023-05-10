@@ -12,6 +12,7 @@ class PinHistoryController extends Controller
     public function SearchPin(Request $request)
     {
         // dd($request->all());
+    
         $currency = $request->input('currency'); //amount
         $countdata = $request->input('total'); //total
         $startDate = $request->input('start_date'); //start date 
@@ -46,7 +47,7 @@ class PinHistoryController extends Controller
 
         // $data = $filter;
         // $data = PinModel::where('pin_ammount', $currency)->orderBy('id', 'asc')->take($countdata)->get();
-
+           
         return view('admin.pinhistory', compact('data'));
     }
     

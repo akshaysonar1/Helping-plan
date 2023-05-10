@@ -22,9 +22,8 @@ return new class extends Migration
             $table->string('get_help_ammount')->nullable();
             $table->string('crearte_date')->nullable();
             $table->string('pin_sale_date')->nullable(); 
-            $table->foreign('pin_sale_user_id')->references('id')->on('users');
+            $table->foreign('pin_sale_user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('pin_sale_user_id')->nullable();
-            $table->foreign('pin_sale_user_id')->on('users')->references('id')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('pin_status',['0','1'])->nullable();
             $table->timestamps();
         });

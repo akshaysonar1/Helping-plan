@@ -68,7 +68,72 @@
                         <div class="">
                             <div class="">
                                 <div class="row">
+                                 
+                                        
+                               
                                     <div class="col-xl-6">
+                                        @if(count($user)==0)
+                                        
+                                            <div class="pay-card responsive-card">
+                                                <div class=" d-flex justify-content-between">
+                                                    <div class="d-flex gap-3">
+                                                        <div class="">
+                                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
+                                                            </svg>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="id-text">ID U17000</p>
+                                                            <p class="date-text">28-12-2023</p>
+                                                        </div>
+                                                        <div class="">
+                                                            <p class="name-text mb-1"> Name : <span
+                                                                    class="name-para">Ajay rajkishor mahto</span></p>
+                                                            <p class="name-text mb-1"> Bank : <span
+                                                                    class="name-para">Axis Bank</span></p>
+                                                            <p class="name-text mb-1"> Mo.No : <span
+                                                                    class="name-para">9773856598</span></p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="">
+                                                        <p class="name-text mb-1">47:38:25</p>
+                                                        <p class="name-text mb-1">Rs. 1000</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xl-12 d-flex justify-content-end gap-2">
+                                                        <button type="button" onclick="importData()" class="btn btn-payment">Payment
+                                                            Image</button>
+                                                        <div class="details-tip">
+                                                            <button type="button"
+                                                                class="btn btn-payment details-show">Details</button>
+                                                            <div class="tooltip-content details-div">
+                                                                <p class="name-text mb-1"> Name : <span
+                                                                        class="name-para">Ajay rajkishor mahto</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Mobile No. : <span
+                                                                        class="name-para">9773856598</span></p>
+                                                                <p class="name-text mb-1"> Ifsc Code : <span
+                                                                        class="name-para">SBIN0001093</span></p>
+                                                                <p class="name-text mb-1"> Account No: <span
+                                                                        class="name-para">20015370793</span></p>
+                                                                <p class="name-text mb-1"> Upi Link: <span
+                                                                        class="name-para">9773856598@yb</span></p>
+                                                                <p class="name-text mb-1"> Phone Pay No: <span
+                                                                        class="name-para">9773856598</span></p>
+                                                                <p class="name-text mb-1"> Google Pay No: <span
+                                                                        class="name-para">9773856598</span></p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        
+                                        @else
+                                        
+                                        @foreach ($user as $row)
+                               
                                         <div class="pay-card responsive-card">
                                             <div class=" d-flex justify-content-between">
                                                 <div class="d-flex gap-3">
@@ -79,21 +144,21 @@
                                                         </svg>
                                                     </div>
                                                     <div class="">
-                                                        <p class="id-text">ID U17000</p>
-                                                        <p class="date-text">28-12-2023</p>
+                                                        <p class="id-text">{{ $row->customer_id }}</p>
+                                                        <p class="date-text">{{ $row->created_at->todatestring()}}</p>
                                                     </div>
                                                     <div class="">
                                                         <p class="name-text mb-1"> Name : <span
-                                                                class="name-para">Ajay rajkishor mahto</span></p>
+                                                                class="name-para">{{ $row->name }}</span></p>
                                                         <p class="name-text mb-1"> Bank : <span
-                                                                class="name-para">Axis Bank</span></p>
+                                                                class="name-para">{{ $row->bank_name }}</span></p>
                                                         <p class="name-text mb-1"> Mo.No : <span
-                                                                class="name-para">9773856598</span></p>
+                                                                class="name-para">{{ $row->mobile }}</span></p>
                                                     </div>
                                                 </div>
                                                 <div class="">
                                                     <p class="name-text mb-1">47:38:25</p>
-                                                    <p class="name-text mb-1">Rs. 1000</p>
+                                                    <p class="name-text mb-1">Rs. {{ $row->provide_help_ammount }}</p>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -105,26 +170,30 @@
                                                             class="btn btn-payment details-show">Details</button>
                                                         <div class="tooltip-content details-div">
                                                             <p class="name-text mb-1"> Name : <span
-                                                                    class="name-para">Ajay rajkishor mahto</span>
+                                                                    class="name-para">{{ $row->name }}</span>
                                                             </p>
                                                             <p class="name-text mb-1"> Mobile No. : <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $row->mobile }}</span></p>
                                                             <p class="name-text mb-1"> Ifsc Code : <span
-                                                                    class="name-para">SBIN0001093</span></p>
+                                                                    class="name-para">{{ $row->ifsc_code }}</span></p>
                                                             <p class="name-text mb-1"> Account No: <span
-                                                                    class="name-para">20015370793</span></p>
+                                                                    class="name-para">{{ $row->account_no }}</span></p>
                                                             <p class="name-text mb-1"> Upi Link: <span
-                                                                    class="name-para">9773856598@yb</span></p>
+                                                                    class="name-para">{{ $row->upi_link }}@yb</span></p>
                                                             <p class="name-text mb-1"> Phone Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $row->phone_pay_no }}</span></p>
                                                             <p class="name-text mb-1"> Google Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $row->google_pay_no }}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br>
+                                        
+                                        @endforeach
+                                        @endif
                                     </div>
+                                
                                     <div class="col-xl-6">
                                         <div class="pay-card-1">
                                             <div class=" d-flex justify-content-between">
@@ -909,11 +978,9 @@
 </div>
 </div>
 <!-- Modal-2 -->
- @if(!empty(Auth::user()->unique_pin))
-
-@else
-
+ @if($data->ammount_Received=='null' || ($data->get_help_ammount==$data->ammount_Received))
  
+
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true">
     @if(Session::has('error'))
 <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">{{ Session::get('error') }}
@@ -949,6 +1016,9 @@
 </div>
 </form>
 </div>
+ 
+@else
+
  
  
 @endif

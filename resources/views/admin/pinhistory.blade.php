@@ -1,14 +1,57 @@
 @extends('layouts.master')
 @section('content')
+<head>
+    <style>
+         
+        body, h1, h3, input { 
+        padding: 0;
+        margin: 0;
+        outline: none;
+        font-family: Roboto, Arial, sans-serif;
+        font-size: 16px;
+        color: #666;
+        }
+        
+       
+        .pad-bg{
+        width: 86%; 
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 5px; 
+        border: solid 1px #ccc;
+        box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+        background: #ebebeb; 
+        }
+   button {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px; 
+        border: none;
+        background: #3b43d6; 
+        font-size: 14px;
+        font-weight: 600;
+        color: #fff;
+        }
+        button:hover {
+        background: #3b43d6;
+        }
+   
+        
+      </style>
+    
+</head>
 <div class="container-fluid">
     <div class="row">
+         
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">PIN HISTORY</h6>
                 </div>
+               
                 <div class="card-body">
-                    <form action="{{route('pinhistory')}}" method="get">
+                    
+                    <form action="{{route('pinhistory')}}" method="get" class='pad-bg'>
                         <div class="form-group">
                             <input id="name" type="radio" name="currency" value="500" {{ request()->input('currency') == '500' ? 'checked' : '' }} autocomplete="name" autofocus> <span class="form-group">500</span>
                             <input id="name" type="radio" name="currency" value="1000" {{ request()->input('currency') == '1000' ? 'checked' : '' }} autocomplete="name" autofocus> <span class="form-group">1000</span>
@@ -17,10 +60,11 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Total</label>
-                            <input id="total" type="text" name="total" value="" autocomplete="name" autofocus> <span class="form-group"></span>
+                            <input id="total"  type="text" name="total" value="" autocomplete="name" autofocus> <span class="form-group"></span>
                         </div>
 
                         <div class="form-group">
+                            
                             <label for="exampleInputPassword1">From</label>
                             <input id="start_date" type="date" name="start_date" value="" autocomplete="name" autofocus> <span class="form-group"></span>
 
@@ -66,7 +110,7 @@
                                                 <td>{{$list->created_at}}</td>
                                                 <td>{{$list->pin_number}}</td>
                                                 <td>{{$list->pin_ammount}}</td>
-                                                <td></td>
+                                                <td>{{$list->pin_sale_user_id}}</td>
                                                 <td></td>
                                                 <td></td>
                                             </tr>
