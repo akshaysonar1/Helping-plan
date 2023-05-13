@@ -173,6 +173,7 @@
         $(document).ready(function() {
             $('#total_pin').keyup(function() {
                 if ($(this).val() > 10) {
+                    
                     alert("No numbers above 10");
                     $(this).val('10');
                 }
