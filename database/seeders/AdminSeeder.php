@@ -23,6 +23,12 @@ class AdminSeeder extends Seeder
             'user_type'=> '1',
             'customer_id' => '88997764',
             'mobile' => '1234567890',
+            'bank_name' => 'Axis Bank',
+            'account_no' => '112233445566',
+            'ifsc_code' => 'BOBD123456',
+            'phone_pay_no' => '1234567890',
+            'google_pay_no' => '1234567890',
+            'upi_link' => '1234567890ybl',
         ]);
 
     }

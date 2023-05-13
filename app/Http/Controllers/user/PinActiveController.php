@@ -59,6 +59,7 @@ class PinActiveController extends Controller
         $into = User::where('id',$request-> id)->first();
         
          $into->unique_pin = $request->pin_number;
+         $into->status = '1';
          $into->update(); 
     }
      }else{

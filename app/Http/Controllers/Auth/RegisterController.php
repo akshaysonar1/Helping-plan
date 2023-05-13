@@ -52,12 +52,12 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
             //  'mobile' => ['required', 'number', 'number', 'max:255', 'unique:users'],
             'mobile' => ['required', 'integer','digits:10','unique:users'],
             
-            // 'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -86,15 +86,15 @@ class RegisterController extends Controller
             
         ]);
        
-        // $providerHelp = new Provide_Help;
-        // $providerHelp->user_id = $user->id;
-        // $providerHelp->customer_id = $user->customer_id; 
-        // $providerHelp->save(); 
-        // //dd($user->id);
+        $providerHelp = new Provide_Help;
+        $providerHelp->users_id = $user->id;
+        $providerHelp->customer_id = $user->customer_id; 
+        $providerHelp->save(); 
+        //dd($user->id);
         
        
 
-        // return $user ; 
+        return $user ; 
 
     }
 }

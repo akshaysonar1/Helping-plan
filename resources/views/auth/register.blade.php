@@ -37,6 +37,7 @@
                     <div class="login-box">
                         <form class="user" method="POST">
                             @csrf
+                            @method('POST')
                         <h1>Sign Up</h1>
                         
                         <div class="row mb-3">
