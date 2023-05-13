@@ -15,19 +15,6 @@
                 color: #666;
             }
 
-
-            form {
-                width: 86%;
-                padding: 20px;
-                margin-bottom: 20px;
-                border-radius: 5px;
-                border: solid 1px #ccc;
-                box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
-                background: #ebebeb;
-
-
-            }
-
             .pad-bg {
                 width: 86%;
                 padding: 20px;
@@ -38,7 +25,15 @@
                 background: #ebebeb;
 
             }
-
+            form {
+                width: 86%;
+                padding: 20px;
+                margin-bottom: 20px;
+                border-radius: 5px;
+                border: solid 1px #ccc;
+                box-shadow: 1px 2px 5px rgba(0, 0, 0, .31);
+                background: #ebebeb;
+            }
             button {
                 width: 100%;
                 padding: 8px;
@@ -49,7 +44,6 @@
                 font-weight: 600;
                 color: #fff;
             }
-
             button:hover {
                 background: #3b43d6;
             }
@@ -63,14 +57,9 @@
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
                 </div>
-                <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
                     <div class="col-lg-7">
                         <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Genrate Pin </h1>
-                            </div>
                             <form class="form-group pad-bg" method="post" action="{{ route('genratepin.data') }}"
                                 id="genratePin">
                                 @csrf
@@ -83,23 +72,16 @@
                                     <input id="pin_ammount" type="radio" name="pin_ammount" value="2000" required
                                         autocomplete="name" autofocus> <span class="form-group">2000</span>
                                 </div>
-
                                 <label>Enter Total Pin </label><br>
-
                                 <input type="text" class="form-control" name="total_pin" placeholder="Enter The pin ">
-
-
                                 <br>
                                 <button type="submit">Submit</button>
                                 <div class="col-sm-6">
                                 </div>
+                            </form>
                         </div>
-
-                        </form>
                     </div>
                     <div class="container-fluid">
-
-
                         <div class="p-4">
                             <!-- Page Heading -->
                             <h1 class="h3 mb-2 text-gray-800">Genrated Pin</h1>
@@ -116,7 +98,6 @@
                                                     <th>Sending Detail </th>
                                                 </tr>
                                             </thead>
-
                                             <tbody>
                                                 @if (isset($data) && !empty($data))
                                                     @foreach ($data as $list)
@@ -135,7 +116,6 @@
                             </div>
 
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -163,17 +143,13 @@
                         required: true,
                         maxlength: true,
                     },
-
                     messages: {
                         total_pin: {
                             required: 'Please Enter To Genrate Pin',
                             maxlength: 2,
                         },
-
                     }
-
                 }
-
             });
         });
     </script> -->
