@@ -1,112 +1,119 @@
+@extends('layouts.master')
+@section('content')
 
-<!DOCTYPE html>
-<html lang="en">
+<div class="container">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>HELPING PLAN</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="{{ asset('assets/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('assets/css/css.css') }}" rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
-  
-
-</head>
-
-<body id="page-top">
-
-    <!-- Page Wrapper -->
-    <div id="wrapper">
-
-        @include('layouts.sidebar')
-
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
-
-            <!-- Main Content -->
-            <div id="content">
-
-                @include('layouts.header')
-
-                <!-- Begin Page Content -->
-                @include('forgotpassword.tabel')
-                {{-- @yield('customer_details.table')akshay --}}
-                <!-- /.container-fluid -->
-
+    <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">FORGOT PASSWORD LIST</h6>
             </div>
-            <!-- End of Main Content -->
-
-           @include('layouts.footer')
-        </div>
-        <!-- End of Content Wrapper -->
-
-    </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
+    <!-- DataTales Example -->
+   
+        <div class="card-body">
+            <div class="table-responsive">
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+            <th>Sr.no</th>
+            <th>Mobile</th>
+            <th>Message</th>
+            <th>Reset Password</th>
+           
+        </tr>
+    </thead>
+    <tbody>
+        @php
+            $i=1;
+        @endphp
+        @foreach ( $user as $row)
+            
+        
+        <tr>
+            <td>{{ $i }}</td>
+            <td>{{ $row->mobile }}</td>
+            <td>{{ $row->message }}</td>
+            {{-- <td><a class="examps"> helo</a></td> --}}
+            <td> <button type="button" class="btn btn-primary examps" data-toggle="modal" data-target="#exampleModal" data-id="{{ $row->id }}" data-mobile="{{ $row->mobile }} ">Reset Password</button></td>
+          
+            <div class="modal fade exampleModal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="{{ route('forgotpassword.passwordupdate') }}" method="POST">
+                        @csrf
+                        @method('POST')
+                        <div class="form-group">
+                          <label for="mobile" class="col-form-label" >Mobile</label>
+                          <input type="text" class="form-control" name="mobile" id="mobile" value="{{ $row->mobile }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">New Password</label>
+                            <input type="text" class="form-control" name="password"  >
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Reset</button>
+                          </div>
+                      </form>
+                    </div>
+                   
+                  </div>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+              </div>
+                
+        </tr>
+        @php
+        $i++;
+    @endphp
+      
+        @endforeach
+      
+    </tbody>
+    <tfoot>
+        
+    </tfoot>
+</table>
+            </div></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+$(".examps").click(function(){
+var mobile = $(this).data('mobile');
+$("#mobile").val(mobile);
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{{ asset('assets/vendor/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{{ asset('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{{ asset('assets/js/sb-admin-2.min.js') }}"></script>
-
-    <!-- Page level plugins -->
-    <script src="{{ asset('assets/vendor/chart.js/Chart.min.js') }}"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
-    <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
-
-      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-    $('#example').DataTable();
 });
-    </script>
+});
+</script>
+<script>
+    $(document).ready(function () {
+$('#example').DataTable();
+});
 
-</body>
 
-</html>
+$(document).on('click','.d',function(){
+alert(123)
+
+var id = $(this).data('id');
+var name = $(this).data('name');
 
 
+$('.id').val(id)
+$('.name').val(name)
+
+
+});
+</script>
+
+        </div>
+    </div>
+</div>
+
+@endsection

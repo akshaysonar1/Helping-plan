@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\user\ProfileController;
 use App\Http\Controllers\user\PinActiveController;
+use App\Http\Controllers\user\PaymentController;
  
  
 /*
@@ -86,6 +87,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::name('customer_details.')->prefix('customer_details')->group(function(){
         Route::get('CustomerDetails',[CustomerDetailsController::class,'CustomerDetails'])->name('CustomerDetails');
 
+        Route::get('payconfarm',[CustomerDetailsController::class,'payconfarm'])->name('payconfarm');
+
     });
     Route::name('forgotpassword.')->prefix('forgotpassword')->group(function(){
         Route::get('forgotpassword',[ForgotPasswordController::class,'forgotpassword'])->name('forgotpassword');
@@ -115,7 +118,8 @@ Route::name('user.')->prefix('user')->group(function(){
 });
     Route::POST('profileupdate{id}', [ProfileController::class, 'profileupdate'])->name('profileupdate');    
     Route::POST('pinactive{id}', [PinActiveController::class, 'pinactive'])->name('pinactive');    
- 
+    Route::POST('payment', [PaymentController::class, 'payment'])->name('payment');    
+    Route::POST('conformetion/{id}', [PaymentController::class, 'conformetion'])->name('conformetion');    
 
  
     Route::get('login', [UserController::class, 'login'])->name('login');  

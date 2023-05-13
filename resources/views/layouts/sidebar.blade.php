@@ -38,7 +38,7 @@
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('customer_details.CustomerDetails') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Customer Details</span></a>
     </li>
@@ -67,6 +67,11 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Forgot Password List</span></a>
     </li>
+    {{-- <li class="nav-item">
+        <a class="nav-link" href="{{ route('customer_details.payconfarm') }}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Payment Confarmetion</span></a>
+    </li> --}}
 
 
 
