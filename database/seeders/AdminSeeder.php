@@ -20,7 +20,7 @@ class AdminSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('12345678'),
-            'user_type'=> '1',
+            'user_type' => '1',
             'customer_id' => '88997764',
             'mobile' => '1234567890',
             'bank_name' => 'Axis Bank',

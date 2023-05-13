@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -24,14 +23,14 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('city')->nullable();
             $table->string('pin_code')->nullable();
-            $table->enum('user_type',['0','1']);
+            $table->enum('user_type', ['0', '1']);
             $table->string('bank_name')->nullable();
             $table->string('account_no')->nullable();
             $table->string('ifsc_code')->nullable();
             $table->string('phone_pay_no')->nullable();
             $table->string('google_pay_no')->nullable();
             $table->string('upi_link')->nullable();
-            $table->enum('status',['0','1'])->nullable();
+            $table->enum('status', ['0', '1'])->nullable();
             $table->string('unique_pin')->nullable();
             $table->rememberToken();
             $table->timestamps();

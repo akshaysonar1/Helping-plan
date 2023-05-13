@@ -12,7 +12,7 @@ class GenrateUniqueCodeController extends Controller
     public function generateUniqueCode()
     {
         $data = PinModel::orderBy('updated_at')->get();
-        return view('admin.genratepin',compact('data'));
+        return view('admin.genratepin', compact('data'));
     }
 
     // This function use for store the random pin 
@@ -30,7 +30,7 @@ class GenrateUniqueCodeController extends Controller
             $newPin->total_pin = $request->total_pin;
             $newPin->save();
         }
-      
+
         return redirect()->back();
     }
 }

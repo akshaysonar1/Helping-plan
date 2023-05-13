@@ -11,22 +11,23 @@ use Illuminate\Support\Facades\Hash;
 class ForgotPasswordController extends Controller
 {
     //
-    public function forgotpassword(){
+    public function forgotpassword()
+    {
         $user = Password_Reset_Request::get();
-        
-        
+
+
         return view('forgotpassword.forgotpassword', compact('user'));
     }
 
-    public function passwordupdate(Request $request){
-      
-        
-        $user=$request->mobile;
+    public function passwordupdate(Request $request)
+    {
+
+
+        $user = $request->mobile;
         $data['password'] = Hash::make($request->password);
- 
-        User::where('mobile' , $user)->update($data);
-        return redirect('forgotpassword/forgotpassword')->with('success',"Record are Updated");
+
+        User::where('mobile', $user)->update($data);
+        return redirect('forgotpassword/forgotpassword')->with('success', "Record are Updated");
 
     }
 }
- 

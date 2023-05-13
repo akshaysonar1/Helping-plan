@@ -12,7 +12,7 @@ class PinHistoryController extends Controller
     public function SearchPin(Request $request)
     {
         // dd($request->all());
-    
+
         $currency = $request->input('currency'); //amount
         $countdata = $request->input('total'); //total
         $startDate = $request->input('start_date'); //start date 
@@ -34,8 +34,11 @@ class PinHistoryController extends Controller
         if (isset($countdata) && !empty($countdata)) {
             $filter = $filter->take($countdata);
         }
-
+    
         $data = $filter->get();
+    //      
+        $users=PinModel::join('users' ,'users.id' ,'=', 'pin_genrate_tabel.pin_sale_user_id')->get();
+      
         //    if(!empty($currency)){
         //     $data= $filter->where('pin_ammount', $currency);
         //    }
@@ -47,8 +50,8 @@ class PinHistoryController extends Controller
 
         // $data = $filter;
         // $data = PinModel::where('pin_ammount', $currency)->orderBy('id', 'asc')->take($countdata)->get();
-           
-        return view('admin.pinhistory', compact('data'));
+
+        return view('admin.pinhistory', compact('data','users'));
     }
-    
+
 }
