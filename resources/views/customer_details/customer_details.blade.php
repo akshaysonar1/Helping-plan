@@ -54,7 +54,7 @@
 
                         <button type="button" class="btn btn-danger" style="width:90px">empty</button></td>
                      @else
-                        @if($row->ammount_pendding=='0')
+                        @if($row->ammount_Received == $row->get_help_ammount)
                             <button type="button" class="btn btn-success" style="width:90px ">Done</button></td>
                         @else
                             <button type="button" class="btn btn-warning"style="width:90px">Pending</button></td>

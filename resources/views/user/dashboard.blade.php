@@ -1,6 +1,7 @@
 @extends('user.layouts.master')
-
+ 
 @section('master')
+ 
 <section id="about" class="about section-bg">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
@@ -72,8 +73,12 @@
                                         
                                
                                     <div class="col-xl-6">
+                                         
                                         @if(count($user)==0)
-                                        
+                                   
+                                            @foreach ($admin as $add)
+                                                
+                                          
                                             <div class="pay-card responsive-card">
                                                 <div class=" d-flex justify-content-between">
                                                     <div class="d-flex gap-3">
@@ -84,56 +89,97 @@
                                                             </svg>
                                                         </div>
                                                         <div class="">
-                                                            <p class="id-text">ID U17000</p>
-                                                            <p class="date-text">28-12-2023</p>
+                                                            <p class="id-text">{{ $add->customer_id }}</p>
+                                                            {{-- <p class="date-text">{{ $add->created_at->todatestring()}}</p> --}}
                                                         </div>
                                                         <div class="">
                                                             <p class="name-text mb-1"> Name : <span
-                                                                    class="name-para">Ajay rajkishor mahto</span></p>
+                                                                    class="name-para">{{ $add->name }}</span></p>
                                                             <p class="name-text mb-1"> Bank : <span
-                                                                    class="name-para">Axis Bank</span></p>
+                                                                    class="name-para">{{ $add->bank_name }}</span></p>
                                                             <p class="name-text mb-1"> Mo.No : <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $add->mobile }}</span></p>
                                                         </div>
                                                     </div>
                                                     <div class="">
                                                         <p class="name-text mb-1">47:38:25</p>
-                                                        <p class="name-text mb-1">Rs. 1000</p>
+                                                         
+                                                            
+                                                        
+                                                        <p class="name-text mb-1">Rs.{{ $data->provide_help_ammount }} </p>
+                                                       
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xl-12 d-flex justify-content-end gap-2">
-                                                        <button type="button" onclick="importData()" class="btn btn-payment">Payment
-                                                            Image</button>
+                                                        {{-- <button type="button" onclick="importData()" class="btn btn-payment">Payment
+                                                            Image</button> --}}
+                                                            <button type="button" class="btn btn-payment" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Payment Image</button>
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form action="{{ route('user.payment') }}" method="POST"  enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('post')
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLabel">Uploade Payment Image</h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              
+                                                                <div class="form-group">
+                                                                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                                                    <input class="form-control" type="file" name="image" id="formFileMultiple" multiple>
+                                                                    <input type="hidden" name="receiver_id" value="{{ $add->id}}"> 
+                                                                    <input type="hidden" name="get_ammmount" value="{{ $data->provide_help_ammount}}"> 
+                                                                </div>
+                                                                
+                                                                 
+                                                           
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" class="btn btn-primary">Uploade</button>
+                                                            </div>
+                                                          </div>
+                                                             </form>
+                                                        </div>
+
+                                                      </div>
                                                         <div class="details-tip">
                                                             <button type="button"
                                                                 class="btn btn-payment details-show">Details</button>
                                                             <div class="tooltip-content details-div">
                                                                 <p class="name-text mb-1"> Name : <span
-                                                                        class="name-para">Ajay rajkishor mahto</span>
+                                                                        class="name-para">{{ $add->name }}</span>
                                                                 </p>
                                                                 <p class="name-text mb-1"> Mobile No. : <span
-                                                                        class="name-para">9773856598</span></p>
+                                                                        class="name-para">{{ $add->mobile }}</span></p>
                                                                 <p class="name-text mb-1"> Ifsc Code : <span
-                                                                        class="name-para">SBIN0001093</span></p>
+                                                                        class="name-para">{{ $add->ifsc_code }}</span></p>
                                                                 <p class="name-text mb-1"> Account No: <span
-                                                                        class="name-para">20015370793</span></p>
+                                                                        class="name-para">{{ $add->account_no }}</span></p>
                                                                 <p class="name-text mb-1"> Upi Link: <span
-                                                                        class="name-para">9773856598@yb</span></p>
+                                                                        class="name-para">{{ $add->upi_link }}</span></p>
                                                                 <p class="name-text mb-1"> Phone Pay No: <span
-                                                                        class="name-para">9773856598</span></p>
+                                                                        class="name-para">{{ $add->phone_pay_no }}</span></p>
                                                                 <p class="name-text mb-1"> Google Pay No: <span
-                                                                        class="name-para">9773856598</span></p>
+                                                                        class="name-para">{{ $add->google_pay_no }}</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        
+                                            @endforeach
                                         @else
                                         
                                         @foreach ($user as $row)
-                               
+                                           @if($row->pay_status=='1')
+
+                                            @else
+                                            
                                         <div class="pay-card responsive-card">
                                             <div class=" d-flex justify-content-between">
                                                 <div class="d-flex gap-3">
@@ -163,8 +209,48 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xl-12 d-flex justify-content-end gap-2">
-                                                    <button type="button" onclick="importData()" class="btn btn-payment">Payment
+                                                    {{-- <form action="" method="POST" name="myForm" id="uploadimageform">
+                                                        @csrf
+                                                        @method('POST')
+                                                    {{-- <button type="button" onclick="importData()" name="myInput"class="btn btn-payment">Payment
                                                         Image</button>
+                                                         --}}
+                                                         
+                                                    {{-- </form>  --}}
+                                                    <button type="button" class="btn btn-payment" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">Payment Image</button>
+                                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form action="{{ route('user.payment') }}" method="POST"  enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('post')
+                                                          <div class="modal-content">
+                                                            <div class="modal-header">
+                                                              <h5 class="modal-title" id="exampleModalLabel">Uploade Payment Image</h5>
+                                                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                              </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                              
+                                                                <div class="form-group">
+                                                                    <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+                                                                    <input class="form-control" type="file" name="image" id="formFileMultiple" multiple>
+                                                                    <input type="hidden" name="receiver_id" value="{{ $row->id}}"> 
+                                                                    <input type="hidden" name="get_ammmount" value="{{ $row->provide_help_ammount}}"> 
+                                                                </div>
+                                                                
+                                                                 
+                                                           
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                              <button type="submit" class="btn btn-primary">Uploade</button>
+                                                            </div>
+                                                          </div>
+                                                             </form>
+                                                        </div>
+
+                                                      </div>
                                                     <div class="details-tip">
                                                         <button type="button"
                                                             class="btn btn-payment details-show">Details</button>
@@ -189,12 +275,15 @@
                                                 </div>
                                             </div>
                                         </div><br>
-                                        
-                                        @endforeach
                                         @endif
+                                        @endforeach
+                                     @endif
                                     </div>
-                                
+                                    
                                     <div class="col-xl-6">
+                                        @foreach ($conform as $conf)
+                                       
+                                            
                                         <div class="pay-card-1">
                                             <div class=" d-flex justify-content-between">
                                                 <div class="d-flex gap-3">
@@ -205,16 +294,16 @@
                                                         </svg>
                                                     </div>
                                                     <div class="">
-                                                        <p class="id-text">ID U17000</p>
-                                                        <p class="date-text">28-12-2023</p>
+                                                        <p class="id-text">{{ $conf->customer_id }}</p>
+                                                        <p class="date-text">{{ $conf->created_at->todatestring()}}</p>
                                                     </div>
                                                     <div class="">
                                                         <p class="name-text mb-1"> Name : <span
-                                                                class="name-para">Ajay rajkishor mahto</span></p>
+                                                                class="name-para">{{ $conf->name }}</span></p>
                                                         <p class="name-text mb-1"> Bank : <span
-                                                                class="name-para">Axis Bank</span></p>
+                                                                class="name-para">{{ $conf->bank_name }}</span></p>
                                                         <p class="name-text mb-1"> Mo.No : <span
-                                                                class="name-para">9773856598</span></p>
+                                                                class="name-para">{{ $conf->mobile }}</span></p>
                                                     </div>
                                                 </div>
                                                 <div class="">
@@ -223,8 +312,18 @@
                                                 </div>
                                             </div>
                                             <div class="row">
+                                                <form action="{{ route('user.conformetion',$conf->sender_id) }}" method="POST">
+                                                    @csrf
+                                                    @method('post')
                                                 <div class="col-xl-12 d-flex justify-content-end gap-2">
-                                                    <button type="button" class="btn btn-payment">confirm</button>
+                                                   
+                                                        @if($conf->tran_status =='1')
+                                                        <button type="button" class="btn btn-payment">Conformation Done</button>
+                                     
+                                                        @else
+                                                    <button type="submit" class="btn btn-payment">confirm</button>
+                                                    @endif
+                                                    </form>
                                                     <button type="button" class="btn btn-payment">Payment
                                                         Image</button>
                                                     <div class="details-tip">
@@ -232,83 +331,33 @@
                                                             class="btn btn-payment details-show">Details</button>
                                                         <div class="tooltip-content details-div">
                                                             <p class="name-text mb-1"> Name : <span
-                                                                    class="name-para">Ajay rajkishor mahto</span>
+                                                                    class="name-para">{{ $conf->name }}</span>
                                                             </p>
                                                             <p class="name-text mb-1"> Mobile No. : <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $conf->mobile }}</span></p>
                                                             <p class="name-text mb-1"> Ifsc Code : <span
-                                                                    class="name-para">SBIN0001093</span></p>
+                                                                    class="name-para">{{ $conf->ifsc_code }}</span></p>
                                                             <p class="name-text mb-1"> Account No: <span
-                                                                    class="name-para">20015370793</span></p>
+                                                                    class="name-para">{{ $conf->account_no }}</span></p>
                                                             <p class="name-text mb-1"> Upi Link: <span
-                                                                    class="name-para">9773856598@yb</span></p>
+                                                                    class="name-para">{{ $conf->upi_link }}</span></p>
                                                             <p class="name-text mb-1"> Phone Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $conf->phone_pay_no }}</span></p>
                                                             <p class="name-text mb-1"> Google Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
+                                                                    class="name-para">{{ $conf->google_pay_no }}</span></p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="pay-card-1 mt-2">
-                                            <div class=" d-flex justify-content-between">
-                                                <div class="d-flex gap-3">
-                                                    <div class="">
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="10" cy="10" r="10" fill="#7AE868" />
-                                                        </svg>
-                                                    </div>
-                                                    <div class="">
-                                                        <p class="id-text">ID U17000</p>
-                                                        <p class="date-text">28-12-2023</p>
-                                                    </div>
-                                                    <div class="">
-                                                        <p class="name-text mb-1"> Name : <span
-                                                                class="name-para">Ajay rajkishor mahto</span></p>
-                                                        <p class="name-text mb-1"> Bank : <span
-                                                                class="name-para">Axis Bank</span></p>
-                                                        <p class="name-text mb-1"> Mo.No : <span
-                                                                class="name-para">9773856598</span></p>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <p class="name-text mb-1">47:38:25</p>
-                                                    <p class="name-text mb-1">Rs. 1000</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-xl-12 d-flex justify-content-end gap-2">
-                                                    <button type="button" class="btn btn-payment">confirm</button>
-                                                    <button type="button" class="btn btn-payment">Payment
-                                                        Image</button>
-                                                    <div class="details-tip">
-                                                        <button type="button"
-                                                            class="btn btn-payment details-show">Details</button>
-                                                        <div class="tooltip-content details-div">
-                                                            <p class="name-text mb-1"> Name : <span
-                                                                    class="name-para">Ajay rajkishor mahto</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Mobile No. : <span
-                                                                    class="name-para">9773856598</span></p>
-                                                            <p class="name-text mb-1"> Ifsc Code : <span
-                                                                    class="name-para">SBIN0001093</span></p>
-                                                            <p class="name-text mb-1"> Account No: <span
-                                                                    class="name-para">20015370793</span></p>
-                                                            <p class="name-text mb-1"> Upi Link: <span
-                                                                    class="name-para">9773856598@yb</span></p>
-                                                            <p class="name-text mb-1"> Phone Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
-                                                            <p class="name-text mb-1"> Google Pay No: <span
-                                                                    class="name-para">9773856598</span></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                      
+                                           </div><br>
+                                        
+                                        
+                                           @endforeach 
                                     </div>
+                                 
                                 </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -1034,3 +1083,8 @@
  }
  </script>
  
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
