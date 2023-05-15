@@ -21,9 +21,8 @@ return new class extends Migration
             $table->string('provide_help_amount')->nullable();
             $table->string('pin_help_amount')->nullable();
             $table->string('sale_mobile')->nullable();
-            $table->string('pin_use_mobile')->nullable();
-            $table->string('user_id')->nullable();
-            $table->string('pin_status')->nullable();
+            $table->string('sale_name')->nullable();
+            $table->string('sell_pin_status')->nullable();
             $table->timestamps();
         });
     }

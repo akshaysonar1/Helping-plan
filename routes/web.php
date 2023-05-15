@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\PinHistoryController;
 
 use App\Http\Controllers\admin\CustomerDetailsController;
 use App\Http\Controllers\admin\ForgotPasswordController;
+use App\Http\Controllers\admin\PinSaleController;
 use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\deshboard\DeshboardController;
 
@@ -59,7 +60,7 @@ Route::prefix('admin')->group(function () {
 });
 Route::get('/', [UserController::class, 'index'])->name('index');
 
-
+Route::get('/user', [UserController::class, 'user'])->name('user');
 
 Route::get('/demo', [DemoController::class, 'demo']);
 Route::name('auth.')->prefix('auth')->group(function () {
@@ -77,9 +78,12 @@ Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(fu
 Route::prefix('admin')->controller(HomeController::class)->group(function () {
     Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
     Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
+    Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
 });
 
-
+Route::name('admin.')->prefix('admin')->group(function () {
+    Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
+});
 
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::middleware(['auth', 'isAdmin'])->group(function () {

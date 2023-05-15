@@ -39,4 +39,8 @@ class UserController extends Controller
     {
         return view('user.register');
     }
+    public function error()
+    {
+        return view('404');
+    }
 }

@@ -79,6 +79,7 @@
                                                     <div class="pay-card responsive-card">
                                                         <div class=" d-flex justify-content-between">
                                                             <div class="d-flex gap-3">
+                                                                
                                                                 <div class="">
                                                                     <svg width="20" height="20" viewBox="0 0 20 20"
                                                                         fill="none" xmlns="http://www.w3.org/2000/svg">
