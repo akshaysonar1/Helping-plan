@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Exception;
 
 class HomeController extends Controller
 {
@@ -30,22 +31,29 @@ class HomeController extends Controller
     //This function use For fetch data 
     public function HelpSwitch()
     {
-        $data = User::where('user_type', '=', '0')->get();
-        return view('admin.helpswitch', compact('data'));
+        try {
+            $data = User::where('user_type', '=', '0')->get();
+            return view('admin.helpswitch', compact('data'));
+        } catch (exception $e) {
+            return view('404');
+        }
     }
 
     // This Funcion Use for activate and deactivate 
     public function UserStatus($data, User $user)
     {
-        // dd('hieee');
-        $user = User::find($data);
-        if ($user->status == '1') {
-            $user->status = '0';
-        } else {
-            $user->status = '1';
+        try {
+            $user = User::find($data);
+            if ($user->status == '1') {
+                $user->status = '0';
+            } else {
+                $user->status = '1';
+            }
+            $user->save();
+            return redirect()->route('helpswitch')->with('success', 'User Updated');
+        } catch (exception $e) {
+            return view('404');
         }
-        $user->save();
-        return redirect()->route('helpswitch')->with('success', 'User Updated');
 
     }
 
