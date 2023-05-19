@@ -5,10 +5,10 @@ namespace Database\Seeders;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB as FacadesDB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
-class AdminSeeder extends Seeder
+class UserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,15 +17,15 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::where('email', 'admin@gmail.com')->first();
+        $user = User::where('email', 'user1@gmail.com')->first();
         if (!$user) {
-            FacadesDB::table('users')->insert([
-                'name' => 'admin',
-                'email' => 'admin@gmail.com',
+            DB::table('users')->insert([
+                'name' => 'user1',
+                'email' => 'user1@gmail.com',
                 'password' => Hash::make('12345678'),
                 'user_type' => '1',
-                'customer_id' => '88997764',
-                'mobile' => '1234567890',
+                'customer_id' => '12345123456',
+                'mobile' => '7878787878',
                 'bank_name' => 'Axis Bank',
                 'account_no' => '112233445566',
                 'ifsc_code' => 'BOBD123456',
