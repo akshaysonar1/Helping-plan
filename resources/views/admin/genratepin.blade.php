@@ -158,12 +158,10 @@
                         </div>
 
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -267,7 +265,6 @@
                         required: true,
                         maxlength: true,
                     },
-
                     messages: {
                         total_pin: {
                             required: 'Please Enter To Genrate Pin',
