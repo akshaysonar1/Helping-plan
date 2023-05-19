@@ -135,7 +135,11 @@
     <script src="{{ asset('user/assets/vendor/php-email-form/validate.js') }}"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
+
+
+
     @yield('custom_js')
+
 
 
 </body>

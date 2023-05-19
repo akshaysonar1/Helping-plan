@@ -16,7 +16,7 @@
     <link href="{{ asset('assets/css/css.css') }}" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="{{ asset('assets/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <link href="{{asset('assets/vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -371,11 +371,11 @@
 
                 @yield('content')
                 <!-- /.container-fluid -->
-                
+
             </div>
             <!-- End of Main Content -->
 
-           @include('layouts.footer')
+            @include('layouts.footer')
         </div>
         <!-- End of Content Wrapper -->
 
@@ -423,17 +423,17 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('assets/js/demo/chart-pie-demo.js') }}"></script>
-     <!-- Page level plugins -->
-     <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <!-- Page level plugins -->
+    <script src="{{ asset('assets/vendor/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('assets/js/demo/datatables-demo.js') }}"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
-    
+
 
     @yield('custom-js')
 
