@@ -138,6 +138,10 @@
 
 
 
+    @yield('custom_js')
+
+
+
 </body>
 
 </html>

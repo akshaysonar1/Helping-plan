@@ -9,7 +9,11 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Provide_Help;
+
 use Exception;
+
+use App\Models\transection;
+
 
 class RegisterController extends Controller
 {
@@ -58,6 +62,9 @@ class RegisterController extends Controller
             //  'mobile' => ['required', 'number', 'number', 'max:255', 'unique:users'],
             'mobile' => ['required', 'integer', 'digits:10', 'unique:users'],
 
+
+
+
             'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
@@ -70,6 +77,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         // $randomNumber = random_int(1000, 9999999999);
 
         // $randomNumber->merge(['customer_id' => $customer_id]);
@@ -97,6 +105,24 @@ class RegisterController extends Controller
             return $user;
          
 
+
+
+        $user =  User::create([
+            'name' => $data['name'],
+            'password' => Hash::make($data['password']),
+            'mobile' => $data['mobile'],
+            'customer_id' => $data['customer_id'],
+            'user_type' => $data['user_type'],
+            'state' => $data['state'],
+            'city' => $data['city'],
+            'pin_code' => $data['pin_code']
+        ]);
+
+        $providerHelp = new Provide_Help;
+        $providerHelp->users_id = $user->id;
+        $providerHelp->customer_id = $user->customer_id;
+        $providerHelp->save();
+        return $user;
 
     }
 }
