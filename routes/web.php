@@ -5,9 +5,6 @@ use App\Http\Controllers\admin\GenrateUniqueCodeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\admin\PinHistoryController;
 
-
-
-
 use App\Http\Controllers\admin\CustomerDetailsController;
 use App\Http\Controllers\admin\ForgotPasswordController;
 use App\Http\Controllers\admin\PinSaleController;
@@ -71,20 +68,21 @@ Route::name('auth.')->prefix('auth')->group(function () {
 
 
 Auth::routes();
-Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
-    Route::get('/genratepin', 'generateUniqueCode')->name('genratepin');
-    Route::post('/genratepin/data', 'storepin')->name('genratepin.data');
-});
-Route::prefix('admin')->controller(HomeController::class)->group(function () {
-    Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
-    Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
-    Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
-});
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
+        Route::get('/genratepin', 'generateUniqueCode')->name('genratepin');
+        Route::post('/genratepin/data', 'storepin')->name('genratepin.data');
+    });
+    Route::prefix('admin')->controller(HomeController::class)->group(function () {
+        Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
+        Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
+        Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
+    });
 
-Route::name('admin.')->prefix('admin')->group(function () {
-    Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
+    Route::name('admin.')->prefix('admin')->group(function () {
+        Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
+    });
 });
-
 // Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -132,11 +130,8 @@ Route::name('user.')->prefix('user')->group(function () {
 });
 
 
+
 Route::middleware(['auth'])->group(function () {
-
-
     Route::name('user.')->prefix('user')->group(function () {
-
-
     });
 });

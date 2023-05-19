@@ -74,7 +74,7 @@ class RegisterController extends Controller
 
         // $randomNumber->merge(['customer_id' => $customer_id]);
 
-        try {
+    
 
             $user = User::create([
 
@@ -95,9 +95,7 @@ class RegisterController extends Controller
             $providerHelp->save();
 
             return $user;
-        } catch (exception $e) {
-            return view('404');
-        }
+         
 
 
     }
