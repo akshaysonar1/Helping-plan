@@ -55,6 +55,7 @@
                 <div class="card-body">
 
                     <form action="{{ route('pinhistory') }}" method="get" class='pad-bg'>
+                        
                         <div class="form-group">
                             <input id="name" type="radio" name="currency" value="500" {{ request()->input('currency') ==
                             '500' ? 'checked' : '' }} autocomplete="name"
@@ -80,7 +81,7 @@
                             <span class="form-group"></span>
 
                             <label for="exampleInputPassword1">To</label>
-                            <input id="end_date" type="date" name="end_date" value="" autocomplete="name" autofocus>
+                            <input id="pin_sale_date" type="date" name="pin_sale_date" value="" autocomplete="name" autofocus>
                             <span class="form-group"></span>
 
 
@@ -149,18 +150,3 @@
 </div>
 @endsection
 
-@section('custom.js')
-<script>
-    $(document).ready(function() {
-            $('#dataTable').DataTable({
-                dom: 'frtip',
-                buttons: [
-                    'copyHtml5',
-                    'excelHtml5',
-                    'csvHtml5',
-                    'pdfHtml5'
-                ]
-            });
-        });
-</script>
-@endsection
