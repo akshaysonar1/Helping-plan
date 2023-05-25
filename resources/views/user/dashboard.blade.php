@@ -74,7 +74,7 @@
                                     <div class="col-xl-6">
                                         @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                         @foreach ($users as $user)
-                                        
+
                                         @if($user->tran_status!=2)
                                         <div class="pay-card responsive-card">
                                             <div class=" d-flex justify-content-between">
@@ -351,6 +351,7 @@
                                                         <button type="button"
                                                             class="btn btn-payment details-show">Details</button>
                                                         <div class="tooltip-content details-div">
+                                                            
                                                             <p class="name-text mb-1"> Name : <span class="name-para">{{
                                                                     $show->receiverUser ? $show->receiverUser->name : ''
                                                                     }}</span>
@@ -677,14 +678,15 @@
                                         </div>
                                         <div class="">
                                             <input type="hidden" id="start_date_timer"
-                                                value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
-                                                Y-m-d h:i:s") }}">
-                                            <input type="hidden" id="end_date_timer" value="{{ $user->end_date }}">
-                                            <input type="hidden" id="payment_success_date"
-                                                value="{{ $user->payment_success_date }}">
-                                            <input type="hidden" id="payment_status" class="payment_status"
-                                                value="{{ $user->tran_status }}">
-                                            <p class="name-text mb-1" id="user_timer"></p>
+                                                        value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                                        Y-m-d h:i:s") }}">
+                                                    <input type="hidden" id="end_date_timer"
+                                                        value="{{ $user->end_date }}">
+                                                    <input type="hidden" id="payment_success_date"
+                                                        value="{{ $user->payment_success_date }}">
+                                                    <input type="hidden" id="payment_status" class="payment_status"
+                                                        value="{{ $user->tran_status }}">
+                                                    <p class="name-text mb-1" id="user1_timer"></p>
 
                                             <p class="name-text mb-1">
                                                 Rs.{{ $user->get_ammount }} </p>
@@ -826,6 +828,16 @@
                                         </div>
                                         <div class="">
                                             {{-- <p class="name-text mb-1">47:38:25</p> --}}
+                                            <input type="hidden" id="start_date_timer"
+                                            value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                            Y-m-d h:i:s") }}">
+                                        <input type="hidden" id="end_date_timer"
+                                            value="{{ $show->end_date }}">
+                                        <input type="hidden" id="payment_success_date"
+                                            value="{{ $show->payment_success_date }}">
+                                        <input type="hidden" id="payment_status" class="payment_status"
+                                            value="{{ $show->tran_status }}">
+                                        <p class="name-text mb-1" id="user1_timer"></p>
 
                                             <p class="name-text mb-1">
                                                 Rs.{{ $show->get_ammount }} </p>
@@ -982,7 +994,7 @@
                                             @if ($conf->tran_status == '1')
 
                                             @else
-                                            <p class="name-text mb-1">47:38:25</p>
+                                       
                                             @endif
                                             <p class="name-text mb-1">Rs. {{ $conf->get_ammount }}</p>
                                         </div>
@@ -1140,6 +1152,16 @@
                                             </div>
                                             <div class="">
                                                 {{-- <p class="name-text mb-1">47:38:25</p> --}}
+                                                <input type="hidden" id="start_date_timer"
+                                                value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                                Y-m-d h:i:s") }}">
+                                            <input type="hidden" id="end_date_timer"
+                                                value="{{ $show->end_date }}">
+                                            <input type="hidden" id="payment_success_date"
+                                                value="{{ $show->payment_success_date }}">
+                                            <input type="hidden" id="payment_status" class="payment_status"
+                                                value="{{ $show->tran_status }}">
+                                            <p class="name-text mb-1" id="user2_timer"></p>
 
                                                 <p class="name-text mb-1">
                                                     Rs.{{ $show->get_ammount }} </p>
@@ -1247,7 +1269,7 @@
                                                 @if ($coform->tran_status == '1')
 
                                                 @else
-                                                <p class="name-text mb-1">47:38:25</p>
+                                            
                                                 @endif
                                                 <p class="name-text mb-1">Rs. {{ $coform->get_ammount }} </p>
                                             </div>
@@ -1398,23 +1420,31 @@
 @else
 @endif
 
-@if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received || Auth::user()->status==0 )
-    <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
-        data-bs-keyboard="false">
-        @if (Session::has('error'))
-            <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
-                {{ Session::get('error') }}
-            </p>
-        @endif
-        <form action="{{ route('user.pinactive', Auth::user()->id) }}" method="post">
-            @csrf
-            @method('POST')
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header header-modify">
-                        <p class="text-center modal-head mb-0">Enter Pin</p>
-                    </div>
-                    <div class="modal-body">
+@if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received || Auth::user()->status==0
+)
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
+    @if (Session::has('error'))
+    <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
+        {{ Session::get('error') }}
+    </p>
+    @endif
+     
+        <div class="modal-dialog modal-dialog-centered" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header header-modify">
+
+                    <p class="text-center modal-head mb-0">Enter Pin</p>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <p><button type="submit" class="btn">Logout</button></p>
+                        </form>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('user.pinactive', Auth::user()->id) }}" method="post">
+                        @csrf
+                        @method('POST')
                         <div class="row">
                             <div class="col-xl-12 mb-3 form-class form-adjust">
                                 <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
@@ -1426,24 +1456,33 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
             </div>
-        </form>
-    </div>
+        </div>
+
+</div>
 @endif
 @endsection
 
 @section('custom_js')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
+</script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-
     var startdate = $('#start_date_timer').val();
     var payment_success_date = $('#payment_success_date').val();
     var enddate = $('#end_date_timer').val();
@@ -1461,6 +1500,7 @@
                 
                 duration = moment.duration(duration - interval, 'milliseconds');
                 $('#user_timer').text(diffHours+":"+moment(duration.minutes(), 'mm').format("mm")+":"+moment(duration.seconds(), 'ss').format("ss"));
+                $('#user1_timer').text(diffHours+":"+moment(duration.minutes(), 'mm').format("mm")+":"+moment(duration.seconds(), 'ss').format("ss"));
             }else{
                 
                 $('#user_timer').text("00:00:00");
@@ -1471,36 +1511,15 @@
               
                 var actionUrl = "{{ url('user/deactive/') }}"+'/'+"{{ $userId }}";
                     $.ajax({
-                       
 						type: 'GET',
                         url: actionUrl,
 						data: {
                          status: status,
-							
 						},
-						
 						success: function(data) {
 							$('#result').html(data.msg);
 						}
-                     
 					});
-                // e.preventDefault(); // avoid to execute the actual submit of the form.
-                // var actionUrl = "{{ url('status/change/') }}"+'/'+"{{ $userId }}";
-                // // console.log(actionUrl);
-                // $.ajax({
-                //     type: "GET",
-                //     url: actionUrl,
-                //     data: {
-                //         'status': 0,
-                //     },
-                //     // data: form.serialize(), // serializes the form's elements.
-                //     success: function(data){
-                //         // console.log(data); // show response from the php script.
-                //     }
-                // });
-
-                	// var fullName = $('#textBoxFullName').val();
-					
             }
         }, interval);
     }else{
@@ -1514,8 +1533,12 @@
         if(diffTimer > 0){
             duration = moment.duration(duration - interval, 'milliseconds');
             $('#user_timer').text(diffHours+":"+moment(duration.minutes(), 'mm').format("mm")+":"+moment(duration.seconds(), 'ss').format("ss"));
+            $('#user1_timer').text(diffHours+":"+moment(duration.minutes(), 'mm').format("mm")+":"+moment(duration.seconds(), 'ss').format("ss"));
+            $('#user2_timer').text(diffHours+":"+moment(duration.minutes(), 'mm').format("mm")+":"+moment(duration.seconds(), 'ss').format("ss"));
         }else{
             $('#user_timer').text("00:00:00");
+            $('#user1_timer').text("00:00:00");
+            $('#user2_timer').text("00:00:00");
         }
     }
 </script>

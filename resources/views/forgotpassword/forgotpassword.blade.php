@@ -101,25 +101,7 @@
                         });
                     });
                 </script>
-                {{-- <script>
-                    $(document).ready(function() {
-                        $('#example').DataTable();
-                    });
-
-
-                    $(document).on('click', '.d', function() {
-                        alert(123)
-
-                        var id = $(this).data('id');
-                        var name = $(this).data('name');
-
-
-                        $('.id').val(id)
-                        $('.name').val(name)
-
-
-                    });
-                </script> --}}
+            
 
             </div>
         </div>

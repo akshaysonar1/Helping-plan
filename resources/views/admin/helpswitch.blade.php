@@ -25,17 +25,22 @@
                         </thead>
 
                         <tbody>
+                            @php
+                            $i = 1;
+                        @endphp
                             @if (isset($data) && !empty($data))
                             @foreach ($data as $list)
+                            
                             <tr>
-                                <td>{{ $list->id }}</td>
+                                <td>{{ $i }}</td>
+                                {{ $list->id }}
                                 <td>{{ $list->created_at }}</td>
                                 <td>{{ $list->customer_id }}</td>
                                 <td>{{ $list->bank_name }}</td>
                                 <td>{{ $list->mobile }}</td>
 
                                 <td>
-                                    @if ($list->status == '1')
+                                    @if ($list->pin_status == '0')
                                     <button class="btn btn-success btn-circle"
                                         onclick="sweetAlertAjax('get','{{ route('status', $list->id) }}', 'Are you sure you want to Deactivate user?')"></button>
                                     @else
@@ -46,6 +51,9 @@
                                 <!-- <td><button class="btn btn-success btn-circle"></button></td>
                                 <td><button class="btn btn-danger btn-circle"></button></td> -->
                             </tr>
+                            @php
+                                        $i++;
+                                    @endphp
                             @endforeach
                             @endif
                         </tbody>
