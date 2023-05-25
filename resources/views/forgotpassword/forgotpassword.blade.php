@@ -3,6 +3,9 @@
     <div class="container">
 
         <div class="card o-hidden border-0 shadow-lg my-5">
+            @if (Session::has('message'))
+            <p class="alert alert-info">{{ Session::get('message') }}</p>
+        @endif
             <div class="card-body p-0">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">FORGOT PASSWORD LIST</h6>
@@ -98,7 +101,7 @@
                         });
                     });
                 </script>
-                <script>
+                {{-- <script>
                     $(document).ready(function() {
                         $('#example').DataTable();
                     });
@@ -116,7 +119,7 @@
 
 
                     });
-                </script>
+                </script> --}}
 
             </div>
         </div>

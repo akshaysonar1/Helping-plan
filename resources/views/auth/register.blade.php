@@ -48,7 +48,7 @@
                                     <input id="name" type="text"
                                         class="form-control form-control-user @error('name') is-invalid @enderror"
                                         name="name" value="{{ old('name') }}" required autocomplete="name"
-                                        autofocus placeholder="Name by bank name">
+                                        autofocus placeholder="Enter Name">
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -108,12 +108,12 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>State</label>
-                                            <input class="form-control" name="state" placeholder="Punjab"
+                                            <input class="form-control" name="state" placeholder="state"
                                                 required></input>
                                         </div>
                                         <div class="col-md-6">
                                             <label>City</label>
-                                            <input class="form-control" name="city" placeholder="Ludhiana"
+                                            <input class="form-control" name="city" placeholder="city"
                                                 required></input>
                                         </div>
                                     </div>

@@ -44,8 +44,11 @@
 </head>
 
 <div class="container">
-
+    @if (Session::has('message'))
+    <p class="alert alert-info">{{ Session::get('message') }}</p>
+@endif  
     <div class="card o-hidden border-0 shadow-lg my-5">
+        
         <div class="card-body p-0">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
@@ -193,7 +196,7 @@
                                 id="pin_number" name="sale_mobile"
                                 oninput="process(this)" maxlength="10">
                             <input type="hidden" class="form-control"
-                                id="id" name="id" value="{{ $list->id }}">
+                                id="id" name="id" value="">
                         </div>
 
                     </div>

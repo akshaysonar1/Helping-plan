@@ -13,7 +13,7 @@ class ProfileController extends Controller
     public function profileupdate($id, Request $request)
     {
 
-        try {
+         
 
             $user = User::where('id', $id)->first();
 
@@ -29,10 +29,8 @@ class ProfileController extends Controller
             $data['upi_link'] = $request->upi_link;
 
             User::find($user->id)->update($data);
-            return redirect('user/dashboard');
-        } catch (exception $e) {
-            return view('404');
-        }
+            return redirect()->back()->with('message',"Your Record has been Updated. Thank you!");
+         
 
     }
 }

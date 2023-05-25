@@ -19,7 +19,7 @@ class GenrateUniqueCodeController extends Controller
             $data = PinSalesUser::rightJoin('pin_genrate_tabel', 'pin_genrate_tabel.id', '=', 'pin_sales_users.pin_id')
                 ->orderBy('pin_genrate_tabel.pin_sell_status', 'asc')
                 ->get();
-            //dd($data);
+            
             return view('admin.genratepin', compact('data'));
         } catch (exception $e) {
             return view('404');
@@ -29,7 +29,7 @@ class GenrateUniqueCodeController extends Controller
     // This function use for store the random pin 
     public function storepin(Request $request)
     {
-        try {
+      
             $j = $request->total_pin;
             for ($i = 1; $i <= $j; $i++) {
                 $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -44,9 +44,7 @@ class GenrateUniqueCodeController extends Controller
                 $newPin->save();
             }
 
-            return redirect()->back();
-        } catch (exception $e) {
-            return view('404');
-        }
+            return redirect()->back()->with('message',"Your Pin Has Been Generated. Thank you!");;
+         
     }
 }

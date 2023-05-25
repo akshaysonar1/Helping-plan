@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Provide_Help;
 use App\Models\transection;
 use App\Models\User;
+use App\Models\user_payment;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +30,16 @@ class TransactionSeeder extends Seeder
                 $transaction->receiver_id = $receiver ? $receiver->id : "";
                 $transaction->tran_status = 1;
                 $transaction->save();
+
+                $payment = new user_payment;
+                $payment->user_id = $user->id;
+                $payment->provide_help_ammount = $provideHelp->provide_help_ammount;
+                $payment->get_help_ammount = $provideHelp->get_help_ammount;
+                $payment->ammount_Received = '0';
+                $payment->ammount_pendding = $provideHelp->get_help_ammount;
+                $payment->unique_id = $receiver->unique_pin;
+                $payment->pay_status = '0';
+                $payment->save();
             }
         }
     }

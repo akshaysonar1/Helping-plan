@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\CustomerDetailsController;
 use App\Http\Controllers\admin\ForgotPasswordController;
 use App\Http\Controllers\admin\PinSaleController;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\ContactController;
 use App\Http\Controllers\user\deshboard\DeshboardController;
 
 use App\Http\Controllers\DemoController;
@@ -77,6 +78,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
         Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
         Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
+        Route::get('status', 'UserStatus')->name('status');
     });
 
     Route::name('admin.')->prefix('admin')->group(function () {
@@ -88,6 +90,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
     Route::name('customer_details.')->prefix('customer_details')->group(function () {
         Route::get('CustomerDetails', [CustomerDetailsController::class, 'CustomerDetails'])->name('CustomerDetails');
+        Route::get('contactdetails', [CustomerDetailsController::class, 'contactdetails'])->name('contactdetails');
 
         Route::get('payconfarm', [CustomerDetailsController::class, 'payconfarm'])->name('payconfarm');
 
@@ -110,9 +113,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
 Route::name('user.')->prefix('user')->group(function () {
     Route::name('layouts.')->prefix('layouts')->group(function () {
         Route::get('index', [UserController::class, 'index'])->name('index');
+        Route::get('error', [UserController::class, 'error'])->name('error');
 
     });
     Route::get('contact', [UserController::class, 'contact'])->name('contact');
+    Route::POST('contactus', [ContactController::class, 'contactus'])->name('contactus');
     Route::get('privacy', [UserController::class, 'privacy'])->name('privacy');
     Route::get('term', [UserController::class, 'term'])->name('term');
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
@@ -120,6 +125,7 @@ Route::name('user.')->prefix('user')->group(function () {
     });
     Route::POST('profileupdate{id}', [ProfileController::class, 'profileupdate'])->name('profileupdate');
     Route::POST('pinactive{id}', [PinActiveController::class, 'pinactive'])->name('pinactive');
+    Route::get('deactive/{userId}', [PinActiveController::class, 'deactive'])->name('deactive');
     Route::POST('payment', [PaymentController::class, 'payment'])->name('payment');
     Route::POST('conformetion/{id}', [PaymentController::class, 'conformetion'])->name('conformetion');
 
@@ -135,3 +141,4 @@ Route::middleware(['auth'])->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
     });
 });
+
