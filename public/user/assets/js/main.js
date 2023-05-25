@@ -289,8 +289,16 @@
 
 // New Js
 $(document).ready(function(){
+  
   $(".details-show").click(function(){ 
     $(this).parent().find(".details-div").show();
+  });
+}); 
+
+// payment image show code
+$(document).ready(function(){
+  $(".image-show").click(function(){ 
+    $(this).parent().find(".image-div").show();
   });
 }); 
 

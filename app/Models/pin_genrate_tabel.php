@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class pin_genrate_tabel extends Model
 {
     use HasFactory;
+    public $table = 'pin_genrate_tabel';
 }

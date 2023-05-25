@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Password_Reset_Request extends Model
 {
     use HasFactory;
-    
+
     public $table = 'password_reset_requests';
-  
+
 }
- 

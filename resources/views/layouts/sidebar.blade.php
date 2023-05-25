@@ -31,7 +31,7 @@
 
     <li class="nav-item">
 
-        <a class="nav-link" href="{{route('genratepin')}}">
+        <a class="nav-link" href="{{ route('genratepin') }}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Pin Genrate</span></a>
     </li>
@@ -44,7 +44,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{route('pinhistory')}}">
+        <a class="nav-link" href="{{ route('pinhistory') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Pin History</span></a>
     </li>
@@ -57,9 +57,9 @@
 
     <li class="nav-item">
 
-        <a class="nav-link" href="{{route('helpswitch')}}">
+        <a class="nav-link" href="{{ route('helpswitch') }}">
 
-          <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-cog"></i>
             <span>Help Switch ON/OFF</span></a>
     </li>
     <li class="nav-item">
@@ -67,11 +67,11 @@
             <i class="fas fa-fw fa-cog"></i>
             <span>Forgot Password List</span></a>
     </li>
-    {{-- <li class="nav-item">
-        <a class="nav-link" href="{{ route('customer_details.payconfarm') }}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Payment Confarmetion</span></a>
-    </li> --}}
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('customer_details.contactdetails') }}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Contcat Details</span></a>
+    </li>
 
 
 
