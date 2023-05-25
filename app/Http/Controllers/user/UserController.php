@@ -41,6 +41,7 @@ class UserController extends Controller
     }
     public function error()
     {
+      
         return view('404');
     }
 }

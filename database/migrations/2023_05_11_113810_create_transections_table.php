@@ -19,8 +19,9 @@ return new class extends Migration {
             $table->string('get_ammount')->nullable();
             $table->string('sender_id')->nullable();
             $table->string('receiver_id')->nullable();
-            $table->string('image')->nullable();
-            $table->string('create_date')->nullable();
+            $table->dateTime('create_date')->nullable();
+            $table->dateTime('end_date')->nullable();
+            $table->dateTime('payment_success_date')->nullable(); 
             $table->string('tran_status')->nullable();
             $table->timestamps();
         });

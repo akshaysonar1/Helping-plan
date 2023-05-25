@@ -13,8 +13,9 @@ class PinSaleController extends Controller
     public function pinsale(Request $request)
     {
         try {
+           
             $pinsale = PinModel::where('id', $request->id)->first();
-
+            
             $data = new PinSalesUser();
 
             $data->pin_id = $pinsale->id;
@@ -23,6 +24,7 @@ class PinSaleController extends Controller
             $data->sale_name = $request->sale_name;
             $data->sell_pin_status = '1';
             $data->provide_help_amount = $pinsale->provide_help_ammount;
+             
             $data->pin_help_amount = $pinsale->get_help_ammount;
 
             $data->save();

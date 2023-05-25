@@ -14,7 +14,7 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>ID </th>
+                                 <th>ID </th>
                                 <th>Joinig Date </th>
                                 <th>Unique No </th>
                                 <th>Bank Name</th>

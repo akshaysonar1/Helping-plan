@@ -7,6 +7,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB as FacadesDB;
 use Illuminate\Support\Facades\Hash;
+use DB;
 
 class AdminSeeder extends Seeder
 {
@@ -50,6 +51,9 @@ class AdminSeeder extends Seeder
                 'google_pay_no' => '1234567890',
                 'upi_link' => '1234567890ybl',
             ]);
+
+
+            
         }
 
     }

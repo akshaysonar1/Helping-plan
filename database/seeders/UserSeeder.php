@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'name' => 'user1',
                 'email' => 'user1@gmail.com',
                 'password' => Hash::make('12345678'),
-                'user_type' => '1',
+                'user_type' => '0',
                 'customer_id' => '12345123456',
                 'mobile' => '7878787878',
                 'bank_name' => 'Axis Bank',

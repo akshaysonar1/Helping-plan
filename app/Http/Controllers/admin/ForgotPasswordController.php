@@ -25,15 +25,12 @@ class ForgotPasswordController extends Controller
     public function passwordupdate(Request $request)
     {
 
-        try {
+        
             $user = $request->mobile;
             $data['password'] = Hash::make($request->password);
 
             User::where('mobile', $user)->update($data);
-            return redirect('forgotpassword/forgotpassword')->with('success', "Record are Updated");
-        } catch (exception $e) {
-            return view('404');
-        }
+            return redirect('forgotpassword/forgotpassword')->with('message', "Password Are Updated");
+        }  
 
     }
-}
