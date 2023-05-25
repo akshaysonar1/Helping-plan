@@ -1398,7 +1398,7 @@
 @else
 @endif
 
-@if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received || Auth::user()->status==0)
+@if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received || Auth::user()->status==0 )
     <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
         data-bs-keyboard="false">
         @if (Session::has('error'))
