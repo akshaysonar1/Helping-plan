@@ -78,7 +78,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
         Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
         Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
-        Route::get('status', 'UserStatus')->name('status');
+       
     });
 
     Route::name('admin.')->prefix('admin')->group(function () {
