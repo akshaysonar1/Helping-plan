@@ -49,7 +49,7 @@
 
 <div class="container">
     @if (Session::has('message'))
-    <p class="alert alert-info">{{ Session::get('message') }}</p>
+    <p class="alert alert-info error">{{ Session::get('message') }}</p>
     @endif
     <div class="card o-hidden border-0 shadow-lg my-5">
 
@@ -227,7 +227,13 @@
         }
     </script>
 
-
+<script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
     <script>
         $(document).ready(function() {
             $("#genratePin").validate({
@@ -244,11 +250,11 @@
                 },
                 messages: {
                     pin_ammount: {
-                        required: 'PLase Enter Your Name',
+                        required: 'Please Enter Your Name',
                     },
                     total_pin: {
                         required: 'Please Enter To Genrate Pin',
-                        maxlength: 'You Are Only Allow 9 Pins TO Genrate',
+                        maxlength: 'You Are Only Allow 0-9 Pins TO Genrate',
                     },
 
                 }
@@ -264,32 +270,33 @@
 
 
 <script>
-    $(document).ready(function() {
-        $("#PinSellModel").validate({
-            errorClass: "error fail-alert",
-            validClass: "valid success-alert",
-            rules: {
-                sale_name: {
-                    required: true,
+        $(document).ready(function() {
+            $("#PinSellModel").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules: {
+                    sale_name: {
+                        required: true,
+                    },
+                    sale_mobile: {
+                        required: true,
+                        maxlength: 10,
+                        minlength:10,
+                    },
                 },
-                sale_mobile: {
-                    required: true,
-                    maxlength: 10,
-                    minlength:10,
-                },
-            },
-            messages: {
-                sale_name: {
-                    required: 'PLease Enter The Name ',
-                },
-                sale_mobile: {
-                    required: 'Please Enter Mobile NUmber',
-                    maxlength: 'Please Enter A Valid Number',
-                    minlength: 'Please Enter A Valid Number',
-                },
-            }
+                messages: {
+                    sale_name: {
+                        required: 'Please Enter The Name ',
+                    },
+                    sale_mobile: {
+                        required: 'Please Enter Mobile NUmber',
+                        maxlength: 'Please Enter A Valid Number',
+                        minlength: 'Please Enter A Valid Number',
+                    },
+
+                }
+            });
         });
-    });
-</script>
+    </script>
 
     @endsection

@@ -8,11 +8,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
+    <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
@@ -22,6 +20,11 @@
     <!-- Template Main CSS File -->
     <link href="{{ asset('user/assets/css/style.css') }}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        label.error {
+            color: red !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -35,7 +38,7 @@
                 </div>
                 <div class="col-md-5">
                     <div class="login-box">
-                        <form class="user" method="POST">
+                        <form class="user" method="POST" id="RegisterForm">
                             @csrf
                             @method('POST')
                             <h1>Sign Up</h1>
@@ -45,14 +48,11 @@
 
                                 <div class="col-12">
                                     <label>Name</label>
-                                    <input id="name" type="text"
-                                        class="form-control form-control-user @error('name') is-invalid @enderror"
-                                        name="name" value="{{ old('name') }}" required autocomplete="name"
-                                        autofocus placeholder="Enter Name">
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Enter Name" oninput="validateInput(this)">
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
 
@@ -61,36 +61,28 @@
                                 <div class="col-12">
                                     <label>Mobile No.</label>
 
-                                    <input id="mobile" type="text"
-                                        class="form-control form-control-user  @error('mobile') is-invalid @enderror numbers"
-                                        name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile"
-                                        autofocus placeholder="10 digit mobile no."oninput="process(this)"
-                                        maxlength="10">
+                                    <input id="mobile" type="text" class="form-control form-control-user  @error('mobile') is-invalid @enderror numbers" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus placeholder="10 digit mobile no." oninput="process(this)" maxlength="10">
                                     @error('mobile')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                     @php
-                                        $randomNumber = random_int(1000, 9999999999);
+                                    $randomNumber = random_int(1000, 9999999999);
                                     @endphp
-                                    <input type="hidden" class="form-control" name="customer_id"
-                                        value="{{ $randomNumber }}">
-                                    <input type="hidden" class="form-control form-control-user" name="user_type"
-                                        value="0">
+                                    <input type="hidden" class="form-control" name="customer_id" value="{{ $randomNumber }}">
+                                    <input type="hidden" class="form-control form-control-user" name="user_type" value="0">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <label>Create password</label>
 
-                                    <input id="password" type="password"
-                                        class="form-control form-control-user @error('password') is-invalid @enderror"
-                                        name="password" required autocomplete="new-password" placeholder="123456789">
+                                    <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="123456789">
                                     @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -98,9 +90,7 @@
                                 <div class="col-12">
                                     <label>Confirm password</label>
 
-                                    <input id="password-confirm" type="password" class="form-control form-control-user"
-                                        name="password_confirmation" required autocomplete="new-password"
-                                        placeholder="123456789">
+                                    <input id="password_confirmation" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="123456789">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -108,22 +98,19 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>State</label>
-                                            <input class="form-control" name="state" placeholder="state"
-                                                required></input>
+                                            <input class="form-control" name="state" id="state" placeholder="state" required oninput="validateInput(this)">
                                         </div>
                                         <div class="col-md-6">
                                             <label>City</label>
-                                            <input class="form-control" name="city" placeholder="city"
-                                                required></input>
+                                            <input class="form-control" name="city" placeholder="city" required oninput="validateInput(this)">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row mb-4">
                                 <div class="col-12">
-                                    <label>Pin Code</label>
-                                    <input type="text" name="pin_code" placeholder="853698" class="form-control"
-                                        required>
+                                    <label>ZipCode</label>
+                                    <input type="text" name="pin_code" id="pin_code" placeholder="Zipcode" class="form-control" oninput="process(this)" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -143,16 +130,91 @@
         </div>
     </div>
 
+    <div id="preloader"></div>
     <script>
         function process(input) {
             let value = input.value;
             let numbers = value.replace(/[^0-9]/g, "");
             input.value = numbers;
         }
+
+        function validateInput(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+        }
     </script>
-    <div id="preloader"></div>
+    <!-- Jquery Validation start -->
+    <script>
+        $(document).ready(function() {
+            $("#RegisterForm").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules: {
+                    name: {
+                        required: true,
+                    },
+                    mobile: {
+                        required: true,
+                        maxlength: 10,
+                        minlength: 10,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                    },
+                    password_confirmation: {
+                        required: true,
+                        minlength: 6,
+                        equalTo: "#password"
+                    },
+                    state: {
+                        required: true,
+                    },
+                    city: {
+                        required: true,
+                    },
+                    pin_code: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    name: {
+                        required: 'Please Enter Your Name',
+                    },
+                    mobile: {
+                        required: 'Please Enter Your Mobile Number',
+                        maxlength: 'Please Enter A Valid Mobile Number',
+                        minlength: 'Please Enter A Valid Mobile Number',
+                    },
+                    password: {
+                        required: 'Please Enter Your Mobile Number',
+                        minlength: 'Minimum Six Character Password Require',
+
+                    },
+                    password_confirmation: {
+                        required: 'Please Enter Your Mobile Number',
+                        minlength: 'Minimum Six Character Password Require',
+                        equalTo: 'Password Not Matched',
+                    },
+                    state: {
+                        required: 'Please Enter Your State Name',
+                    },
+                    city: {
+                        required: 'Please Enter Your City Name',
+                    },
+                    pin_code: {
+                        required: 'Please Enter Your Zipcode Name',
+                    },
+
+                }
+            });
+        });
+    </script>
+    <!-- Jquery Validation End -->
+
+
+
     <!-- Vendor JS Files -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script src="{{ asset('user/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
@@ -160,9 +222,11 @@
     <script src="{{ asset('user/assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
-    <script src="{{ asset('user/assets/vendor/php-email-form/validate.js') }}"></script>
+    <!-- <script src="{{ asset('user/assets/vendor/php-email-form/validate.js') }}"></script> -->
     <!-- Template Main JS File -->
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script> -->
 </body>
 
 </html>

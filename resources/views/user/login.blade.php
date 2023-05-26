@@ -8,11 +8,9 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
     <!-- Favicons -->
-    <link href="{{ asset('user/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
     <link href="{{ asset('user/assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -22,9 +20,14 @@
     <link href="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('user/assets/css/style.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         .alert {
             color: red;
+        }
+
+        label.error {
+            color: red !important;
         }
     </style>
 </head>
@@ -38,27 +41,27 @@
                 </div>
 
                 <div class="col-md-5">
-                    <form action="{{ route('user.log') }}" method="POST">
+                    <form action="{{ route('user.log') }}" method="POST" id="UserLogin">
                         @csrf
                         @method('POST')
                         <div class="login-box">
                             <h1>Login</h1>
                             @if (Session::has('error'))
-                                <p class="alert {{ Session::get('alert-class', 'alert-info') }}">
-                                    {{ Session::get('error') }}</p>
+                            <p class="alert {{ Session::get('alert-class', 'alert-info') }} error">
+                                {{ Session::get('error') }}
+                            </p>
                             @endif
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" name="mobile" oninput="process(this)"
-                                        maxlength="10" id="phone">
+                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile">
 
                                 </div>
                             </div>
                             <div class="row mb-1">
                                 <div class="col-12">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" name="password">
+                                    <input type="password" class="form-control" name="password" id="password">
                                 </div>
                             </div>
                             <div class="row justify-content-between mb-4">
@@ -93,6 +96,46 @@
             input.value = numbers;
         }
     </script>
+
+    <script>
+        $("document").ready(function() {
+            setTimeout(function() {
+                $(".error").remove();
+            }, 5000); // 5 secs
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#UserLogin").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules: {
+                    mobile: {
+                        required: true,
+                        maxlength: 10,
+                        minlength: 10,
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                    },
+                },
+                messages: {
+                    mobile: {
+                        required: 'Please Enter Mobile Number',
+                        maxlength: 'Please Enter A Valid Mobile Number',
+                        minlength: 'Please Enter A Valid Mobile Number',
+                    },
+                    password: {
+                        required: 'Please Enter The Password',
+                        minlength: 'Minimum Six Digit Password Required',
+                    },
+
+                }
+            });
+        });
+    </script>
+
     <!-- Vendor JS Files -->
 
     <script src="{{ asset('user/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
@@ -105,6 +148,9 @@
     <script src="{{ asset('user/assets/vendor/php-email-form/validate.js') }}"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+
 </body>
 
 </html>

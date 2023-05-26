@@ -11,11 +11,9 @@
 
     <!-- Favicons -->
     <!-- Favicons -->
-    <link href="{{ asset('user/assets/img/favicon.png') }}" rel="icon">
+    <link href="{{asset('assets/img/favicon.png')}}" rel="icon">
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <!-- Vendor CSS Files -->
     <link href="{{ asset('user/assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ asset('user/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -25,13 +23,19 @@
     <link href="{{ asset('user/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <!-- Template Main CSS File -->
     <link href="{{ asset('user/assets/css/style.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <style>
+        label.error {
+            color: red !important;
+        }
+    </style>
 
 </head>
 
 <body>
 
     <div class="login-section">
-        <form action="{{ route('auth.store') }}" method="POST">
+        <form action="{{ route('auth.store') }}" method="POST" id="ForgetPassword">
             @csrf
             @method('post')
             <div class="container-fluid ps-md-0">
@@ -47,16 +51,15 @@
                             <h1>Forgot Password</h1>
                             <div class="row mb-3">
                                 @if (Session::has('message'))
-                                    <p class="alert alert-info">{{ Session::get('message') }}</p>
+                                <p class="alert alert-info">{{ Session::get('message') }}</p>
                                 @endif
                                 <div class="col-12">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" name="mobile" oninput="process(this)"
-                                        maxlength="10" id="phone">
+                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile">
                                 </div>
                                 <div class="col-12">
                                     <label>Message</label>
-                                    <input type="text" class="form-control" name="message">
+                                    <input type="text" class="form-control" name="message" id="message">
                                 </div>
                             </div>
 
@@ -85,6 +88,37 @@
             input.value = numbers;
         }
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $("#ForgetPassword").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules: {
+                    mobile: {
+                        required: true,
+                        maxlength: 10,
+                        minlength: 10,
+                    },
+                    message: {
+                        required: true,
+                    },
+                },
+                messages: {
+                    mobile: {
+                        required: 'Please Enter Mobile Number',
+                        maxlength: 'Please Enter A Valid Mobile Number',
+                        minlength: 'Please Enter A Valid Mobile Number',
+                    },
+                    message: {
+                        required: 'Please Enter The Text That Got You From The Admin',
+                    },
+                }
+            });
+        });
+    </script>
+
+
     <!-- Vendor JS Files -->
     <script src="{{ asset('user/assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
     <script src="{{ asset('user/assets/vendor/aos/aos.js') }}"></script>
@@ -96,6 +130,8 @@
     <script src="{{ asset('user/assets/vendor/php-email-form/validate.js') }}"></script>
     <!-- Template Main JS File -->
     <script src="{{ asset('user/assets/js/main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
 </body>
 </body>
 
