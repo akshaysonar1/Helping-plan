@@ -1,5 +1,9 @@
 @extends('user.layouts.master')
-
+<style>
+    #text{
+        text-decoration: none;
+    }
+</style>
 @section('master')
 <style>
     label.error {
@@ -155,36 +159,61 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="details-tip">
-                                                        <button type="button" class="btn btn-payment details-show">Details</button>
-                                                        <div class="tooltip-content details-div">
-                                                            <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                                    $user->receiverUser ? $user->receiverUser->name : ''
-                                                                    }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->mobile : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->ifsc_code : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Account No: <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->account_no : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Upi Link: <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->upi_link : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->phone_pay_no : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{ $user->receiverUser ?
-                                                                    $user->receiverUser->google_pay_no : '' }}</span>
-                                                            </p>
+                                                    <div class="dropdown ">
+                                                        <div class="details-tip">
+                                                            <button type="button"
+                                                                class="btn btn-payment details-show dropdown-toggle"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-bs-toggle="dropdown"
+                                                                aria-expanded="false">Details</button>
+
+                                                                <div class="demo">
+                                                                <div class="tooltip-content dropdown-menu details-div">
+                                                                    <p class="name-text mb-1"> Name : <span
+                                                                            class="name-para">{{
+                                                                            $user->receiverUser ?
+                                                                            $user->receiverUser->name : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Mobile No. : <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->mobile : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Ifsc Code : <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->ifsc_code : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Account No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->account_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Upi Link: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->upi_link : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Phone Pay No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->phone_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Google Pay No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->google_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                </div>
+
+                                                                </div>
                                                         </div>
                                                     </div>
+
+
+
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br>
                                         @else
 
                                         @endif
@@ -293,37 +322,58 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="details-tip">
-                                                        <button type="button" class="btn btn-payment details-show">Details</button>
-                                                        <div class="tooltip-content details-div">
+                                                    <div class="dropdown ">
+                                                        <div class="details-tip">
+                                                            <button type="button"
+                                                                class="btn btn-payment details-show dropdown-toggle"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-bs-toggle="dropdown"
+                                                                aria-expanded="false">Details</button>
 
-                                                            <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                                    $show->receiverUser ? $show->receiverUser->name : ''
-                                                                    }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->mobile : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->ifsc_code : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Account No: <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->account_no : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Upi Link: <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->upi_link : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->phone_pay_no : '' }}</span>
-                                                            </p>
-                                                            <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{ $show->receiverUser ?
-                                                                    $show->receiverUser->google_pay_no : '' }}</span>
-                                                            </p>
+                                                                <div class="demo">
+                                                                <div class="tooltip-content dropdown-menu details-div">
+                                                                    <p class="name-text mb-1"> Name : <span
+                                                                            class="name-para">{{
+                                                                            $show->receiverUser ?
+                                                                            $show->receiverUser->name : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Mobile No. : <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->mobile : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Ifsc Code : <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->ifsc_code : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Account No: <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->account_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Upi Link: <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->upi_link : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Phone Pay No: <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->phone_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Google Pay No: <span
+                                                                            class="name-para">{{ $show->receiverUser ?
+                                                                            $show->receiverUser->google_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                </div>
+
+                                                                </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br>
                                         @endforeach
                                         @endif
                                     </div>
@@ -412,29 +462,53 @@
 
                                                         @else
 
-                                                        <div class="details-tip">
-                                                            <button type="button" class="btn btn-payment details-show">Details</button>
-                                                            <div class="tooltip-content details-div">
-
-                                                                <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                                        $coform->name }}</span>
-                                                                </p>
-                                                                <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{
-                                                                        $coform->mobile }}</span></p>
-                                                                <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{
-                                                                        $coform->ifsc_code }}</span>
-                                                                </p>
-                                                                <p class="name-text mb-1"> Account No: <span class="name-para">{{
-                                                                        $coform->account_no }}</span>
-                                                                </p>
-                                                                <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
-                                                                        $coform->upi_link }}</span></p>
-                                                                <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{
-                                                                        $coform->phone_pay_no }}</span>
-                                                                </p>
-                                                                <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{
-                                                                        $coform->google_pay_no }}</span>
-                                                                </p>
+                                                        <div class="dropdown ">
+                                                            <div class="details-tip">
+                                                                <button type="button"
+                                                                    class="btn btn-payment details-show dropdown-toggle"
+                                                                    type="button" id="dropdownMenuButton"
+                                                                    data-bs-toggle="dropdown"
+                                                                    aria-expanded="false">Details</button>
+    
+                                                                    <div class="demo">
+                                                                    <div class="tooltip-content dropdown-menu details-div">
+                                                                        <p class="name-text mb-1"> Name : <span
+                                                                                class="name-para">{{
+                                                                                $coform->receiverUser ?
+                                                                                $coform->receiverUser->name : ''
+                                                                                }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Mobile No. : <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->mobile : '' }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Ifsc Code : <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->ifsc_code : ''
+                                                                                }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Account No: <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->account_no : ''
+                                                                                }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Upi Link: <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->upi_link : '' }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Phone Pay No: <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->phone_pay_no : ''
+                                                                                }}</span>
+                                                                        </p>
+                                                                        <p class="name-text mb-1"> Google Pay No: <span
+                                                                                class="name-para">{{ $coform->receiverUser ?
+                                                                                $coform->receiverUser->google_pay_no : ''
+                                                                                }}</span>
+                                                                        </p>
+                                                                    </div>
+    
+                                                                    </div>
                                                             </div>
                                                         </div>
                                                         @endif
@@ -444,7 +518,7 @@
                                                 </form>
                                             </div>
 
-                                        </div>
+                                        </div><br>
                                         @endforeach
 
                                     </div>
@@ -546,8 +620,11 @@
                     <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab" tabindex="0">
                         <div class="row">
                             <div class="col-xl-12">
-
+                                {{-- @if(isset($users) && count($users) > 0 && Auth::user()->status==1) --}}
                                 @foreach ($users as $user)
+
+                                @if($user->tran_status!=2)
+
 
                                 <div class="pay-card responsive-card">
                                     <div class=" d-flex justify-content-between">
@@ -583,11 +660,14 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            <input type="hidden" id="start_date_timer" value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
-                                                        Y-m-d h:i:s") }}">
+                                            <input type="hidden" id="start_date_timer"
+                                                value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                                Y-m-d h:i:s") }}">
                                             <input type="hidden" id="end_date_timer" value="{{ $user->end_date }}">
-                                            <input type="hidden" id="payment_success_date" value="{{ $user->payment_success_date }}">
-                                            <input type="hidden" id="payment_status" class="payment_status" value="{{ $user->tran_status }}">
+                                            <input type="hidden" id="payment_success_date"
+                                                value="{{ $user->payment_success_date }}">
+                                            <input type="hidden" id="payment_status" class="payment_status"
+                                                value="{{ $user->tran_status }}">
                                             <p class="name-text mb-1" id="user1_timer"></p>
 
                                             <p class="name-text mb-1">
@@ -635,42 +715,65 @@
                                                 </div>
 
                                             </div>
-                                            <div class="details-tip">
-                                                <button type="button" class="btn btn-payment details-show">Details</button>
-                                                <div class="tooltip-content details-div">
-                                                    <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                            $user->receiverUser ? $user->receiverUser->name : ''
-                                                            }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->mobile : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->ifsc_code : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Account No: <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->account_no : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->upi_link : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->phone_pay_no : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{
-                                                            $user->receiverUser ?
-                                                            $user->receiverUser->google_pay_no : '' }}</span>
-                                                    </p>
-                                                </div>
-                                            </div>
+                                             <div class="dropdown">
+                                                        <div class="details-tip">
+                                                            <button type="button"
+                                                                class="btn btn-payment details-show dropdown-toggle"
+                                                                type="button" id="dropdownMenuButton"
+                                                                data-bs-toggle="dropdown"
+                                                                aria-expanded="false">Details</button>
+
+                                                                <div class="demo">
+                                                                <div class="tooltip-content dropdown-menu details-div">
+                                                                    <p class="name-text mb-1"> Name : <span
+                                                                            class="name-para">{{
+                                                                            $user->receiverUser ?
+                                                                            $user->receiverUser->name : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Mobile No. : <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->mobile : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Ifsc Code : <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->ifsc_code : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Account No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->account_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Upi Link: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->upi_link : '' }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Phone Pay No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->phone_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                    <p class="name-text mb-1"> Google Pay No: <span
+                                                                            class="name-para">{{ $user->receiverUser ?
+                                                                            $user->receiverUser->google_pay_no : ''
+                                                                            }}</span>
+                                                                    </p>
+                                                                </div>
+
+                                                                </div>
+                                                          
+                                                        </div>
+
+                                                    
+                                                        
+                                                    </div>
                                         </div>
                                     </div>
                                 </div>
+                                @else
+
+                                @endif
                                 @endforeach
 
 
@@ -717,11 +820,14 @@
                                         </div>
                                         <div class="">
                                             {{-- <p class="name-text mb-1">47:38:25</p> --}}
-                                            <input type="hidden" id="start_date_timer" value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
-                                            Y-m-d h:i:s") }}">
+                                            <input type="hidden" id="start_date_timer"
+                                                value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                                Y-m-d h:i:s") }}">
                                             <input type="hidden" id="end_date_timer" value="{{ $show->end_date }}">
-                                            <input type="hidden" id="payment_success_date" value="{{ $show->payment_success_date }}">
-                                            <input type="hidden" id="payment_status" class="payment_status" value="{{ $show->tran_status }}">
+                                            <input type="hidden" id="payment_success_date"
+                                                value="{{ $show->payment_success_date }}">
+                                            <input type="hidden" id="payment_status" class="payment_status"
+                                                value="{{ $show->tran_status }}">
                                             <p class="name-text mb-1" id="user1_timer"></p>
 
                                             <p class="name-text mb-1">
@@ -787,37 +893,53 @@
                                                 </div>
 
                                             </div>
-                                            <div class="details-tip">
-                                                <button type="button" class="btn btn-payment details-show">Details</button>
-                                                <div class="tooltip-content details-div">
-                                                    <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                            $show->receiverUser ? $show->receiverUser->name : ''
-                                                            }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->mobile : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->ifsc_code : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Account No: <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->account_no : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->upi_link : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->phone_pay_no : '' }}</span>
-                                                    </p>
-                                                    <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{
-                                                            $show->receiverUser ?
-                                                            $show->receiverUser->google_pay_no : '' }}</span>
-                                                    </p>
+                                            <div class="dropdown ">
+                                                <div class="details-tip">
+                                                    <button type="button"
+                                                        class="btn btn-payment details-show dropdown-toggle"
+                                                        type="button" id="dropdownMenuButton"
+                                                        data-bs-toggle="dropdown"
+                                                        aria-expanded="false">Details</button>
+
+                                                        <div class="demo">
+                                                        <div class="tooltip-content dropdown-menu details-div">
+                                                            <p class="name-text mb-1"> Name : <span
+                                                                    class="name-para">{{
+                                                                    $show->receiverUser ?
+                                                                    $show->receiverUser->name : ''
+                                                                    }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Mobile No. : <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->mobile : '' }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Ifsc Code : <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->ifsc_code : ''
+                                                                    }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Account No: <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->account_no : ''
+                                                                    }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Upi Link: <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->upi_link : '' }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Phone Pay No: <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->phone_pay_no : ''
+                                                                    }}</span>
+                                                            </p>
+                                                            <p class="name-text mb-1"> Google Pay No: <span
+                                                                    class="name-para">{{ $show->receiverUser ?
+                                                                    $show->receiverUser->google_pay_no : ''
+                                                                    }}</span>
+                                                            </p>
+                                                        </div>
+
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -1006,11 +1128,14 @@
                                             </div>
                                             <div class="">
                                                 {{-- <p class="name-text mb-1">47:38:25</p> --}}
-                                                <input type="hidden" id="start_date_timer" value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
-                                                Y-m-d h:i:s") }}">
+                                                <input type="hidden" id="start_date_timer"
+                                                    value="{{ isset($currentDate) && !empty($currentDate) ? $currentDate : date("
+                                                    Y-m-d h:i:s") }}">
                                                 <input type="hidden" id="end_date_timer" value="{{ $show->end_date }}">
-                                                <input type="hidden" id="payment_success_date" value="{{ $show->payment_success_date }}">
-                                                <input type="hidden" id="payment_status" class="payment_status" value="{{ $show->tran_status }}">
+                                                <input type="hidden" id="payment_success_date"
+                                                    value="{{ $show->payment_success_date }}">
+                                                <input type="hidden" id="payment_status" class="payment_status"
+                                                    value="{{ $show->tran_status }}">
                                                 <p class="name-text mb-1" id="user2_timer"></p>
 
                                                 <p class="name-text mb-1">
@@ -1041,32 +1166,53 @@
                                                     </div>
                                                 </div>
                                                 {{-- Image model End --}}
-                                                <div class="details-tip">
-                                                    <button type="button" class="btn btn-payment details-show">Details</button>
-                                                    <div class="tooltip-content details-div">
-                                                        <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                                $show->receiverUser ? $show->receiverUser->name : ''
-                                                                }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{ $show->receiverUser ?
-                                                                $show->receiverUser->mobile : '' }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{ $show->receiverUser ?
-                                                                $show->receiverUser->ifsc_code : '' }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Account No: <span class="name-para">{{ $show->receiverUser ?
-                                                                $show->receiverUser->account_no : '' }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
-                                                                $show->receiverUser ?
-                                                                $show->receiverUser->upi_link : '' }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{ $show->receiverUser ?
-                                                                $show->receiverUser->phone_pay_no : '' }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{ $show->receiverUser ?
-                                                                $show->receiverUser->google_pay_no : '' }}</span>
-                                                        </p>
+                                                <div class="dropdown ">
+                                                    <div class="details-tip">
+                                                        <button type="button"
+                                                            class="btn btn-payment details-show dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false">Details</button>
+
+                                                            <div class="demo">
+                                                            <div class="tooltip-content dropdown-menu details-div">
+                                                                <p class="name-text mb-1"> Name : <span
+                                                                        class="name-para">{{
+                                                                        $show->receiverUser ?
+                                                                        $show->receiverUser->name : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Mobile No. : <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->mobile : '' }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Ifsc Code : <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->ifsc_code : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Account No: <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->account_no : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Upi Link: <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->upi_link : '' }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Phone Pay No: <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->phone_pay_no : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Google Pay No: <span
+                                                                        class="name-para">{{ $show->receiverUser ?
+                                                                        $show->receiverUser->google_pay_no : ''
+                                                                        }}</span>
+                                                                </p>
+                                                            </div>
+
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -1242,10 +1388,23 @@
 </div>
 @else
 @endif
+@if(isset($popup) && count($popup) > 0 || Auth::user()->status=NULL)
+@foreach ($popup as $pop)
+@if($pop->status==0 || Auth::user()->status==null)
 
-@if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received || Auth::user()->status==0
-)
-<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+@else
+
+
+@endif
+
+@endforeach
+
+@else
+{{-- @if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received ||
+Auth::user()->status==0) --}}
+
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
     @if (Session::has('error'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
         {{ Session::get('error') }}
@@ -1272,7 +1431,9 @@
                             <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
                             <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-2">Activate</button>
+                                <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal"
+                                    aria-label="Close" data-bs-toggle="modal"
+                                    data-bs-target="#modal-2">Activate</button>
                             </div>
                         </div>
                     </div>
@@ -1283,6 +1444,9 @@
     </div>
 
 </div>
+{{-- @endif --}}
+
+
 @endif
 @endsection
 
@@ -1324,19 +1488,19 @@
 
                 var userId = $('.userId').val();
                 var status = '0';
-                //    var url = "{{ url('user/deactive/') }}";
-
-                var actionUrl = "{{ url('user/deactive/') }}" + '/' + "{{ $userId }}";
-                $.ajax({
-                    type: 'GET',
-                    url: actionUrl,
-                    data: {
-                        status: status,
-                    },
-                    success: function(data) {
-                        $('#result').html(data.msg);
-                    }
-                });
+            //    var url = "{{ url('user/deactive/') }}";
+              
+                // var actionUrl = "{{ url('user/deactive/') }}"+'/'+"{{ $userId }}";
+                //     $.ajax({
+				// 		type: 'GET',
+                //         url: actionUrl,
+				// 		data: {
+                //          status: status,
+				// 		},
+				// 		success: function(data) {
+				// 			$('#result').html(data.msg);
+				// 		}
+				// 	});
             }
         }, interval);
     } else {

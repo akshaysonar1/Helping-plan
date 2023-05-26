@@ -15,7 +15,8 @@ class ForgotPasswordController extends Controller
     public function forgotpassword()
     {
         try {
-            $user = Password_Reset_Request::get();
+            $user = Password_Reset_Request::join('users', 'users.mobile', '=', 'password_reset_requests.mobile')->get();
+
             return view('forgotpassword.forgotpassword', compact('user'));
         } catch (exception $e) {
             return view('404');

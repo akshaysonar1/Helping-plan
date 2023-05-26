@@ -31,7 +31,9 @@ class DeshboardController extends Controller
                 $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('image', '!=', null)->where('user_id', '!=', (Auth::user()->id))->get();
                 $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
                 $currentDate = Carbon::now();
-                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers'));
+                $popup = transection::where('tran_status', '!=','2')->where('user_id', Auth::user()->id)->get();
+
+                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup'));
             } else {
                 return redirect('user/login');
             }

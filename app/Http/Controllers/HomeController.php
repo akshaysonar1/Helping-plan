@@ -53,8 +53,8 @@ class HomeController extends Controller
         // }
         // $user->save();
 
-        $change = PinModel::where('pin_sale_user_id', '=', $data)->first();
-      
+        $change = PinModel::where('pin_number', '=', $data)->first();
+     
         if ($change->pin_status == '0') {
             $change->pin_status = '1';
         } else {
@@ -62,7 +62,7 @@ class HomeController extends Controller
         }
         $change->update();
         
-        $updated = transection::where('user_id', '=', $data)->first();
+        $updated = transection::where('pin_number', '=', $data)->first();
      
         if ($updated->tran_status == '0') {
             $updated->tran_status = '2';

@@ -120,7 +120,7 @@
                                         <tbody>
 
                                             @if (isset($data) && !empty($data))
-                                            @foreach ($users as $row)
+                                            @foreach ($data as $row)
                                             @if ($row->pin_status == '0')
                                             <tr>
                                                 <td>{{ $row->created_at }}</td>
