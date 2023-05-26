@@ -244,11 +244,11 @@
                 },
                 messages: {
                     pin_ammount: {
-                        required: 'PLase Enter Your Name',
+                        required: 'Please Enter Your Name',
                     },
                     total_pin: {
                         required: 'Please Enter To Genrate Pin',
-                        maxlength: 'You Are Only Allow 9 Pins TO Genrate',
+                        maxlength: 'You Are Only Allow 0-9 Pins TO Genrate',
                     },
 
                 }
@@ -280,10 +280,10 @@
                 },
                 messages: {
                     sale_name: {
-                        required: 'PLease Select The Amount',
+                        required: 'Please Enter The Name ',
                     },
                     sale_mobile: {
-                        required: 'Please Enter To Genrate Pin',
+                        required: 'Please Enter Mobile NUmber',
                         maxlength: 'Please Enter A Valid Number',
                         minlength: 'Please Enter A Valid Number',
                     },
