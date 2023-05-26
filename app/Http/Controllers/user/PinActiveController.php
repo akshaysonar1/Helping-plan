@@ -56,8 +56,6 @@ class PinActiveController extends Controller
                             $transection->provide_help_id = $checkProviderUser->id;
                             $transection->tran_status = "0";
                             
-
-                           
                             $transection->save();
                         }
                     }
@@ -74,6 +72,7 @@ class PinActiveController extends Controller
                     $transection->tran_status = "0";
                     $transection->create_date = $currentDate;
                     $transection->end_date = $tomorrow;
+                    $transection->pin_number = $request->pin_number;
                     $transection->save();
                  
                 }
@@ -97,6 +96,8 @@ class PinActiveController extends Controller
                 $into->unique_pin = $request->pin_number;
                 $into->status = '1';
                 $into->update();
+
+              
             }
         } else {
             return redirect('user/dashboard')->with('error', 'This Pin Already Exsiste');

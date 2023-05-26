@@ -264,33 +264,32 @@
 
 
 <script>
-        $(document).ready(function() {
-            $("#PinSellModel").validate({
-                errorClass: "error fail-alert",
-                validClass: "valid success-alert",
-                rules: {
-                    sale_name: {
-                        required: true,
-                    },
-                    sale_mobile: {
-                        required: true,
-                        maxlength: 10,
-                        minlength:10,
-                    },
+    $(document).ready(function() {
+        $("#PinSellModel").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
+                sale_name: {
+                    required: true,
                 },
-                messages: {
-                    sale_name: {
-                        required: 'PLease Select The Amount',
-                    },
-                    sale_mobile: {
-                        required: 'Please Enter To Genrate Pin',
-                        maxlength: 'Please Enter A Valid Number',
-                        minlength: 'Please Enter A Valid Number',
-                    },
-
-                }
-            });
+                sale_mobile: {
+                    required: true,
+                    maxlength: 10,
+                    minlength:10,
+                },
+            },
+            messages: {
+                sale_name: {
+                    required: 'PLease Enter The Name ',
+                },
+                sale_mobile: {
+                    required: 'Please Enter Mobile NUmber',
+                    maxlength: 'Please Enter A Valid Number',
+                    minlength: 'Please Enter A Valid Number',
+                },
+            }
         });
-    </script>
+    });
+</script>
 
     @endsection

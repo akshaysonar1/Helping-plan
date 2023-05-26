@@ -12217,14 +12217,15 @@ form.user .btn-user {
     box-shadow: 0 0 0 .2rem rgba(255, 255, 255, .5)
 }
 
-.error {
+/* .error {
     color: #5a5c69;
     font-size: 16px !important;
     position: relative;
     line-height: 1;
     
   
-}
+} */
+
 
 @-webkit-keyframes noise-anim {
     0% {

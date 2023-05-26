@@ -33,7 +33,7 @@
                             
                             <tr>
                                 <td>{{ $i }}</td>
-                                {{ $list->id }}
+                            
                                 <td>{{ $list->created_at }}</td>
                                 <td>{{ $list->customer_id }}</td>
                                 <td>{{ $list->bank_name }}</td>
@@ -42,10 +42,10 @@
                                 <td>
                                     @if ($list->pin_status == '0')
                                     <button class="btn btn-success btn-circle"
-                                        onclick="sweetAlertAjax('get','{{ route('status', $list->id) }}', 'Are you sure you want to Deactivate user?')"></button>
+                                        onclick="sweetAlertAjax('get','{{ route('status', $list->pin_number) }}', 'Are you sure you want to Deactivate user?')"></button>
                                     @else
                                     <button class="btn btn-danger btn-circle"
-                                        onclick="sweetAlertAjax('get','{{ route('status', $list->id) }}', 'Are you sure you want to Activate user?')"></button>
+                                        onclick="sweetAlertAjax('get','{{ route('status', $list->pin_number) }}', 'Are you sure you want to Activate user?')"></button>
                                     @endif
                                 </td>
                                 <!-- <td><button class="btn btn-success btn-circle"></button></td>
