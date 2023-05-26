@@ -264,19 +264,13 @@
 
 
 <script>
-        $(document).ready(function() {
-            $("#PinSellModel").validate({
-                errorClass: "error fail-alert",
-                validClass: "valid success-alert",
-                rules: {
-                    sale_name: {
-                        required: true,
-                    },
-                    sale_mobile: {
-                        required: true,
-                        maxlength: 10,
-                        minlength:10,
-                    },
+    $(document).ready(function() {
+        $("#PinSellModel").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
+                sale_name: {
+                    required: true,
                 },
                 messages: {
                     sale_name: {
@@ -291,6 +285,7 @@
                 }
             });
         });
-    </script>
+    });
+</script>
 
     @endsection
