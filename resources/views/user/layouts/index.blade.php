@@ -86,7 +86,7 @@
             </div>
         </section><!-- End About Section -->
         <!-- ======= Counts Section ======= -->
-        <section id="counts" class="counts">
+        <!-- <section id="counts" class="counts">
             <div class="container" data-aos="fade-up">
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -123,14 +123,15 @@
                     </div>
                 </div>
             </div>
-        </section><!-- End Counts Section -->
+        </section> -->
+        <!-- End Counts Section -->
 
         <!-- ======= Testimonials Section ======= -->
-        <section id="testimonials" class="testimonials">
+        <!-- <section id="testimonials" class="testimonials">
             <div class="container" data-aos="zoom-in">
                 <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
+                    <div class="swiper-wrapper"> -->
+                        <!-- <div class="swiper-slide">
                             <div class="testimonial-item">
 
                                 <h3>Saul Goodman</h3>
@@ -143,8 +144,9 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
-                        <div class="swiper-slide">
+                        </div> -->
+                        <!-- End testimonial item -->
+                        <!-- <div class="swiper-slide">
                             <div class="testimonial-item">
 
                                 <h3>Sara Wilsson</h3>
@@ -157,8 +159,9 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
-                        <div class="swiper-slide">
+                        </div> -->
+                        <!-- End testimonial item -->
+                        <!-- <div class="swiper-slide">
                             <div class="testimonial-item">
 
                                 <h3>Jena Karlis</h3>
@@ -171,8 +174,9 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
-                        <div class="swiper-slide">
+                        </div> -->
+                        <!-- End testimonial item -->
+                        <!-- <div class="swiper-slide">
                             <div class="testimonial-item">
 
                                 <h3>Matt Brandon</h3>
@@ -186,8 +190,9 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
-                        <div class="swiper-slide">
+                        </div> -->
+                        <!-- End testimonial item -->
+                        <!-- <div class="swiper-slide">
                             <div class="testimonial-item">
 
                                 <h3>John Larson</h3>
@@ -201,12 +206,14 @@
                                     <i class="bx bxs-quote-alt-right quote-icon-right"></i>
                                 </p>
                             </div>
-                        </div><!-- End testimonial item -->
-                    </div>
+                        </div> -->
+                        <!-- End testimonial item -->
+                    <!-- </div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
-        </section><!-- End Testimonials Section -->
+        </section> -->
+        <!-- End Testimonials Section -->
         <!-- ======= Contact Section ======= -->
         <!-- <section id="contact" class="contact">
           <div class="container" data-aos="fade-up">

@@ -56,7 +56,7 @@ class LoginController extends Controller
 
   public function mobilelogin(Request $request)
   {
-    try {
+    
       $this->validate($request, [
 
         'mobile' => 'required',
@@ -91,10 +91,7 @@ class LoginController extends Controller
           return redirect('user/login')->with('error', 'phone number not register');
         }
       }
-    } catch (exception $e) {
-      return view('404');
-    }
-
+   
   }
 
   protected function redirectTo()

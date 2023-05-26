@@ -49,7 +49,7 @@
 
 <div class="container">
     @if (Session::has('message'))
-    <p class="alert alert-info">{{ Session::get('message') }}</p>
+    <p class="alert alert-info error">{{ Session::get('message') }}</p>
     @endif
     <div class="card o-hidden border-0 shadow-lg my-5">
 
@@ -227,7 +227,13 @@
         }
     </script>
 
-
+<script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
     <script>
         $(document).ready(function() {
             $("#genratePin").validate({
@@ -264,13 +270,19 @@
 
 
 <script>
-    $(document).ready(function() {
-        $("#PinSellModel").validate({
-            errorClass: "error fail-alert",
-            validClass: "valid success-alert",
-            rules: {
-                sale_name: {
-                    required: true,
+        $(document).ready(function() {
+            $("#PinSellModel").validate({
+                errorClass: "error fail-alert",
+                validClass: "valid success-alert",
+                rules: {
+                    sale_name: {
+                        required: true,
+                    },
+                    sale_mobile: {
+                        required: true,
+                        maxlength: 10,
+                        minlength:10,
+                    },
                 },
                 messages: {
                     sale_name: {
@@ -285,7 +297,6 @@
                 }
             });
         });
-    });
-</script>
+    </script>
 
     @endsection
