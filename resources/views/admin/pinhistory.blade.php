@@ -48,6 +48,19 @@
         button:hover {
             background: #3b43d6;
         }
+        button {
+            width: 5%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background: #3b43d6;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #4e73df;
+            border-color: #4e73df;
+            margin-top: 20px;
+        }
     </style>
 
 </head>
@@ -121,7 +134,7 @@
 
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered pdfFIle" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="pinHistoryTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Genrated Date </th>
@@ -139,7 +152,8 @@
                                         @foreach ($data as $row)
                                         @if ($row->pin_status == '0')
                                         <tr>
-                                            <td>{{ $row->created_at }}</td>
+                                           
+                                            <td>{{ $row->pin_sale_date }}</td>
                                             <td>{{ $row->pin_number }}</td>
                                             <td>{{ $row->pin_ammount }}</td>
                                             <td>{{ $row->customer_id }}</td>
@@ -162,17 +176,17 @@
         </div>
     </div>
 </div>
-
 @endsection
 @section('custom-js')
-<!-- <script>
+<script>
 $(document).ready(function() {
-    $('#dataTable').DataTable( {
-        dom: 'Bfrtip',
+    $('#pinHistoryTable').DataTable( {
+        dom: 'lBfrtip',
+        // Bfrtip
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'copy', 'csv', 'excel', 'pdf', 'print',
         ]
     } );
 } );
-</script> -->
+</script>
 @endsection 

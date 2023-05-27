@@ -95,4 +95,13 @@
             });
         }
 </script>
+<script>
+$(document).ready(function() {
+            $('#dataTable').DataTable({
+                // "aaSorting": [
+                //     [4, "asc"]
+                // ]
+            });
+        });
+        </script>
 @endsection

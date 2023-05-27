@@ -33,7 +33,8 @@ class PinSaleController extends Controller
             $change->pin_sell_status = $data->sell_pin_status;
             $change->update();
 
-            return redirect('admin/genratepin');
+            // return redirect('admin/genratepin');
+            return redirect()->back()->with('message', 'Pin Sold');
         } catch (exception $e) {
             return view('404');
         }

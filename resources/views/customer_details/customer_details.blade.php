@@ -11,7 +11,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
-
+        <style>
+            button {
+            width: 5%;
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            background: #3b43d6;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            background-color: #4e73df;
+            border-color: #4e73df;
+            margin-top: 20px;
+        }
+            </style>
     </head>
 
     <body>
@@ -23,7 +37,7 @@
                     </div>
 
                     <div class="card-body p-6">
-                        <table id="example" class="table table-striped table-bordered" style="width:100%">
+                        <table id="customerDetails" class="table table-striped table-bordered" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sr.no</th>
@@ -76,16 +90,26 @@
                         </table>
 
                     </div>
-                    <script>
-                        $(document).ready(function() {
-                            $('#example').DataTable();
-                        });
-                    </script>
-
+                    
                 </div>
             </div>
         </div>
     </body>
 
     </html>
+@endsection
+@section('custom-js')
+
+<script>
+$(document).ready(function() {
+    $('#customerDetails').DataTable( {
+        dom: 'lBfrtip',
+        // Bfrtip
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print',
+        ]
+    } );
+} );
+</script>
+
 @endsection
