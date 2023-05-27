@@ -66,7 +66,7 @@
                             <div class="">
                                 <div class="row">
                                     @if (Session::has('message'))
-                                    <p class="alert alert-info error">{{ Session::get('message') }}</p>
+                                    <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
                                     @endif
                                     <div class="col-xl-6">
                                         @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
@@ -1541,7 +1541,7 @@ Auth::user()->status==0) --}}
 <script>
     $("document").ready(function() {
         setTimeout(function() {
-            $(".error").remove();
+            $(".session-error").remove();
         }, 5000); // 5 secs
     });
 </script>

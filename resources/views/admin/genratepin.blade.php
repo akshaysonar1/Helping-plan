@@ -48,12 +48,13 @@
 
 
 <div class="container">
-    @if (Session::has('message'))
-    <p class="alert alert-info error">{{ Session::get('message') }}</p>
-    @endif
+   
     <div class="card o-hidden border-0 shadow-lg my-5">
 
         <div class="card-body p-0">
+            @if (Session::has('message'))
+                <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
+            @endif
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
             </div>
@@ -65,12 +66,12 @@
                         <form class="form-group pad-bg" method="post" action="{{ route('genratepin.data') }}" id="genratePin">
                             @csrf
                             Select Price For Pin
-                            <div class="form-group">
+                            <div class="form-group mb-2">
                                 <input id="pin_ammount" type="radio" name="pin_ammount" value="500" autocomplete="name" > <span class="form-group">500</span>
                                 <input id="pin_ammount" type="radio" name="pin_ammount" value="1000" autocomplete="name" > <span class="form-group">1000</span>
                                 <input id="pin_ammount" type="radio" name="pin_ammount" value="2000" autocomplete="name" > <span class="form-group">2000</span>
                             </div>
-                            <!-- <label id="pin_ammount-error" class="error fail-alert" for="pin_ammount"> -->
+                            <label id="pin_ammount-error" class="error fail-alert" for="pin_ammount"></label>
 
                             <div class="form-group form-text">
                                 <label>Enter Total Pin </label><br>
@@ -230,7 +231,7 @@
 <script>
     $("document").ready(function() {
         setTimeout(function() {
-            $(".error").remove();
+            $(".session-error").remove();
         }, 5000); // 5 secs
     });
 </script>

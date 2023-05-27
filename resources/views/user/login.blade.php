@@ -47,7 +47,7 @@
                         <div class="login-box">
                             <h1>Login</h1>
                             @if (Session::has('error'))
-                            <p class="alert {{ Session::get('alert-class', 'alert-info') }} error">
+                            <p class="alert {{ Session::get('alert-class', 'alert-info') }} session-error">
                                 {{ Session::get('error') }}
                             </p>
                             @endif
@@ -100,7 +100,7 @@
     <script>
         $("document").ready(function() {
             setTimeout(function() {
-                $(".error").remove();
+                $(".session-error").remove();
             }, 5000); // 5 secs
         });
     </script>

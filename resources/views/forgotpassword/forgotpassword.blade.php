@@ -4,7 +4,7 @@
 
         <div class="card o-hidden border-0 shadow-lg my-5">
             @if (Session::has('message'))
-            <p class="alert alert-info">{{ Session::get('message') }}</p>
+            <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
         @endif
             <div class="card-body p-0">
                 <div class="card-header py-3">
@@ -106,4 +106,13 @@
             </div>
         </div>
     </div>
+@endsection
+@section('custom-js')
+<script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".session-error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
 @endsection
