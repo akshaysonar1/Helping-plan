@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
                 'name' => 'user1',
                 'email' => 'user1@gmail.com',
                 'password' => Hash::make('12345678'),
-                'user_type' => '0',
+                'user_type' => '2',
                 'customer_id' => '12345123456',
                 'mobile' => '7878787878',
                 'bank_name' => 'Axis Bank',
@@ -33,6 +33,9 @@ class UserSeeder extends Seeder
                 'google_pay_no' => '1234567890',
                 'upi_link' => '1234567890ybl',
             ]);
+        }else{
+            $user->user_type = '2';
+            $user->update();
         }
     }
 }

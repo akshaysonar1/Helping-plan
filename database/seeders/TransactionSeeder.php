@@ -23,23 +23,29 @@ class TransactionSeeder extends Seeder
             $provideHelp = Provide_Help::where('users_id', $user->id)->first();
             if ($provideHelp) {
                 $receiver =  User::where('email', 'admin@gmail.com')->first();
-                $transaction = new transection();
-                $transaction->user_id = $user->id;
-                $transaction->get_ammount = $provideHelp->provide_help_ammount;
-                $transaction->sender_id = $user->id;
-                $transaction->receiver_id = $receiver ? $receiver->id : "";
-                $transaction->tran_status = 1;
-                $transaction->save();
+                $transactionCheck = transection::where('user_id', $user->id)->first();
+                if(!$transactionCheck){
+                    $transaction = new transection();
+                    $transaction->user_id = $user->id;
+                    $transaction->get_ammount = $provideHelp->provide_help_ammount;
+                    $transaction->sender_id = $user->id;
+                    $transaction->receiver_id = $receiver ? $receiver->id : "";
+                    $transaction->tran_status = 1;
+                    $transaction->save();
+                }
 
-                $payment = new user_payment;
-                $payment->user_id = $user->id;
-                $payment->provide_help_ammount = $provideHelp->provide_help_ammount;
-                $payment->get_help_ammount = $provideHelp->get_help_ammount;
-                $payment->ammount_Received = '0';
-                $payment->ammount_pendding = $provideHelp->get_help_ammount;
-                $payment->unique_id = $receiver->unique_pin;
-                $payment->pay_status = '0';
-                $payment->save();
+                $userPaymentCheck = user_payment::where('user_id', $user->id)->first();
+                if(!$userPaymentCheck){
+                    $payment = new user_payment;
+                    $payment->user_id = $user->id;
+                    $payment->provide_help_ammount = $provideHelp->provide_help_ammount;
+                    $payment->get_help_ammount = $provideHelp->get_help_ammount;
+                    $payment->ammount_Received = '0';
+                    $payment->ammount_pendding = $provideHelp->get_help_ammount;
+                    $payment->unique_id = $receiver->unique_pin;
+                    $payment->pay_status = '0';
+                    $payment->save();
+                }
             }
         }
     }

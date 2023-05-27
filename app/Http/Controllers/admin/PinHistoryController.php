@@ -13,14 +13,11 @@ class PinHistoryController extends Controller
 {
     public function SearchPin(Request $request)
     {
-
-
         $currency = $request->input('currency'); //amount
         $countdata = $request->input('total'); //total
         $startDate = $request->input('start_date'); //start date 
         $endDate = $request->input('end_date'); //end date
         $pinData = $request->input('pin'); //pin
-
 
         $filter = PinModel::join('users', 'users.id', '=', 'pin_genrate_tabel.pin_sale_user_id');
         $date = transection::get();
@@ -35,15 +32,12 @@ class PinHistoryController extends Controller
  
             $filter = $filter->whereDate('pin_sale_date', '<=', date('Y-m-d h:i:s',strtotime($request->start_date)))
             ->whereDate('pin_sale_date', '>=', date('Y-m-d h:i:s',strtotime($request->end_date)));       
-
         }
      
         if (isset($countdata) && !empty($countdata)) {
             $filter = $filter->take($countdata);
         }
         $data = $filter->get();
-  
-
         return view('admin.pinhistory', compact('data'));
 
     }

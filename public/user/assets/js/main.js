@@ -317,9 +317,9 @@ $(document).ready(function(){
 // });
 
 // Pop up js
-// $(document).ready(function(){
-//   $('.pop-modal').modal('show');
-//    });
+$(document).ready(function(){
+  $('.pop-modal').modal('show');
+   });
 
 // upload image
 // function importData() {
