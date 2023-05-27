@@ -626,66 +626,12 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xl-12 mb-3">
-                                        <h4 class="profile-tag">Bank Detail</h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Bank Name</label>
-                                            <input type="text" placeholder="Name by bank name" class="form-control"
-                                                name="bank_name" id="bank_name" value="{{ Auth::user()->bank_name }}"
-                                                oninput="validateInput(this)">
-                                        </div>
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>A/C No.</label>
-                                            <input type="text" placeholder="xxxxxxxxxxxxxxxx" class="form-control"
-                                                name="account_no" id="account_no" value="{{ Auth::user()->account_no }}"
-                                                maxlength="20" oninput="process(this)">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>IFSC CODE</label>
-                                            <input type="text" placeholder="SBIN001992" class="form-control"
-                                                name="ifsc_code" id="ifsc_code" value="{{ Auth::user()->ifsc_code }}"
-                                                onkeyup="
-                                        var start = this.selectionStart;
-                                        var end = this.selectionEnd;
-                                        this.value = this.value.toUpperCase();
-                                        this.setSelectionRange(start, end);
-                                    ">
-                                        </div>
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Phone Pay No.</label>
-                                            <input type="text" placeholder="99854854589" class="form-control"
-                                                name="phone_pay_no" id="phone_pay_no"
-                                                value="{{ Auth::user()->phone_pay_no }}" oninput="process(this)"
-                                                maxlength="10">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Google Pay No.</label>
-                                            <input type="text" placeholder="99854854589" class="form-control"
-                                                name="google_pay_no" id="google_pay_no"
-                                                value="{{ Auth::user()->google_pay_no }}" oninput="process(this)"
-                                                maxlength="10">
-                                        </div>
-                                        <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Upi Link</label>
-                                            <input type="text" placeholder="99854854589@ybl" class="form-control"
-                                                name="upi_link" id="upi_link" value="{{ Auth::user()->upi_link }}">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            {{-- <button type="button" class="btn btn-form">Edit</button> --}}
-                                            <button type="submit" class="btn btn-form-1">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
+                                    @if (Session::has('message'))
+                                    <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
+                                    @endif
+                                    <div class="col-xl-6">
+                                        @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
+                                        @foreach ($users as $user)
 
                         <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab"
                             tabindex="0">
@@ -1625,70 +1571,107 @@
         });
     </script>
 
-    <script>
-        function process(input) {
-            let value = input.value;
-            let numbers = value.replace(/[^0-9]/g, "");
-            input.value = numbers;
-        }
+<script>
+    function process(input) {
+        let value = input.value;
+        let numbers = value.replace(/[^0-9]/g, "");
+        input.value = numbers;
+    }
 
-        function validateInput(input) {
-            // input.value = input.value.replace(/[^a-zA-Z]/g,'');
-            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
-        }
-    </script>
+    function validateInput(input) {
+        // input.value = input.value.replace(/[^a-zA-Z]/g,'');
+        input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+    }
+</script>
 
 
-    <script>
-        $("document").ready(function() {
-            setTimeout(function() {
-                $(".error").remove();
-            }, 5000); // 5 secs
-        });
-    </script>
+<script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".session-error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
 
-    <script>
-        $(document).ready(function() {
-            $("#ProfileForm").validate({
-                errorClass: "error fail-alert",
-                validClass: "valid success-alert",
-                rules: {
-                    name: {
-                        required: true,
-                    },
-                    state: {
-                        required: true,
-                    },
-                    city: {
-                        required: true,
-                    },
-                    pin_code: {
-                        required: true,
-                    },
-                    bank_name: {
-                        required: true,
-                    },
-                    account_no: {
-                        required: true,
-                        maxlength: 20,
-                        minlength: 12,
-                    },
-                    ifsc_code: {
-                        required: true,
-                    },
-                    phone_pay_no: {
-                        required: true,
-                        maxlength: 10,
-                        minlength: 10,
-                    },
-                    google_pay_no: {
-                        required: true,
-                        maxlength: 10,
-                        minlength: 10,
-                    },
-                    upi_link: {
-                        required: true,
-                    },
+<script>
+    $(document).ready(function() {
+        $("#ProfileForm").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
+                name: {
+                    required: true,
+                },
+                state: {
+                    required: true,
+                },
+                city: {
+                    required: true,
+                },
+                pin_code: {
+                    required: true,
+                },
+                bank_name: {
+                    required: true,
+                },
+                account_no: {
+                    required: true,
+                    maxlength: 20,
+                    minlength: 12,
+                },
+                ifsc_code: {
+                    required: true,
+                },
+                phone_pay_no: {
+                    required: true,
+                    maxlength: 10,
+                    minlength: 10,
+                },
+                google_pay_no: {
+                    required: true,
+                    maxlength: 10,
+                    minlength: 10,
+                },
+                upi_link: {
+                    required: true,
+                },
+            },
+            messages: {
+                mobile: {
+                    required: 'Please Enter Name',
+                },
+                state: {
+                    required: 'Please Enter The State',
+                },
+                city: {
+                    required: 'Please Enter The City',
+                },
+                pin_code: {
+                    required: 'Please Enter The Pin Code',
+                },
+                bank_name: {
+                    required: 'Please Enter The Bank Name',
+                },
+                account_no: {
+                    required: 'Please Enter The Account Number',
+                    maxlength: 'Not A Valid Account NUmber',
+                    minlength: 'Not A Valid Account NUmber',
+                },
+                ifsc_code: {
+                    required: 'Please Enter The IFSC Code',
+                },
+                phone_pay_no: {
+                    required: 'Please Enter The PhonePe Number',
+                    maxlength: 'Not A Valid Mobile NUmber',
+                    minlength: 'Not A Valid Mobile NUmber',
+                },
+                google_pay_no: {
+                    required: 'Please Enter The Google Pay Number',
+                    maxlength: 'Not A Valid Mobile NUmber',
+                    minlength: 'Not A Valid Mobile NUmber',
+                },
+                upi_link: {
+                    required: 'Please Enter The Upi ID',
                 },
                 messages: {
                     mobile: {
