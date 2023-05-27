@@ -73,7 +73,7 @@
                             <div class="sent-message">Your message has been sent. Thank you!</div>
                         </div> --}}
                         @if (Session::has('message'))
-                        <p class="alert alert-info">{{ Session::get('message') }}</p>
+                        <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
                     @endif
                         <div class="text-center"><button type="submit">Send Message</button></div>
                     </form>
@@ -137,5 +137,12 @@
             });
         });
     </script>
+    <script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".session-error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
 
 @endsection

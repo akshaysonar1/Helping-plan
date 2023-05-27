@@ -51,7 +51,7 @@
                             <h1>Forgot Password</h1>
                             <div class="row mb-3">
                                 @if (Session::has('message'))
-                                <p class="alert alert-info">{{ Session::get('message') }}</p>
+                                <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
                                 @endif
                                 <div class="col-12">
                                     <label>Mobile Number</label>
@@ -88,7 +88,13 @@
             input.value = numbers;
         }
     </script>
-
+<script>
+    $("document").ready(function() {
+        setTimeout(function() {
+            $(".session-error").remove();
+        }, 5000); // 5 secs
+    });
+</script>
     <script>
         $(document).ready(function() {
             $("#ForgetPassword").validate({

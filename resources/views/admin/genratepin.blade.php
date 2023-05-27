@@ -48,12 +48,11 @@
 
 
 <div class="container">
-    @if (Session::has('message'))
-    <p class="alert alert-info error">{{ Session::get('message') }}</p>
-    @endif
+   
     <div class="card o-hidden border-0 shadow-lg my-5">
 
         <div class="card-body p-0">
+           
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
             </div>
@@ -62,19 +61,22 @@
                 <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
                 <div class="col-lg-7">
                     <div class="p-5">
+                    @if (Session::has('message'))
+                <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
+            @endif
                         <form class="form-group pad-bg" method="post" action="{{ route('genratepin.data') }}" id="genratePin">
                             @csrf
                             Select Price For Pin
-                            <div class="form-group">
-                                <input id="pin_ammount" type="radio" name="pin_ammount" value="500" autocomplete="name" > <span class="form-group">500</span>
+                            <div class="form-group mb-2">
+                                <input id="pin_ammount" type="radio" name="pin_ammount" value="500" autocomplete="name" checked> <span class="form-group">500</span>
                                 <input id="pin_ammount" type="radio" name="pin_ammount" value="1000" autocomplete="name" > <span class="form-group">1000</span>
                                 <input id="pin_ammount" type="radio" name="pin_ammount" value="2000" autocomplete="name" > <span class="form-group">2000</span>
                             </div>
-                            <!-- <label id="pin_ammount-error" class="error fail-alert" for="pin_ammount"> -->
+                            <label id="pin_ammount-error" class="error fail-alert" for="pin_ammount"></label>
 
                             <div class="form-group form-text">
-                                <label>Enter Total Pin </label><br>
-                                <input type="text" class="form-control" name="total_pin" placeholder="Enter The pin" maxlength="1" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
+                                <label>Enter Total Pin (1-99 Pin at a time.) </label><br>
+                                <input type="text" class="form-control" name="total_pin" placeholder="Enter The pin" id="numberInput" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onkeyup="handleChange(this);" onchange="handleChange(this);">
                             </div>
 
 
@@ -135,6 +137,7 @@
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+            
                 <form action="{{ route('admin.pinsale') }}" method="post" id="PinSellModel">
                     @csrf
                     @method('post')
@@ -149,7 +152,7 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Name</label>
-                            <input type="text" class="form-control" name="sale_name" id="sale_name">
+                            <input type="text" class="form-control" name="sale_name" id="sale_name" oninput="validateInput(this)">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Mobile</label>
@@ -191,9 +194,9 @@
         });
     </script>
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
+        // $(document).ready(function() {
+        //     $('#example').DataTable();
+        // });
 
         $(document).ready(function() {
             $('#short').DataTable({
@@ -225,12 +228,15 @@
             let numbers = value.replace(/[^0-9]/g, "");
             input.value = numbers;
         }
+        function validateInput(input) {
+            input.value = input.value.replace(/[^a-zA-Z\s]/g, '');
+        }
     </script>
 
 <script>
     $("document").ready(function() {
         setTimeout(function() {
-            $(".error").remove();
+            $(".session-error").remove();
         }, 5000); // 5 secs
     });
 </script>
@@ -245,7 +251,7 @@
                     },
                     total_pin: {
                         required: true,
-                        maxlength: 1,
+                        maxlength: 2,
                     },
                 },
                 messages: {
@@ -254,7 +260,7 @@
                     },
                     total_pin: {
                         required: 'Please Enter To Genrate Pin',
-                        maxlength: 'You Are Only Allow 0-9 Pins TO Genrate',
+                        maxlength: 'You Are Only Allow 1-10 Pins T0 Genrate',
                     },
 
                 }
@@ -298,5 +304,34 @@
             });
         });
     </script>
+    <script>
+        function handleChange(input) {
+            if (input.value == '0') input.value = '';
+            if (input.value > 99) input.value = 99;
+        }
+        $(document).ready(function() {
+            // $('#numberInput').on('keyup', function() {
+            //     alert($(this).val());
+            //     if($(this).val() > 99){
+            //         return false;
+            //     }
+            //     // var inputValue = $(this).val();
+            //     // inputValue = inputValue.replace(/\D/g, '');
+
+            //     // if (inputValue < 1) {
+            //     //     inputValue = inputValue;
+                    
+            //     // } else if (inputValue > 99) {
+            //     //     inputValue = 99;
+            //     // }
+            //     // if($('#numberInput').val()==0){
+            //     //     alert($('#numberInput').val());
+            //     //     inputValue = 1;
+                    
+            //     // }
+            //     // $(this).val(inputValue);
+            // });
+        });
+</script>
 
     @endsection
