@@ -142,3 +142,7 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
+Route::get('run-seeder',function(){ 
+    Artisan::call("db:seed");
+    return 'Seeder run successfully !'; 
+});

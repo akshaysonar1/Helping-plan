@@ -18,24 +18,32 @@ class PaymentController extends Controller
 {
     public function payment(Request $request)
     {
+        try{
+            // $payment = transection::where('user_id', '=', Auth::user()->id)->first();
+            $payment = transection::where('id', $request->transaction_id)->first();
+            
+            if(isset($payment) && !empty($payment)){
+                $payment->receiver_id = $request->receiver_id;
+                $image = $request->File('image');
+                $extenstion = $image->getClientOriginalName();
+                $filename = time() . '.' . $extenstion;
+                $destinationPath = public_path('user/assets/img/payment');
+                $image->move($destinationPath, $filename);
+                $payment->image = $filename;
+                $payment->update();
 
+                if($payment){
+                    return redirect('user/dashboard')->with('message', "Your Payment Image Has Been Send. Thank you!");
+                }else{
+                    return redirect('user/dashboard')->with('message', "Your Payment Image Has Not Been Send.");
+                }
+            }
 
+            return redirect('user/dashboard')->with('message', "Payment Not Found !");
 
-
-        $payment = transection::where('user_id', '=', Auth::user()->id)->first();
-
-        $payment->receiver_id = $request->receiver_id;
-        $image = $request->File('image');
-        $extenstion = $image->getClientOriginalName();
-        $filename = time() . '.' . $extenstion;
-        $destinationPath = public_path('user/assets/img/payment');
-        $image->move($destinationPath, $filename);
-        $payment->image = $filename;
-        $payment->update();
-
-
-        return redirect('user/dashboard')->with('message', "Your Payment Image  Has Been Send. Thank you!");
-
+        }catch(Exception $e){
+            dd($e);
+        }
     }
 
 

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\user_payment;
+use App\Models\transection;
 
 class User extends Authenticatable
 {
@@ -57,6 +59,46 @@ class User extends Authenticatable
 
     public function provideHelp()
     {
-        return $this->hasMany(Provide_Help::class, 'user_id');
+        return $this->hasMany(Provide_Help::class, 'users_id');
+    }
+
+    public function provideHelpUser()
+    {
+        return $this->hasOne(Provide_Help::class, 'users_id');
+    }
+    public function userPayment()
+    {
+        return $this->hasMany(user_payment::class,'user_id');
+    }
+
+    public function getPaymentAmmountArttribute()
+    {
+        $helpAmmount = $this->provideHelp()->sum('get_help_ammount');
+        $ammountReceived = $this->provideHelp()->sum('ammount_received');
+        if($helpAmmount <= $ammountReceived){
+            return 1;
+        }
+        return 0;
+    }
+
+    public function getGetHelpAmmountAttribute()
+    {
+        // dd('hii');
+        $helpAmmountTotal = $this->provideHelp()->sum('get_help_ammount');
+        return $helpAmmountTotal;
+    }
+    public function transactions()
+    {
+        return $this->hasMany(transection::class, 'receiver_id');
+    }
+
+    public function getGetAmmountAttribute()
+    {
+        $transactions = $this->transactions()->sum('get_ammount');
+        if($transactions){
+            return $transactions;
+        }
+
+        return 0;
     }
 }

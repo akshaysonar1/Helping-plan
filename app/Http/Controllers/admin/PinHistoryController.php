@@ -44,7 +44,6 @@ class PinHistoryController extends Controller
             $filter = $filter->take($countdata);
         }
         $data = $filter->get();
-
         return view('admin.pinhistory', compact('data'));
 
     }
