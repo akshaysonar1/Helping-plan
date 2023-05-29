@@ -133,11 +133,11 @@
                                         <input id="total" type="text" name="total" value="" autocomplete="name" class="form-control" autofocus oninput="process(this)" maxlength="5"> <span class="form-group" ></span>
                                     </div>
                                 </div>
-                                <div class="col-auto ml-auto">
+                                <!-- <div class="col-auto ml-auto"> -->
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary w-auto px-4">Search</button>
                                     </div>
-                                </div>
+                                <!-- </div> -->
                             </div>
                         </form>
                     </div>
