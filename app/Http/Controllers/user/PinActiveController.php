@@ -74,7 +74,8 @@ class PinActiveController extends Controller
                         $transection->create_date = $currentDate;
                         $transection->end_date = $tomorrow;
                         $transection->pin_number = $request->pin_number;
-                        $transection->save();
+
+                        // $transection->save();
 
                         $users = User::where('user_type', '0')->with(['userPayment', 'provideHelpUser'])->get();
                         $helpAmmount = $transection->get_ammount;

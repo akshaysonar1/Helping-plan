@@ -31,6 +31,7 @@ class DeshboardController extends Controller
                 $data = Provide_Help::where('users_id', '=', (Auth::user()->id))->first();
                 $user = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('ammount_pendding', '>', 0)->where('user_id', '!=', (Auth::user()->id))->get();
                 $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('image', '!=', null)->where('user_id', '!=', (Auth::user()->id))->get();
+                
                 $currentDate = Carbon::now();
                 $popup = transection::where('tran_status', '!=','2')->where('user_id', Auth::user()->id)->get();
             

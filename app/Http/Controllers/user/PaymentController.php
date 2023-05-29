@@ -49,16 +49,16 @@ class PaymentController extends Controller
 
     public function conformetion($id, Request $request)
     {
-
-        $data = transection::where('user_id', $id)->first();
-
-
+      
+        $data = transection::where('user_id', $id)->where('receiver_id', $request->receiver_id)->where('pin_number', $request->unique_pin)->first();
+        // if($data->)
+// dd($data);
         $data->tran_status = '1';
         $currentDate = Carbon::now();
         $data->payment_success_date = $currentDate;
-
+        
         $data->update();
-
+        
         $providerHelp = Provide_Help::where('users_id', $id)->first();
         $user = User::where('id', $id)->first();
         
@@ -70,22 +70,26 @@ class PaymentController extends Controller
         $payment->ammount_pendding = $providerHelp->ammount_pendding;
         $payment->unique_id = $user->unique_pin;
         $payment->pay_status = '0';
-
+          
         $payment->save();
-
-        $change = user_payment::where('user_id', '=', $data->receiver_id)->first();
-      //  $updated = Provide_Help::where('users_id', '=', $data->receiver_id)->first();
-
-        if ($change->get_help_ammount == $change->ammount_Received) {
+        
+        $change = user_payment::where('user_id', $request->receiver_id)->first();
+        //  $updated = Provide_Help::where('users_id', '=', $data->receiver_id)->first();
+        if ($change->get_help_ammount == $change->ammount_Receive) {
+         
             $change->pay_status = '1';
         } else {
-            $change->ammount_Received += $payment->provide_help_ammount;
+       
+            $change->ammount_Received += $request->get_ammount;
+            $change->ammount_pendding -= $request->get_ammount;
+            
+            // dd( $change->ammount_Received);
             if ($change->get_help_ammount == $change->ammount_Received) {
                 $change->pay_status = '1';
             } else {
 
             }
-
+         
             $change->update();
         }
 
@@ -95,7 +99,7 @@ class PaymentController extends Controller
             return redirect()->back()->with('error', "Transaction Not Fount");
         }
 
-        $transaction->tran_status = 1;
+        $transaction->tran_status = '1';
         $transaction->create_date = date("Y-m-d H:i:s");
         $image = $request->File('image');
         $extenstion = $image->getClientOriginalName();
@@ -104,10 +108,11 @@ class PaymentController extends Controller
         $image->move($destinationPath, $filename);
         $transaction->image = $filename;
         $transaction->save();
-
+      
         $providerHelp = $transaction->provideHelp;
         $providerHelp->ammount_Received = $providerHelp->ammount_Received + $transaction->get_ammount;
         $providerHelp->ammount_pendding = $transaction->get_ammount - $providerHelp->ammount_pendding;
+       
         $providerHelp->save();
 
         if ($providerHelp->ammount_pendding <= 0) {
@@ -120,6 +125,7 @@ class PaymentController extends Controller
         $data->get_help_ammount = $providerHelp->get_help_ammount;
         $data->ammount_Received = $providerHelp->ammount_Received;
         $data->ammount_pendding = $providerHelp->idammount_pendding;
+     
         $data->save();
 
         return redirect('user/dashboard');
