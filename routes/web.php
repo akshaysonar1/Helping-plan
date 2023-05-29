@@ -18,6 +18,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\user\ProfileController;
 use App\Http\Controllers\user\PinActiveController;
 use App\Http\Controllers\user\PaymentController;
+use App\Http\Controllers\admin\DashboardController;
 
 
 /*
@@ -44,6 +45,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
+Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
+
 
 Route::group(['middleware' => 'auth'], function () {
 });
@@ -70,6 +74,9 @@ Route::name('auth.')->prefix('auth')->group(function () {
 
 Auth::routes();
 Route::middleware(['auth', 'isAdmin'])->group(function () {
+    // Route::prefix('admin')->controller(DashboardController::class)->group(function () {
+    //     Route::get('/dashboard', 'adminDashboard')->name('admin.dashboard');
+    // });
     Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
         Route::get('/genratepin', 'generateUniqueCode')->name('genratepin');
         Route::post('/genratepin/data', 'storepin')->name('genratepin.data');

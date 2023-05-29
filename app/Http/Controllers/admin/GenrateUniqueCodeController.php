@@ -44,7 +44,7 @@ class GenrateUniqueCodeController extends Controller
                 $newPin->save();
             }
 
-            return redirect()->back()->with('message',"Your Pin Has Been Generated. Thank you!");;
+            return redirect()->back()->with('message',"Your Pin Has Been Generated. Thank you!");
          
     }
 }
