@@ -130,7 +130,7 @@
                                 <div class="col-xl-1">
                                     <div class="form-group">
                                         <b><label for="exampleInputPassword1">Total </label></b>
-                                        <input id="total" type="text" name="total" value="" autocomplete="name" class="form-control" autofocus> <span class="form-group" oninput="validateInput(this)" maxlength="10"></span>
+                                        <input id="total" type="text" name="total" value="" autocomplete="name" class="form-control" autofocus oninput="process(this)" maxlength="5"> <span class="form-group" ></span>
                                     </div>
                                 </div>
                                 <div class="col-auto ml-auto">
