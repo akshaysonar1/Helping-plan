@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\admin\NoteModel;
 use App\Models\admin\PinModel;
 use App\Models\transection;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Carbon;
 
 class HomeController extends Controller
 {
@@ -25,9 +27,52 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    
+     //dashboard page view
+    public function index(Request $request)
     {
-        return view('layouts.master');
+        $store = NoteModel::first();
+        $pinData = PinModel::whereDate('created_at', Carbon::today())->get();
+        return view('admin.dashboard',compact('store','pinData'));
+    }
+
+    //this funtion store the note 
+    public function storenote(Request $request)
+    {
+        $validatedData = $request->validate([
+            'note' => 'required|string',
+        ]);
+        if (NoteModel::find($request->Noteid)) {
+            // Update the existing record
+            $store = NoteModel::find($request->Noteid);
+            $store->note = $validatedData['note'];
+            $store->save();
+            return redirect()->back()->with('message',"Note Updated Sucessfully");
+        } else {
+            // Create a new record
+            $store = new NoteModel;
+            $store->note = $validatedData['note'];
+            $store->save();
+            return redirect()->back()->with('message',"Note Added Sucessfully");
+        }
+    }
+
+    // this function use to search data in dashboard 
+    public function dashboardPinData(Request $request)
+    {
+        $currency = $request->input('currency'); 
+        $countdata = $request->input('total'); 
+        $filter = PinModel::get();
+        if (isset($currency) && !empty($currency)) {
+            $filterData = $filter->where('pin_ammount', $currency);
+        }
+        if (isset($countdata) && !empty($countdata)) {
+            $filterData = $filterData->take($countdata);
+        }
+        $data = $filterData;
+        $store = NoteModel::first();
+        // $pinData = PinModel::whereDate('created_at', Carbon::today())->get();
+        return view('admin.dashboard',compact('data','store'));
     }
 
     //This function use For fetch data 
