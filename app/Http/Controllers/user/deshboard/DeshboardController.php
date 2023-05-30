@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user\deshboard;
 
 use App\Http\Controllers\Controller;
+use App\Models\admin\NoteModel;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\admin\PinModel;
@@ -21,6 +22,9 @@ class DeshboardController extends Controller
 {
     public function dashboard()
     {
+        
+        $noteData = NoteModel::first();
+       
         $userId = '';
         if (!empty(Auth::user())) {
             $userId = Auth::user()->id;
@@ -35,6 +39,8 @@ class DeshboardController extends Controller
                 $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('image', '!=', null)->where('user_id', '!=', (Auth::user()->id))->get();
                 $currentDate = Carbon::now();
                 $popup = transection::where('tran_status', '!=','2')->where('user_id', Auth::user()->id)->get();
+                $congoPopUp = user_payment::where('pay_status','1')->where('user_id', Auth::user()->id)->first(); // for open congratulation pop up
+                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','noteData','congoPopUp'));
                 $pindeatils= Provide_Help::join('users', 'users.id', '=', 'provide__helps.users_id')->where('users_id', Auth::user()->id)->first();
                 //  dd($users);
                 return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','pindeatils'));

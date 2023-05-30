@@ -50,7 +50,6 @@ class PaymentController extends Controller
 
     public function conformetion($id, Request $request)
     {
-      
         $data = transection::where('user_id', $id)->where('receiver_id', $request->receiver_id)->where('pin_number', $request->unique_pin)->first();
         // if($data->)
 // dd($data);
