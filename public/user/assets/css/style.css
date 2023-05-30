@@ -2406,3 +2406,6 @@ button {
 .dropdown-toggle::after {
   display: none !important;
 }
+.content-paragraph{
+  padding: 20px !important;
+}

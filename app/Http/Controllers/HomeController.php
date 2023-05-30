@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\admin\NoteModel;
 use App\Models\admin\PinModel;
 use App\Models\transection;
+use App\Models\user_payment;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
@@ -90,13 +91,14 @@ class HomeController extends Controller
     public function UserStatus($data)
     {
       
-        // $user = User::find($data);
-        // if ($user->status == '1') {
-        //     $user->status = '0';
-        // } else {
-        //     $user->status = '1';
-        // }
-        // $user->save();
+        $user = User::where('unique_pin', '=', $data)->first();
+     
+        if ($user->status == '1') {
+            $user->status = '0';
+        } else {
+            $user->status = '1';
+        }
+        $user->update();
 
         $change = PinModel::where('pin_number', '=', $data)->first();
      
@@ -115,6 +117,15 @@ class HomeController extends Controller
             $updated->tran_status = '0';
         }
         $updated->update();
+
+        $status = user_payment::where('unique_id', '=', $data)->first();
+     
+        if ($status->pay_status == '0') {
+            $status->pay_status = '1';
+        } else {
+            $status->pay_status = '0';
+        }
+        $status->update();
         return redirect()->route('helpswitch')->with('success', 'User Updated');
 
     }

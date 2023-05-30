@@ -127,7 +127,7 @@
                         minlength: 'Please Enter A Valid Mobile Number',
                     },
                     password: {
-                        required: 'Please Enter The Password',
+                        required: 'Please Enter Password',
                         minlength: 'Minimum Six Digit Password Required',
                     },
 
