@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProvideHelp;
 use Illuminate\Http\Request;
 use App\Models\Provide_Help;
 use App\Models\user_payment;
@@ -72,25 +73,33 @@ class PaymentController extends Controller
         $payment->pay_status = '0';
           
         $payment->save();
+        $provideamount = Provide_Help::where('users_id', '=',Auth::user()->id)->first();
         
         $change = user_payment::where('user_id', $request->receiver_id)->first();
         //  $updated = Provide_Help::where('users_id', '=', $data->receiver_id)->first();
+        // dd($request->receiver_id);
         if ($change->get_help_ammount == $change->ammount_Receive) {
          
             $change->pay_status = '1';
+            $provideamount->status = '1';
         } else {
        
             $change->ammount_Received += $request->get_ammount;
             $change->ammount_pendding -= $request->get_ammount;
+
+            $provideamount->ammount_Received += $request->get_ammount;
+            $provideamount->ammount_pendding -= $request->get_ammount;
             
             // dd( $change->ammount_Received);
             if ($change->get_help_ammount == $change->ammount_Received) {
                 $change->pay_status = '1';
+                $provideamount->status = '1';
             } else {
 
             }
          
             $change->update();
+            $provideamount->update();
         }
 
         $transaction = transection::where('id', $request->user_id)->first();

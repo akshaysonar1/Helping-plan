@@ -27,15 +27,17 @@ class DeshboardController extends Controller
             if (Auth::user()->user_type == '0' || Auth::user()->user_type == '2') {
                 $users = transection::where('tran_status', '!=', '1')->where('split_status', '1')->where('user_id', Auth::user()->id)->get();
                 // dd($users);
-                $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
+                // $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
+                $showusers = transection::where('user_id', Auth::user()->id)->get();
+                // dd($showusers);
                 $data = Provide_Help::where('users_id', '=', (Auth::user()->id))->first();
                 $user = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('ammount_pendding', '>', 0)->where('user_id', '!=', (Auth::user()->id))->get();
                 $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('image', '!=', null)->where('user_id', '!=', (Auth::user()->id))->get();
-                
                 $currentDate = Carbon::now();
                 $popup = transection::where('tran_status', '!=','2')->where('user_id', Auth::user()->id)->get();
-            
-                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup'));
+                $pindeatils= Provide_Help::join('users', 'users.id', '=', 'provide__helps.users_id')->where('users_id', Auth::user()->id)->first();
+                //  dd($users);
+                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','pindeatils'));
             } else {
                 return redirect('user/login');
             }

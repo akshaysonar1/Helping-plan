@@ -57,7 +57,7 @@
                                 @foreach ($users as $row)
                                     <tr>
                                         <td>{{ $i }}</td>
-                                        <td>{{ $row->created_at->todatestring() }}</td>
+                                        <td>{{ $row->created_at}}</td>
                                         <td>{{ $row->customer_id }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->mobile }}</td>

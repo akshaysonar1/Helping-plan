@@ -76,7 +76,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label>Create password</label>
+                                    <label>Create Password</label>
 
                                     <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="123456789">
                                     @error('password')
@@ -88,7 +88,7 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label>Confirm password</label>
+                                    <label>Confirm Password</label>
 
                                     <input id="password_confirmation" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="123456789">
                                 </div>
@@ -178,31 +178,31 @@
                 },
                 messages: {
                     name: {
-                        required: 'Please Enter Your Name',
+                        required: 'Please Enter Name',
                     },
                     mobile: {
-                        required: 'Please Enter Your Mobile Number',
+                        required: 'Please Enter Mobile Number',
                         maxlength: 'Please Enter A Valid Mobile Number',
                         minlength: 'Please Enter A Valid Mobile Number',
                     },
                     password: {
-                        required: 'Please Enter Your Mobile Number',
+                        required: 'Please Enter Password',
                         minlength: 'Minimum Six Character Password Require',
 
                     },
                     password_confirmation: {
-                        required: 'Please Enter Your Mobile Number',
+                        required: 'Please Enter Password',
                         minlength: 'Minimum Six Character Password Require',
                         equalTo: 'Password Not Matched',
                     },
                     state: {
-                        required: 'Please Enter Your State Name',
+                        required: 'Please Enter State',
                     },
                     city: {
-                        required: 'Please Enter Your City Name',
+                        required: 'Please Enter City',
                     },
                     pin_code: {
-                        required: 'Please Enter Your Zipcode Name',
+                        required: 'Please Enter Zipcode',
                     },
 
                 }
