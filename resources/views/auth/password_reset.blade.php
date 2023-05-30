@@ -117,7 +117,7 @@
                         minlength: 'Please Enter A Valid Mobile Number',
                     },
                     message: {
-                        required: 'Please Enter The Text That Got You From The Admin',
+                        required: 'Please Enter Message',
                     },
                 }
             });

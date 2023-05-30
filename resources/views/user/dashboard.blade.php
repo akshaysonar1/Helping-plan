@@ -31,10 +31,19 @@
         <div class="row">
             <div class="col-xl-3 col-lg-3 ">
                 <div class="tab-background">
-                    <!-- <div class="sidebar-flex"> -->
-                    <div class="profile-img">
-                        <img src="assets/img/testimonials-bg.jpg">
+                 
+                    <div class="content-paragraph p-4">
+                        @if(isset($pindeatils) || !empty($pindeatils))
+                        <p class="mb-2" style="font-size: 14px; font-weight: 600">Current Pin: <span style="font-size: 14px; font-weight: 400">{{ $pindeatils->unique_pin }}</span></p>
+                        <p class="mb-2" style="font-size: 14px; font-weight: 600">Provide Help Amount: <span style="font-size: 14px; font-weight: 400"> {{ $pindeatils->provide_help_ammount }}</span></p>
+                        <p class="mb-2" style="font-size: 14px; font-weight: 600">Get Help Amount: <span style="font-size: 14px; font-weight: 400"> {{ $pindeatils->get_help_ammount }}</span></p>
+                        <p class="mb-2" style="font-size: 14px; font-weight: 600">Amount Recieved: <span style="font-size: 14px; font-weight: 400"> {{ $pindeatils->ammount_Received }}</span></p>
+                        <p class="mb-2" style="font-size: 14px; font-weight: 600">Amount Pending: <span style="font-size: 14px; font-weight: 400"> {{ $pindeatils->ammount_pendding }}</span></p>
+                        @else
+
+                        @endif
                     </div>
+
                     <div class="tab-menu">
 
                         <ul class="nav nav-pills tab-list" id="myTab" role="tablist">
@@ -911,8 +920,9 @@
                     <div class="tab-pane fade" id="get-tab-pane" role="tabpanel" aria-labelledby="get-tab" tabindex="0">
                         <div class="row">
                             <div class="col-xl-12">
-                                @foreach ($conform as $conf)
+                                @foreach ($conform as $coform)
                                 <div class="pay-card-1">
+
                                     <div class=" d-flex justify-content-between">
                                         <div class="d-flex gap-3">
                                             <div class="">
@@ -921,9 +931,9 @@
                                                 </svg>
                                             </div>
                                             <div class="">
-                                                <p class="id-text">{{ $conf->customer_id }}</p>
+                                                <p class="id-text">{{ $coform->customer_id }}</p>
                                                 <p class="date-text">
-                                                    {{ $conf->created_at->todatestring() }}
+                                                    {{ $coform->created_at->todatestring() }}
                                                 </p>
                                             </div>
                                             <div class="">
@@ -937,69 +947,140 @@
                                             </div>
                                         </div>
                                         <div class="">
-                                            @if ($conf->tran_status == '1')
+                                            @if ($coform->tran_status == '1')
 
                                             @else
-
+                                            {{-- <p class="name-text mb-1">47:38:25</p> --}}
                                             @endif
-                                            <p class="name-text mb-1">Rs. {{ $conf->get_ammount }}</p>
+                                            <p class="name-text mb-1">Rs.{{ $coform->get_ammount }}</p>
                                         </div>
                                     </div>
 
+
+
+
                                     <div class="row">
-                                        <form action="{{ route('user.conformetion', $conf->sender_id) }}" method="POST">
+
+
+                                        <form action="{{ route('user.conformetion', $coform->sender_id) }}"
+                                            method="POST">
                                             @csrf
                                             @method('post')
                                             <div class="col-xl-12 d-flex justify-content-end gap-2">
-                                                @if ($conf->tran_status == '1')
-                                                <button type="button" class="btn btn-payment">Conformation Done</button>
+
+
+                                                @if ($coform->tran_status == '1')
+                                                <button type="button" class="btn btn-payment">Conformation
+                                                    Done</button>
                                                 @else
+                                               
+                                                <input type="hidden" name="id" value="{{  $coform->id }}">
+                                                <input type="hidden" name="provide_help_id" value="{{  $coform->provide_help_id  }}">
+                                               <input type="hidden" name="get_ammount" value="{{  $coform->get_ammount  }}">
+                                                <input type="hidden" name="receiver_id" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="unique_pin" value="{{ $coform->unique_pin }}">
                                                 <button type="submit" class="btn btn-payment">confirm</button>
                                                 @endif
-                                                <button type="button" class="btn btn-payment examps" data-toggle="modal" data-target=".{{ $conf->id }}-modal5-lg" data-id="{{ $conf->user_id }}" data-image="{{ $conf->image }}">View Image</button>
+
+                                                {{-- image model --}}
+                                                    
+                                                <button type="button" class="btn btn-payment"
+                                                    data-toggle="modal"
+                                                    data-target=".{{ $coform->id }}-modal1-lg"
+                                                    data-id="{{ $coform->user_id }}"
+                                                    data-image="{{ $coform->image }}">View
+                                                    Image</button>
+
 
                                                 <!-- Large modal -->
-                                                <div class="modal fade bd-example-modal-lg {{ $conf->id }}-modal5-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+
+                                                <div class="modal fade bd-example-modal-lg {{ $coform->id }}-modal1-lg"
+                                                    tabindex="-1" role="dialog"
+                                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog modal-lg">
                                                         <div class="modal-content">
-                                                            <img id="image" src="{{ asset('user/assets/img/payment/'.$conf->image) }}" />
+
+                                                            <img id="image"
+                                                                src="{{ asset('user/assets/img/payment/'.$coform->image) }}" />
                                                         </div>
                                                     </div>
                                                 </div>
+                                                {{-- image model end --}}
 
-                                                @if ($conf->tran_status == '1')
+
+
+                                                @if ($coform->tran_status == '1')
+
                                                 @else
-                                                <div class="details-tip">
-                                                    <button type="button" class="btn btn-payment details-show">Details</button>
-                                                    <div class="tooltip-content details-div">
 
-                                                        <p class="name-text mb-1"> Name : <span class="name-para">{{
-                                                                $conf->name }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{
-                                                                $conf->mobile }}</span></p>
-                                                        <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{
-                                                                $conf->ifsc_code }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Account No: <span class="name-para">{{
-                                                                $conf->account_no }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
-                                                                $conf->upi_link }}</span></p>
-                                                        <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{
-                                                                $conf->phone_pay_no }}</span>
-                                                        </p>
-                                                        <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{
-                                                                $conf->google_pay_no }}</span>
-                                                        </p>
+                                                <div class="dropdown ">
+                                                    <div class="details-tip">
+                                                        <button type="button"
+                                                            class="btn btn-payment details-show dropdown-toggle"
+                                                            type="button" id="dropdownMenuButton"
+                                                            data-bs-toggle="dropdown"
+                                                            aria-expanded="false">Details</button>
+
+                                                        <div class="demo">
+                                                            <div
+                                                                class="tooltip-content dropdown-menu details-div">
+                                                                <p class="name-text mb-1"> Name : <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->name : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Mobile No. : <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->mobile : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Ifsc Code : <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->ifsc_code : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Account No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->account_no : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Upi Link: <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->upi_link : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Phone Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->phone_pay_no : ''
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Google Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->receiverUser ?
+                                                                        $coform->receiverUser->google_pay_no :
+                                                                        ''
+                                                                        }}</span>
+                                                                </p>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif
+
                                             </div>
+
                                         </form>
                                     </div>
-                                </div>
-                                <br>
+
+                                </div><br>
                                 @endforeach
                             </div>
                         </div>
@@ -1315,16 +1396,11 @@
 
 @endif
 
-@if(isset($popup) && count($popup) > 0 || Auth::user()->status=NULL)
-@foreach ($popup as $pop)
-@if($pop->status==0 || Auth::user()->status==null)
-@else
-@endif
-@endforeach
-@else
-{{-- @if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received ||
-Auth::user()->status==0) --}}
-<div class="modal fade pop-modal dataModel" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+
+ @if ($data->ammount_Received == 'null' || $data->get_help_ammount == $data->ammount_Received ||
+Auth::user()->status==0)
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
+    data-bs-keyboard="false">
     @if (Session::has('error'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
         {{ Session::get('error') }}

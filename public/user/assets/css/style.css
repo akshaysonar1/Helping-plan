@@ -2412,5 +2412,7 @@ button {
 .cross-btn button{
   position: absolute;
   right: 15px;
-
+}
+.content-paragraph{
+  padding: 20px !important;
 }

@@ -21,7 +21,8 @@ class PinActiveController extends Controller
        try{
 
             $user = PinModel::where('pin_number', '=', $request->pin_number)->first();
-           
+           // $users = User::where('user_type', '0')->where('status', '!=', '1')->with(['userPayment', 'provideHelpUser'])->get();
+            // dd($users);
             if (empty($user->pin_sale_user_id)) {
                 if (empty($user->pin_ammount)) {
                     return redirect('user/dashboard')->with('error', 'This Pin is not valide');
@@ -77,13 +78,17 @@ class PinActiveController extends Controller
 
                         // $transection->save();
 
-                        $users = User::where('user_type', '0')->with(['userPayment', 'provideHelpUser'])->get();
+                        $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
+                       
                         $helpAmmount = $transection->get_ammount;
+                        
                         if(isset($users) && count($users) > 0){
+                       
                             foreach($users as $userlist){
-                                // dd($userlist);
+                                
                                 if($userlist->getHelpAmmount > $userlist->getAmmount && $helpAmmount > 0){
                                     $totalGetAmmount = $userlist->getHelpAmmount-$userlist->getAmmount;
+                                    
                                     $gethelpAmmount = $totalGetAmmount-$helpAmmount;
                                     if($gethelpAmmount > 0){
                                         $remainingHelpAmmount = 0;
