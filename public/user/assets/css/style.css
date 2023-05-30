@@ -2406,3 +2406,11 @@ button {
 .dropdown-toggle::after {
   display: none !important;
 }
+.header-position{
+  position: relative;
+}
+.cross-btn button{
+  position: absolute;
+  right: 15px;
+
+}

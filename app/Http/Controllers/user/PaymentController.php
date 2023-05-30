@@ -49,7 +49,6 @@ class PaymentController extends Controller
 
     public function conformetion($id, Request $request)
     {
-      
         $data = transection::where('user_id', $id)->where('receiver_id', $request->receiver_id)->where('pin_number', $request->unique_pin)->first();
         // if($data->)
 // dd($data);
@@ -86,6 +85,9 @@ class PaymentController extends Controller
             // dd( $change->ammount_Received);
             if ($change->get_help_ammount == $change->ammount_Received) {
                 $change->pay_status = '1';
+            //code for congrtulation after getting full amount
+                
+                
             } else {
 
             }
