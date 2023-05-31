@@ -36,7 +36,6 @@
         <div class="row">
             <div class="col-xl-3 col-lg-3 ">
                 <div class="tab-background">
-                    {{--
                     <div class="content-paragraph p-4">
                         @if(isset($pindeatils) || !empty($pindeatils))
                         <p class="mb-2" style="font-size: 14px; font-weight: 600">Current Pin: <span
@@ -323,8 +322,12 @@
                                         @endforeach
                                         @endif
 
-
-                                        @if(isset($showusers) && count($showusers) > 0)
+                                        <!-- && Auth::user()->unique_pin != $congoPopUp->unique_id -->
+                                        
+                                      
+                                        @if(!empty($congoPopUp->ammount_pendding))
+                                        @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1 && Auth::user()->unique_pin != $congoPopUp->unique_id )
+                                        @if(isset($showusers) && count($showusers) > 0 )
                                         {{-- mycode payment done after show this code --}}
                                         @foreach ($showusers as $show)
                                         <div class="pay-card responsive-card">
@@ -504,22 +507,24 @@
                                         </div><br>
                                         @endforeach
                                         @endif
-
+                                        @endif
+                                        @endif
+                                       
 
 
                                     </div>
 
                                     {{-- my code Finish --}}
-
+                                    @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1 && Auth::user()->unique_pin != $congoPopUp->unique_id )
+                                    @if(isset($showusers) && count($showusers) > 0 )
                                     <div class="col-xl-6">
                                         @foreach ($conform as $coform)
                                         <div class="pay-card-1">
 
                                             <div class=" d-flex justify-content-between">
-                                                <div class="flex-amount">
+                                                <div class="d-flex gap-3">
                                                     <div class="">
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                            xmlns="http://www.w3.org/2000/svg">
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                             <circle cx="10" cy="10" r="10" fill="#7AE868" />
                                                         </svg>
                                                     </div>
@@ -555,8 +560,7 @@
                                             <div class="row">
 
 
-                                                <form action="{{ route('user.conformetion', $coform->sender_id) }}"
-                                                    method="POST">
+                                                <form action="{{ route('user.conformetion', $coform->sender_id) }}" method="POST">
                                                     @csrf
                                                     @method('post')
                                                     <div class="col-xl-12 d-flex justify-content-end gap-2">
@@ -680,6 +684,9 @@
                                         </div><br>
                                         @endforeach
                                     </div>
+                                    @endif
+                                    @endif
+                                    
 
                                 </div>
                             </div>
@@ -1193,8 +1200,7 @@
                                     <div class="row">
 
 
-                                        <form action="{{ route('user.conformetion', $coform->sender_id) }}"
-                                            method="POST">
+                                        <form action="{{ route('user.conformetion', $coform->sender_id) }}" method="POST">
                                             @csrf
                                             @method('post')
                                             <div class="col-xl-12 d-flex justify-content-end gap-2">
@@ -1234,8 +1240,7 @@
                                                     <div class="modal-dialog modal3-lg">
                                                         <div class="modal-content">
 
-                                                            <img id="image"
-                                                                src="{{ asset('user/assets/img/payment/'.$coform->image) }}" />
+                                                            <img id="image" src="{{ asset('user/assets/img/payment/'.$coform->image) }}" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1249,11 +1254,7 @@
 
                                                 <div class="dropdown ">
                                                     <div class="details-tip">
-                                                        <button type="button"
-                                                            class="btn btn-payment details-show dropdown-toggle"
-                                                            type="button" id="dropdownMenuButton"
-                                                            data-bs-toggle="dropdown"
-                                                            aria-expanded="false">Details</button>
+                                                        <button type="button" class="btn btn-payment details-show dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Details</button>
 
                                                         <div class="demo">
                                                             <div class="tooltip-content dropdown-menu details-div">
@@ -1263,38 +1264,32 @@
                                                                         $coform->receiverUser->name : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Mobile No. : <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Mobile No. : <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->mobile : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Ifsc Code : <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Ifsc Code : <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->ifsc_code : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Account No: <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Account No: <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->account_no : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Upi Link: <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Upi Link: <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->upi_link : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Phone Pay No: <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Phone Pay No: <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->phone_pay_no : ''
                                                                         }}</span>
                                                                 </p>
-                                                                <p class="name-text mb-1"> Google Pay No: <span
-                                                                        class="name-para">{{
+                                                                <p class="name-text mb-1"> Google Pay No: <span class="name-para">{{
                                                                         $coform->receiverUser ?
                                                                         $coform->receiverUser->google_pay_no :
                                                                         ''
@@ -1659,7 +1654,6 @@
     </div>
 </div>
 @else
-
 @endif
 
 
@@ -1674,7 +1668,7 @@ Auth::user()->status = Null )
     @endif
 
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content enterPinModel">
+        <div class="modal-content ">
             <div class="modal-header header-modify">
                 <p class="text-center modal-head mb-0">Enter Pin</p>
                 <form action="{{ route('logout') }}" method="POST">
@@ -1705,12 +1699,54 @@ Auth::user()->status = Null )
 {{-- @endif --}}
 @endif
 
+<!-- popup re-enter pin model -->
+@if(!empty(Auth::user()->unique_pin) && !empty($congoPopUp->unique_id) )
+@if(Auth::user()->unique_pin == $congoPopUp->unique_id)
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="dataModel">
+    @if (Session::has('error'))
+    <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
+        {{ Session::get('error') }}
+    </p>
+    @endif
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header header-modify">
+                <p class="text-center modal-head mb-0">Enter Pin</p>
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <p><button type="submit" class="btn">Logout</button></p>
+                </form>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('user.pinactive', Auth::user()->id) }}" method="post">
+                    @csrf
+                    @method('POST')
+                    <div class="row">
+                        <div class="col-xl-12 mb-3 form-class form-adjust">
+                            <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
+                            <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal" aria-label="Close" data-bs-toggle="modal" data-bs-target="#modal-2">Activate</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
+@endif
+<!-- popup rnter pin model -->
+
 <!-- congratulation popup start  -->
 
-@if(isset($congoPopUp) && Auth::user()->status == NULL)
-@if($congoPopUp->pay_status == 1 && $congoPopUp->ammount_pendding == 0)
-<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
-    data-bs-keyboard="false">
+
+@if(!empty($congoPopUp->pay_status) && !empty($congoPopUp->ammount_pendding) && !empty($congoPopUp->get_help_ammount) && !empty($congoPopUp->ammount_Received) && !empty(Auth::user()->unique_pin)
+&& !empty($congoPopUp->unique_id))
+@if($congoPopUp->pay_status == 1 && $congoPopUp->ammount_pendding == 0 && $congoPopUp->get_help_ammount == $congoPopUp->ammount_Received && Auth::user()->unique_pin == $congoPopUp->unique_id)
+
+<div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     @if (Session::has('error'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
         {{ Session::get('error') }}
@@ -1719,14 +1755,12 @@ Auth::user()->status = Null )
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header header-modify header-position">
-                <div class="cross-btn"><button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close" id="closeBtn"></button></div>
+                <div class="cross-btn"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeBtn"></button></div>
             </div>
             <div>
                 @if(isset($congoPopUp->ammount_Received) && !empty($congoPopUp->ammount_Received ))
                 <p class="text-center modal-head mb-0" style="font-size: 20px;
-        font-weight: 700;">Congratulation You Have Completed !!!<br>You got {{$congoPopUp->ammount_Received}} by
-                    providing help of {{$congoPopUp->provide_help_ammount}} </p>
+        font-weight: 700;">Congratulation You Have Completed !!!<br>You got {{$congoPopUp->ammount_Received}} by providing help of {{$congoPopUp->provide_help_ammount}} </p>
                 @endif
             </div>
             <div class="modal-body">
@@ -1736,6 +1770,13 @@ Auth::user()->status = Null )
                 </div>
             </div>
         </div>
+
+    </div>
+</div>
+
+@endif
+@endif
+<!-- congratulation popup end  -->
 
     </div>
 </div>
@@ -1768,7 +1809,9 @@ Auth::user()->status = Null )
 <script>
     $("document").ready(function() {
         $('#closeBtn').on('click', function() {
-            $('.dataModel').show();
+            $('#dataModel').modal('show');
+            // alert('hieee');
+            // $('#dataModel').show();
         });
         // $('#submitBtn').submit(function(e) {
         // e.preventDefault();
