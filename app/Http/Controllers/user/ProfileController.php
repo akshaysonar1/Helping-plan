@@ -12,11 +12,7 @@ class ProfileController extends Controller
     //
     public function profileupdate($id, Request $request)
     {
-
-         
-
             $user = User::where('id', $id)->first();
-
             $data['name'] = $request->name;
             $data['state'] = $request->state;
             $data['city'] = $request->city;

@@ -22,28 +22,34 @@ class PaymentController extends Controller
         try{
             // $payment = transection::where('user_id', '=', Auth::user()->id)->first();
             $payment = transection::where('id', $request->transaction_id)->first();
-            
-            if(isset($payment) && !empty($payment)){
-                $payment->receiver_id = $request->receiver_id;
-                $image = $request->File('image');
-                $extenstion = $image->getClientOriginalName();
-                $filename = time() . '.' . $extenstion;
-                $destinationPath = public_path('user/assets/img/payment');
-                $image->move($destinationPath, $filename);
-                $payment->image = $filename;
-                $payment->update();
+            // dd('heloo');
+            if(!empty(Auth::user()->bank_name) && !empty(Auth::user()->account_no) && !empty(Auth::user()->ifsc_code)){
+               
+                if(isset($payment) && !empty($payment)){
+                    $payment->receiver_id = $request->receiver_id;
+                    $image = $request->File('image');
+                    $extenstion = $image->getClientOriginalName();
+                    $filename = time() . '.' . $extenstion;
+                    $destinationPath = public_path('user/assets/img/payment');
+                    $image->move($destinationPath, $filename);
+                    $payment->image = $filename;
+                    $payment->update();
 
-                if($payment){
-                    return redirect('user/dashboard')->with('message', "Your Payment Image Has Been Send. Thank you!");
-                }else{
-                    return redirect('user/dashboard')->with('message', "Your Payment Image Has Not Been Send.");
+                    if($payment){
+                        return redirect('user/dashboard')->with('message', "Your Payment Image Has Been Send. Thank you!");
+                    }else{
+                        return redirect('user/dashboard')->with('message', "Your Payment Image Has Not Been Send.");
+                    }
                 }
+
+            }else{
+                return redirect('user/dashboard')->with('message', "Please Fill Bank Details First !");
             }
 
             return redirect('user/dashboard')->with('message', "Payment Not Found !");
 
         }catch(Exception $e){
-            dd($e);
+            return redirect('user/dashboard')->with('message', "Payment Not Found !");
         }
     }
 

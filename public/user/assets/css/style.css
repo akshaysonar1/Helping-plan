@@ -617,6 +617,7 @@ section {
 .section-title {
   text-align: center;
   padding-bottom: 30px;
+  padding-top: 80px;
 }
 
 .section-title h2 {
@@ -2415,4 +2416,38 @@ button {
 }
 .content-paragraph{
   padding: 20px !important;
+}
+.profile-table{
+  padding: 10px !important;
+}
+.button-flex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0px 20px;
+}
+.btn-collapse{
+  background-color: white !important;
+  border: #7C7FFF !important;
+  border-radius: 6px !important;
+  font-size: 14px !important;
+  color: #7C7FFF !important;
+  font-weight: 600 !important;
+  padding: 8px 12px !important;
+}
+.profile-name{
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 18px;
+  color: #FFFFFF;
+}
+.flex-amount{
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.icon-tab i{
+  font-size: 28px;
+  font-weight: 600;
 }
