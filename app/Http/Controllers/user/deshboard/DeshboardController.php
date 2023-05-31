@@ -31,10 +31,9 @@ class DeshboardController extends Controller
             if (Auth::user()->user_type == '0' || Auth::user()->user_type == '2') {
                 $users = transection::where('tran_status', '!=', '1')->where('split_status', '1')->where('user_id', Auth::user()->id)->get();
                 // dd($users);
-                // $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
-                
-                $showusers = transection::where('user_id', Auth::user()->id)->get();
-                // dd($showusers);
+                 $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
+                // $showusers = transection::where('user_id', Auth::user()->id)->get();
+                 
                 $data = Provide_Help::where('users_id', '=', (Auth::user()->id))->first();
                 
                 $user = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('ammount_pendding', '>', 0)->where('user_id', '!=', (Auth::user()->id))->get();
