@@ -616,8 +616,8 @@ section {
 
 .section-title {
   text-align: center;
-  padding-bottom: 30px;
-  padding-top: 80px;
+  padding-bottom: 0px !important;
+  padding-top: 50px !important;
 }
 
 .section-title h2 {
@@ -2450,4 +2450,13 @@ button {
 .icon-tab i{
   font-size: 28px;
   font-weight: 600;
+}
+
+@media (max-width: 576px){
+  .tab-menu{
+    display: none !important;
+  }
+  .tab-background{
+    min-height: 200px !important;
+  }
 }
