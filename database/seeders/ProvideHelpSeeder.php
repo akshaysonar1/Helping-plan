@@ -23,9 +23,9 @@ class ProvideHelpSeeder extends Seeder
             if (!$provideHelp) {
                 $provideHelp = new Provide_Help();
                 $provideHelp->provide_help_ammount = 1000;
-                $provideHelp->get_help_ammount = 2000;
+                $provideHelp->get_help_ammount = 2000000;
                 $provideHelp->ammount_Received = 0;
-                $provideHelp->ammount_pendding = 2000;
+                $provideHelp->ammount_pendding = 2000000;
                 $provideHelp->customer_id = time() . random_int(1000, 9999999999);
                 $provideHelp->status = "1";
                 $provideHelp->users_id = $user->id;

@@ -37,7 +37,6 @@
             <div class="col-xl-3 col-lg-3 ">
                 <div class="tab-background">
 
-
                     {{-- table info --}}
                     <div class="button-flex mb-3">
                         <p class="mb-0 profile-name"> Profile : {{ Auth::user()->name }}</p>
@@ -277,13 +276,17 @@
                                         @endif
 
                                         <!-- && Auth::user()->unique_pin != $congoPopUp->unique_id -->
-
-
-                                        @if(!empty($congoPopUp->ammount_pendding))
-                                        @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1 && Auth::user()->unique_pin != $congoPopUp->unique_id )
-                                        @if(isset($showusers) && count($showusers) > 0 )
+                                        
+                                        @if(!empty($congoPopUp))
+                                        @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1)
+                                        
+                                     
+                                         @if(isset($showusers) && count($showusers) > 0 )
                                         {{-- mycode payment done after show this code --}}
-                                        @foreach ($showusers as $show)
+                                   
+                                         @foreach ($showusers as $show)
+                                         @if(Auth::user()->unique_pin == $show->pin_number)
+                                        
                                         <div class="pay-card responsive-card">
                                             <div class=" d-flex justify-content-between">
                                                 <div class="flex-amount">
@@ -426,21 +429,30 @@
                                                 </div>
                                             </div>
                                         </div><br>
-                                        @endforeach
+                                        @endif
+                                          @endforeach
                                         @endif
                                         @endif
+                                       @else
+                                       {{-- else condition --}}
+                                     
                                         @endif
-
+                                       
 
 
                                     </div>
 
                                     {{-- my code Finish --}}
                                     @if(!empty($congoPopUp))
-                                    @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1 && Auth::user()->unique_pin != $congoPopUp->unique_id )
+                                    @if($congoPopUp->ammount_pendding != 0 && $congoPopUp->pay_status != 1)
                                     @if(isset($showusers) && count($showusers) > 0 )
                                     <div class="col-xl-6">
                                         @foreach ($conform as $coform)
+                                        {{-- {{ dd(Auth::user()->unique_pin,$coform->pin_number )}}
+                                        {{ dd($conform) }} --}}
+                                        {{-- @if(Auth::user()->unique_pin == $coform->pin_number) --}}
+                                      
+                                        
                                         <div class="pay-card-1">
 
                                             <div class=" d-flex justify-content-between">
@@ -581,12 +593,14 @@
                                             </div>
 
                                         </div><br>
+                                        {{-- @endif --}}
                                         @endforeach
                                     </div>
                                     @endif
                                     @endif
+                                    @else
+                                   
                                     @endif
-
 
                                 </div>
                             </div>
@@ -675,7 +689,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </from>
+                        </form>
                     </div>
                     <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab" tabindex="0">
                         <div class="row">
@@ -1487,7 +1501,7 @@ Auth::user()->status = Null )
 
 <!-- popup re-enter pin model -->
 @if(!empty(Auth::user()->unique_pin) && !empty($congoPopUp->unique_id) )
-@if(Auth::user()->unique_pin == $congoPopUp->unique_id)
+@if(Auth::user()->unique_pin != $congoPopUp->unique_id)
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false" id="dataModel">
     @if (Session::has('error'))
     <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
@@ -1500,6 +1514,7 @@ Auth::user()->status = Null )
                 <p class="text-center modal-head mb-0">Enter Pin</p>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
+                    @method('post')
                     <p><button type="submit" class="btn">Logout</button></p>
                 </form>
             </div>
@@ -1526,11 +1541,11 @@ Auth::user()->status = Null )
 <!-- popup rnter pin model -->
 
 <!-- congratulation popup start  -->
-
-
-@if(!empty($congoPopUp->pay_status) && !empty($congoPopUp->ammount_pendding) && !empty($congoPopUp->get_help_ammount) && !empty($congoPopUp->ammount_Received) && !empty(Auth::user()->unique_pin)
-&& !empty($congoPopUp->unique_id))
-@if($congoPopUp->pay_status == 1 && $congoPopUp->ammount_pendding == 0 && $congoPopUp->get_help_ammount == $congoPopUp->ammount_Received && Auth::user()->unique_pin == $congoPopUp->unique_id)
+{{-- {{ DD($data) }} --}}
+@if($data->status !=null && $data->get_help_ammount ==  $data->get_help_ammount && $data->ammount_pendding == 0)
+{{-- @if(!empty($congoPopUp)) --}}
+{{-- {{ dd($congoPopUp->pay_status == 1,$congoPopUp->ammount_pendding == 0,$congoPopUp->get_help_ammount == $congoPopUp->ammount_Received,Auth::user()->unique_pin == $congoPopUp->unique_id ) }} --}}
+{{-- @if($congoPopUp->pay_status == 1 && $congoPopUp->ammount_pendding == 0 && $congoPopUp->get_help_ammount == $congoPopUp->ammount_Received && Auth::user()->unique_pin == $congoPopUp->unique_id) --}}
 
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
     @if (Session::has('error'))
@@ -1544,9 +1559,9 @@ Auth::user()->status = Null )
                 <div class="cross-btn"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeBtn"></button></div>
             </div>
             <div>
-                @if(isset($congoPopUp->ammount_Received) && !empty($congoPopUp->ammount_Received ))
+                @if(isset($data->ammount_Received) && !empty($data->ammount_Received ))
                 <p class="text-center modal-head mb-0" style="font-size: 20px;
-        font-weight: 700;">Congratulation You Have Completed !!!<br>You got {{$congoPopUp->ammount_Received}} by providing help of {{$congoPopUp->provide_help_ammount}} </p>
+        font-weight: 700;">Congratulation You Have Completed !!!<br>You got {{$data->ammount_Received}} by providing help of {{$data->provide_help_ammount}} </p>
                 @endif
             </div>
             <div class="modal-body">
@@ -1560,11 +1575,10 @@ Auth::user()->status = Null )
     </div>
 </div>
 
-@endif
+{{-- @endif --}}
 @endif
 <!-- congratulation popup end  -->
 
-</div>
 </div>
 
 {{-- pop up start --}}

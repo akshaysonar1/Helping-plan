@@ -25,7 +25,7 @@ class PinActiveController extends Controller
             // dd($users);
             if (empty($user->pin_sale_user_id)) {
                 if (empty($user->pin_ammount)) {
-                    return redirect('user/dashboard')->with('error', 'This Pin is not valide');
+                    return redirect('user/dashboard')->with('error', 'This Pin is not valid');
                 } else {
                     $provide_help_ammount = '1000';
                     if($user->pin_sell_status!=1){
