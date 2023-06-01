@@ -59,9 +59,9 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col-12">
-                                    <label>Mobile No.</label>
+                                    <label>Mobile Number</label>
 
-                                    <input id="mobile" type="text" class="form-control form-control-user  @error('mobile') is-invalid @enderror numbers" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus placeholder="10 digit mobile no." oninput="process(this)" maxlength="10">
+                                    <input id="mobile" type="text" class="form-control form-control-user  @error('mobile') is-invalid @enderror numbers" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile" autofocus placeholder="Enter Mobile Number" oninput="process(this)" maxlength="10">
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -78,7 +78,7 @@
                                 <div class="col-12">
                                     <label>Create Password</label>
 
-                                    <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="123456789">
+                                    <input id="password" type="password" class="form-control form-control-user @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" placeholder="Enter Password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
                                 <div class="col-12">
                                     <label>Confirm Password</label>
 
-                                    <input id="password_confirmation" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="123456789">
+                                    <input id="password_confirmation" type="password" class="form-control form-control-user" name="password_confirmation" required autocomplete="new-password" placeholder="Enter Confirm Password">
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -109,8 +109,8 @@
                             </div>
                             <div class="row mb-4">
                                 <div class="col-12">
-                                    <label>ZipCode</label>
-                                    <input type="text" name="pin_code" id="pin_code" placeholder="Zipcode" class="form-control" oninput="process(this)" required>
+                                    <label>Zip Code</label>
+                                    <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -191,7 +191,7 @@
 
                     },
                     password_confirmation: {
-                        required: 'Please Enter Password',
+                        required: 'Please Enter Confirm Password',
                         minlength: 'Minimum Six Character Password Require',
                         equalTo: 'Password Not Matched',
                     },

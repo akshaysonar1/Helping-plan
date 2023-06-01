@@ -103,9 +103,11 @@
                                                 <th>Pin Price </th>
                                                 <th>Sending Detail </th>
                                                 <th>Status </th>
+                                                <th>Pin Use Status </th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            
                                             @if (isset($data) && !empty($data) )
                                             @foreach ($data as $list)
                                             <tr>
@@ -118,6 +120,14 @@
                                                     <button type="button" class="btn btn-danger" style="width:100px" data-toggle="modal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }} ">sold</button>
                                                     @else
                                                     <button type="button" class="btn btn-primary examps" data-toggle="modal" data-target="#exampleModal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }}  " style="width:100px">sell</button>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if(!empty($list->pin_sale_user_id) && $list->pin_status == 0)
+                                                   
+                                                    <button type="button" class="btn btn-danger" style="width:100px" >Pin use</button>
+                                                    @else
+                                                    <button type="button" class="btn btn-warning examps" style="width:100px">pending</button>
                                                     @endif
                                                 </td>
                                             </tr>
