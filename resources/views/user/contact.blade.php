@@ -24,34 +24,35 @@
               
                 <div class="row">
                 <div class="col-lg-12">
+                    @if (Session::has('message'))
+                        <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
+                    @endif
                     <form action="{{ route('user.contactus') }}" method="POST" class="php-email-form" id="ContactForm">
                         @csrf
                         @method('POST')
                         <div class="row">
                             <div class="col form-group">
                                 <input type="text" name="user_name" class="form-control"  
-                                    placeholder="Your Name" required oninput="validateInput(this)">
+                                    placeholder="Your Name" required oninput="validateInput(this)" maxlength="15">
                             </div>
                             <div class="col form-group">
-                                <input type="email" class="form-control" name="user_email"  
-                                    placeholder="Your Email" required>
+                                <input type="number" class="form-control" name="mobile"  
+                                    placeholder="Your Mobile Number" oninput="validateInput(this)" required maxlength="10">
                             </div>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                            <input type="text" class="form-control" name="subject" oninput="validateInput(this)" maxlength="150" id="subject" placeholder="Subject"
                                 required>
                         </div>
                         <div class="form-group">
-                            <textarea class="form-control" name="user_message" rows="5" placeholder="Message" required></textarea>
+                            <textarea class="form-control" name="user_message" oninput="validateInput(this)" maxlength="200" rows="5" placeholder="Message" required></textarea>
                         </div>
                         {{-- <div class="my-3">
                             <div class="loading">Loading</div>
                              
                             <div class="sent-message">Your message has been sent. Thank you!</div>
                         </div> --}}
-                        @if (Session::has('message'))
-                        <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
-                    @endif
+                        
                         <div class="text-center"><button type="submit">Send Message</button></div>
                     </form>
                     </div>
@@ -84,32 +85,32 @@
                     user_name: {
                         required: true,
                     },
-                    user_email: {
+                    mobile: {
                         required: true,
-                        regex: /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/,
+                        
                     },
                     subject: {
                         required: true,
                     },
                     user_message: {
                         required: true,
-                        maxlength: 100,
+                        maxlength: 200,
                     },
                     
                 },
                 messages: {
                     user_name: {
-                        required: 'Please Enter Name',
+                        required: 'Enter Name',
                     },
-                    user_email: {
-                        required: 'Please Enter The Email',
-                        regex:'Please Enter The Valid E-Mail',
+                    mobile: {
+                        required: 'Enter Mobile Number',
+                        
                     },
                     subject: {
-                        required: 'Please Enter The Subjct',
+                        required: 'Enter Subjct',
                     },
                     user_message: {
-                        required: 'Please Enter The Message',
+                        required: 'Enter The Message',
                         maxlength:'Allow Only 200 Words',
                     },
                 }

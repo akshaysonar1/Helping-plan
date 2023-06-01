@@ -39,7 +39,9 @@
                                                 data-target="#exampleModal" data-id="{{ $row->id }}"
                                                 data-mobile="{{ $row->mobile }} ">Reset Password</button>
                                             @else
-                                            <button type="button" class="btn btn-success examps">Password Reseted</button>
+                                            <b>Password Reseted</b>
+                                            <b><p>{{ $row->created_at }}</p> </b>
+                                            {{-- <button type="button" class="btn btn-success examps"></button> --}}
                                         @endif
                                     </td>
                                         <div class="modal fade exampleModal" id="exampleModal" tabindex="-1" role="dialog"

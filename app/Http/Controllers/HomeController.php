@@ -33,7 +33,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $store = NoteModel::first();
-        $pinData = PinModel::whereDate('created_at', Carbon::today())->get();
+        $pinData = PinModel::whereDate('created_at', Carbon::today())->orderBy('id', 'DESC')->get();
+        
         return view('admin.dashboard',compact('store','pinData'));
     }
 
@@ -63,7 +64,8 @@ class HomeController extends Controller
     {
         $currency = $request->input('currency'); 
         $countdata = $request->input('total'); 
-        $filter = PinModel::get();
+        // $filter = PinModel::get();
+        $filter = PinModel::whereDate('created_at', Carbon::today())->get();
         if (isset($currency) && !empty($currency)) {
             $filterData = $filter->where('pin_ammount', $currency);
         }
@@ -81,9 +83,7 @@ class HomeController extends Controller
     {
       
         $data = PinModel::join('users', 'users.id', '=', 'pin_genrate_tabel.pin_sale_user_id')->get();
-       
-          
-            return view('admin.helpswitch', compact('data'));
+        return view('admin.helpswitch', compact('data'));
          
     }
 

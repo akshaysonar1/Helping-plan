@@ -83,6 +83,9 @@ class PaymentController extends Controller
         $change = user_payment::where('user_id', $request->receiver_id)->first();
         //  $updated = Provide_Help::where('users_id', '=', $data->receiver_id)->first();
         // dd($request->receiver_id);
+        if(!empty($change->get_help_ammount)){
+
+        
         if ($change->get_help_ammount == $change->ammount_Receive) {
          
             $change->pay_status = '1';
@@ -106,6 +109,7 @@ class PaymentController extends Controller
             $change->update();
             $provideamount->update();
         }
+     }
 
         $transaction = transection::where('id', $request->user_id)->first();
 

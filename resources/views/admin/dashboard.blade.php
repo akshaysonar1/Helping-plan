@@ -10,8 +10,10 @@
         color: red !important;
     }
     button {
+
         /* width: 5%; */
         padding: 8px 12px;
+
         border-radius: 5px;
         border: none;
         background: #3b43d6;
@@ -21,10 +23,13 @@
         background-color: #4e73df;
         border-color: #4e73df;
         margin-top: 20px;
+        margin-bottom: 10px;
     }
     .btn1 {
+
         /* width: 20%; */
         padding: 8px 12px;
+
         border-radius: 5px;
         border: none;
         background: #3b43d6;
@@ -102,7 +107,9 @@
                 <div class="col-lg-12">
 
 
+
                 <div class="p-5">
+
                         @if (Session::has('message'))
                         <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
                         @endif
@@ -134,11 +141,13 @@
         <div class="col-lg-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">PIN Genrated Today</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Today Genrated PIN</h6>
                 </div>
                 <div class="">
                     <div class="card-body">
-                        <form action="{{ route('home.search') }}" method="get">
+
+                        {{-- <form action="{{ route('home.search') }}" method="get" class='pad-bg shadow'>
+
                             <div class="row align-items-end">
                                 <div class="col-xl-auto col-lg-auto col-md-auto col-sm-auto">
                                     <b> <label for="exampleInputPassword1">Pin Amount</label></b>
@@ -165,13 +174,13 @@
                                     </div>
                                 <!-- </div> -->
                             </div>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
                 <!-- Used for the data  -->
                 <div class="container-fluid">
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Pin History Data</h1>
+                    {{-- <h1 class="h3 mb-2 text-gray-800">Pin History Data</h1> --}}
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-body">
@@ -179,9 +188,11 @@
                                 <table class="table table-bordered" id="dashboardTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Genrated Date </th>
-                                            <th> Pin Detail </th>
+                                            <th> Pin Genrated Date </th>
+                                            <th> Pin </th>
                                             <th> Pin Amount </th>
+                                            <th> Pin Status </th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -192,10 +203,12 @@
                                             <td>{{ $list->created_at }}</td>
                                             <td>{{ $list->pin_number }}</td>
                                             <td>{{ $list->pin_ammount }}</td>
+                                            <td>@if(!empty($list->pin_sale_user_id) && $list->pin_status == 0) <p style="color: red"> PIN Used </p> @else <p style="color: rgb(29 149 29);"> PIN Not Used </p>@endif</td>
                                         </tr>
                                         @endforeach
                                         @endif
-                                        @else
+
+                                        {{-- @else
                                         @if (isset($data) && !empty($data))
                                         @foreach ($data as $list)
                                         <tr>
@@ -204,7 +217,7 @@
                                             <td>{{ $list->pin_ammount }}</td>
                                         </tr>
                                         @endforeach
-                                        @endif
+                                        @endif --}}
                                         @endif
                                     </tbody>
                                 </table>
@@ -252,7 +265,7 @@
         input.readOnly = false;
     }
 </script>
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('#dashboardTable').DataTable({
             dom: 'lBfrtip',
@@ -262,7 +275,7 @@
             ]
         });
     });
-</script>
+</script> -->
 <script>
     function process(input) {
         let value = input.value;

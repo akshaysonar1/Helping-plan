@@ -60,7 +60,7 @@
                                 <tr>
                                     <th>Sr.no</th>
                                     <th>Date</th>
-                                    <th>Unique No</th>
+                                    <th>Pin</th>
                                     <th>Name</th>
                                     <th>Mobile No.</th>
                                     <th>Provide Help</th>
@@ -89,16 +89,15 @@
                                         <td>{{ $row->ammount_pendding }}</td>
                                         <td>
                                             @if (empty($row->provide_help_ammount))
-                                                <button type="button" class="btn btn-danger"
-                                                    style="width:90px">empty</button>
+                                                <p style="color:rgb(0, 140, 255)">Not Used Pin</p>
                                         </td>
                                     @else
                                         @if ($row->ammount_Received == $row->get_help_ammount)
-                                            <button type="button" class="btn btn-success" style="width:90px ">Done</button>
+                                            <p style="color:rgb(20, 87, 11)">Done</p>
                                             </td>
                                         @else
-                                            <button type="button"
-                                                class="btn btn-warning"style="width:90px">Pending</button></td>
+                                            <p style="color:red">Pending</p>
+                                            </td>
                                         @endif
                                 @endif
                                 </tr>

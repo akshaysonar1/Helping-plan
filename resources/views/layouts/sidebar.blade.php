@@ -70,19 +70,19 @@
             <span>Pin History</span></a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-hands-helping" style="color: #ffffff;"></i>
             <span>Help History</span></a>
-    </li>
+    </li> -->
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
 
         <a class="nav-link" href="{{ route('helpswitch') }}">
 
             <i class="fas fa-fw fa-cog" style="color: #ffffff;"></i>
             <span>Help Switch ON/OFF</span></a>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('forgotpassword.forgotpassword') }}">
             <i class="fas fa-unlock-alt" style="color: #ffffff;"></i>

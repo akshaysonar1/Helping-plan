@@ -27,10 +27,6 @@ class PinHistoryController extends Controller
         if (isset($currency) && !empty($currency)) {
             $filter = $filter->where('pin_ammount', $currency);
         }
-       //serch with pin nimber 
-        if (isset($pinData) && !empty($pinData)) {
-            $filter = $filter->where('pin_number', $pinData);
-        }
         //serch with date
         if (isset($startDate) && !empty($startDate)) {
             $filter =  $filter->whereDate('pin_sale_date', '>=', date('Y-m-d',strtotime($startDate)));
