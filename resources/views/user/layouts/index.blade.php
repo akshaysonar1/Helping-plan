@@ -17,7 +17,7 @@
                                     officia deserunt mollit anim id est laborum</h2>
                             </div>
                             <div class="pt-3">
-                                <button type="button" class="btn btn-form-1 p-3">Know More</button>
+                                {{-- <button type="button" class="btn btn-form-1 p-3">Know More</button> --}}
                             </div>
                         </div>
                     </div>

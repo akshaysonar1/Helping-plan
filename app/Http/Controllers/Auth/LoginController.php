@@ -72,14 +72,14 @@ class LoginController extends Controller
 
       if ($user) {
         if ($request->get('mobile') != $user->mobile) {
-          return redirect('user/login')->with('error', 'Please register first mobile number!');
+          return redirect('user/login')->with('error', 'Please Register First Mobile Number!');
         }
       } else {
 
-        return redirect('user/login')->with('error', 'phone number not register');
+        return redirect('user/login')->with('error', 'Mobile Number is Not Registered');
       }
       if (!Hash::check($pass, $user->password)) {
-        return redirect('user/login')->with('error', 'password is wrong');
+        return redirect('user/login')->with('error', 'Password is Wrong');
       } else {
 
 
@@ -88,7 +88,7 @@ class LoginController extends Controller
 
           return redirect('user/dashboard');
         } else {
-          return redirect('user/login')->with('error', 'phone number not register');
+          return redirect('user/login')->with('error', 'Mobile Number is Not Registered');
         }
       }
    

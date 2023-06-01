@@ -91,9 +91,10 @@
 
                         <form action="{{ route('pinhistory') }}" method="get" class='pad-bg shadow'>
                             <div class="row align-items-end">
-                                <div class="col-xl-auto">
+                                <div class="col-xl-4">
                                    <b> <label for="exampleInputPassword1">Pin Amount</label></b>
                                     <div class="form-group form-control">
+                                        
                                         <div class="d-flex" style="gap: 5px;">
                                             <input id="name" type="radio" name="currency" value="500" {{ request()->input('currency') ==
                                             '500' ? 'checked' : '' }} autocomplete="name" autofocus> <span class="form-group mb-0 mr-2">500</span>
@@ -104,33 +105,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-xl-1">
-                                    <div class="form-group">
-                                    <b><label for="exampleInputPassword1">Total </label></b>
-                                        <input id="total" type="text" name="total" value="" autocomplete="name" class="form-control" autofocus> <span class="form-group"></span>
-                                    </div>
-                                </div>
-                                <div class="col-xl-2">
+                                
+                                <div class="col-xl-4">
                                     <div class="form-group">
                                     <b><label for="exampleInputPassword1">From</label></b>
                                         <input id="start_date" class="form-control" type="date" name="start_date" value="" autocomplete="name" autofocus>
                                     </div>
                                 </div>
-                                <div class="col-xl-2">
+                                
+                                
+                                <div class="col-xl-4">
                                     <div class="form-group">
                                         <b><label for="exampleInputPassword1">To</label></b>
                                         <input id="pin_sale_date" class="form-control" type="date" name="end_date" value="" autocomplete="name" autofocus>
                                     </div>
                                 </div>
-                                <div class="col-xl-2">
-                                    <div class="form-group">
-                                       <b> <label for="exampleInputPassword1">Pin </label></b>
-                                        <input id="pin" type="text" class="form-control" name="pin" value="" autocomplete="name" autofocus>
-                                    </div>
-                                </div>
-                                <div class="col-auto ml-auto">
+                                
+                                <div class="col-xl-3">
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary w-auto px-4">Search</button>
+                                        <a href="{{ route('pinhistory') }}" class="btn btn-primary w-auto px-4">Clear</a>
+                                       
+                                         
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +138,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Pin History Data</h1>
+                    {{-- <h1 class="h3 mb-2 text-gray-800">Pin History Data</h1> --}}
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
 
@@ -152,7 +148,7 @@
                                     <thead>
                                         <tr>
                                             <th>Genrated Date </th>
-                                            <th> Pin Detail </th>
+                                            <th> Pin</th>
                                             <th> Pin Amount </th>
                                             <th> User Person ID </th>
                                             <th> Name </th>

@@ -39,7 +39,8 @@ class CustomerDetailsController extends Controller
     }
 
     public function contactdetails(){
-        $contact = ContactUs::get();
+        $contact = ContactUs::orderBy('id', 'DESC')->get();
+        
         return view('customer_details.contactus', compact('contact'));
     }
 }

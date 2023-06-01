@@ -28,6 +28,26 @@
 </head>
 
 <body>
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="logo"><a href="{{ route('index') }}"><img src="{{ asset('user/assets/img/logo.svg') }}"
+                        alt=""></a></h1>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" href="{{ route('index') }}">HOME</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('user.dashboard.show') }}">DASHBOARD</a></li>
+                    <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">CONTACT US</a></li>
+                    @if (empty(Auth::user()->id) || Auth::user()->user_type == '1')
+                        <li><span><a class="btn main-btn" href="{{ route('user.login') }}">LOGIN</a></span></li>
+                    @else
+                        <li><a class="nav-link scrollto"
+                                href="{{ route('user.dashboard.show') }}">{{ Auth::user()->name }}</a></li>
+                    @endif
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
     <div class="login-section sign-section">
         <div class="container-fluid ps-md-0">
             <div class="row align-items-center">
@@ -48,7 +68,7 @@
 
                                 <div class="col-12">
                                     <label>Name</label>
-                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Enter Name" oninput="validateInput(this)">
+                                    <input id="name" type="text" class="form-control form-control-user @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required placeholder="Enter Name" oninput="validateInput(this)" maxlength="30">
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,11 +118,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>State</label>
-                                            <input class="form-control" name="state" id="state" placeholder="state" required oninput="validateInput(this)">
+                                            <input class="form-control" name="state" id="state" placeholder="state" required oninput="validateInput(this)" maxlength="20">
                                         </div>
                                         <div class="col-md-6">
                                             <label>City</label>
-                                            <input class="form-control" name="city" placeholder="city" required oninput="validateInput(this)">
+                                            <input class="form-control" name="city" placeholder="city" required oninput="validateInput(this)" maxlength="20">
                                         </div>
                                     </div>
                                 </div>
@@ -110,7 +130,7 @@
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <label>Zip Code</label>
-                                    <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)" required>
+                                    <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)" required maxlength="10">
                                 </div>
                             </div>
                             <div class="row">

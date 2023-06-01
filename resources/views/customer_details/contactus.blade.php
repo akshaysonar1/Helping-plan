@@ -19,6 +19,7 @@
                                 <tr>
                                     <th>Sr.no</th>
                                     <th>Name</th>
+                                    <th>Number</th>
                                     <th>Subject</th>
                                     <th>Message</th>
                                      
@@ -33,6 +34,7 @@
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>{{ $row->user_name }}</td>
+                                        <td>{{ $row->mobile }}</td>
                                         <td>{{ $row->subject }}</td>
                                         <td>{{ $row->user_message }}</td>
                                         {{-- <td><a class="examps"> helo</a></td> --}}

@@ -33,7 +33,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $store = NoteModel::first();
-        $pinData = PinModel::whereDate('created_at', Carbon::today())->get();
+        $pinData = PinModel::whereDate('created_at', Carbon::today())->orderBy('id', 'DESC')->get();
+        
         return view('admin.dashboard',compact('store','pinData'));
     }
 

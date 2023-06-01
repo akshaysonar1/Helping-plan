@@ -55,13 +55,13 @@
             <span>Help History</span></a>
     </li> -->
 
-    <li class="nav-item">
+    {{-- <li class="nav-item">
 
         <a class="nav-link" href="{{ route('helpswitch') }}">
 
             <i class="fas fa-fw fa-cog"></i>
             <span>Help Switch ON/OFF</span></a>
-    </li>
+    </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('forgotpassword.forgotpassword') }}">
             <i class="fas fa-fw fa-cog"></i>

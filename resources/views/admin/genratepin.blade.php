@@ -56,14 +56,19 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
             </div>
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-                <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
-                <div class="col-lg-7">
-                    <div class="p-5">
-                    @if (Session::has('message'))
+            @if (Session::has('message'))
                 <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
             @endif
+            <!-- Nested Row within Card Body -->
+            <div class="row">
+                
+                <!-- <div class="col-lg-5 d-none d-lg-block bg-register-image"></div> -->
+                {{-- <div class="col-lg-7"> --}}
+                    <div class="col-lg-2">
+                    </div>
+                    <div class="col-lg-9">
+                    <div class="p-5">
+                    
                         <form class="form-group pad-bg" method="post" action="{{ route('genratepin.data') }}" id="genratePin">
                             @csrf
                             Select Price For Pin
@@ -90,7 +95,7 @@
                 <div class="container-fluid">
                     <div class="p-4">
                         <!-- Page Heading -->
-                        <h1 class="h3 mb-2 text-gray-800">Genrated Pin</h1>
+                        {{-- <h1 class="h3 mb-2 text-gray-800">Genrated Pin List</h1> --}}
                         <!-- DataTales Example -->
                         <div class="card shadow mb-4">
                             <div class="card-body">
@@ -99,7 +104,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Genrate Date </th>
-                                                <th>Pin Detail </th>
+                                                <th>Pin </th>
                                                 <th>Pin Price </th>
                                                 <th>Sending Detail </th>
                                                 <th>Status </th>
@@ -117,18 +122,23 @@
                                                 <td>{{ $list->updated_at }}</td>
                                                 <td>
                                                     @if($list->sell_pin_status=='1')
-                                                    <button type="button" class="btn btn-danger" style="width:100px" data-toggle="modal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }} ">sold</button>
+                                                    <b style="color:rgb(80, 78, 78)">Pin Sold</b>
+                                                    {{-- <button type="button" class="btn btn-danger" style="width:100px" data-toggle="modal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }} ">sold</button> --}}
                                                     @else
+                                                    {{-- <a type="button"  data-toggle="modal" data-target="#exampleModal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }}  " style="width:100px">sell</a> --}}
                                                     <button type="button" class="btn btn-primary examps" data-toggle="modal" data-target="#exampleModal" data-id="{{ $list->id }}" data-pin_number="{{ $list->pin_number }}  " style="width:100px">sell</button>
                                                     @endif
                                                 </td>
                                                 <td>
                                                     @if(!empty($list->pin_sale_user_id) && $list->pin_status == 0)
                                                    
-                                                    <button type="button" class="btn btn-danger" style="width:100px" >Pin use</button>
+                                                    {{-- <button type="button" class="btn btn-danger" style="width:100px" >Pin Used</button> --}}
+                                                    <p style="color: red"> Used Pin </p>
                                                     @else
-                                                    <button type="button" class="btn btn-warning examps" style="width:100px">pending</button>
+                                                    {{-- <button type="button" class="btn btn-warning examps" style="width:100px">pending</button> --}}
+                                                    <p style="color: rgb(29 149 29);"> Unused Pin</p>
                                                     @endif
+                                                    
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -153,7 +163,7 @@
                     @method('post')
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            Sale Pin </h5>
+                            Pin Sell</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -162,7 +172,7 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Name</label>
-                            <input type="text" class="form-control" name="sale_name" id="sale_name" oninput="validateInput(this)">
+                            <input type="text" class="form-control" name="sale_name" id="sale_name" oninput="validateInput(this)" maxlength="30">
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Mobile</label>
