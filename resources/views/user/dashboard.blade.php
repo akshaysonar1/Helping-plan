@@ -15,7 +15,7 @@
     }
 </style>
 
-<section id="about" class="about section-bg">
+<!-- <section id="about" class="about section-bg">
     <div class="container" data-aos="fade-up">
         <div class="section-title">
             <h2>Dashboard</h2>
@@ -34,10 +34,18 @@
     @else
 
     @endif
-</marquee>
+</marquee> -->
 <section class="adjust-margin">
     <div class="container">
         <div class="row">
+        <marquee class="mt-5">
+    <h6>Note:- <span>{{$noteData->note}}</span></h6>
+    @if(empty(Auth::user()->bank_name) && empty(Auth::user()->account_no) && empty(Auth::user()->ifsc_code))
+    <h6>warning:- <span>Please Fill bank Details</span></h6>
+    @else
+
+    @endif
+</marquee>
             <div class="col-xl-3 col-lg-3 ">
                 <div class="tab-background">
 
@@ -46,7 +54,7 @@
                         <p class="mb-0 profile-name"> Profile : {{ Auth::user()->name }}</p>
 
                         <div class="icon-tab">
-                            <i class="fal fa-bars" style="color: #ffffff;" data-bs-toggle="collapse" href="#table-information"></i>
+                            <i class="fal fa-bars" style="color: #4260cb;" data-bs-toggle="collapse" href="#table-information"></i>
                         </div>
                         {{-- <button type="button" class="btn btn-primary btn-collapse" data-bs-toggle="collapse"
                             href="#table-information">Know More</button> --}}
@@ -210,7 +218,7 @@
                                                     <button type="button" class="btn btn-payment" data-toggle="modal" data-target="#exampleModal{{$user->id}}" data-whatever="@mdo">Payment Image</button>
                                                     @endif
                                                     <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
                                                             <form action="{{ route('user.payment') }}" method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('post')
@@ -218,13 +226,13 @@
                                                                 <!-- payment image modal -->
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                        <h5 class="modal-title text-center modal-head mb-0" id="exampleModalLabel">
                                                                             Upload
                                                                             Payment Image</h5>
-                                                                        <button type="button" class="close"
+                                                                        <!-- <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
-                                                                        </button>
+                                                                        </button> -->
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="form-group">
@@ -721,7 +729,7 @@
                     </div>
                     <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab" tabindex="0">
                         <div class="row">
-                            <div class="col-xl-12">
+                            <div class="col-xl-6">
                                 {{-- @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                 --}}
                                 @foreach ($users as $user)
@@ -1051,7 +1059,7 @@
                     </div>
                     <div class="tab-pane fade" id="get-tab-pane" role="tabpanel" aria-labelledby="get-tab" tabindex="0">
                         <div class="row">
-                            <div class="col-xl-12">
+                            <div class="col-xl-6">
                                 @foreach ($conform as $coform)
                                 <div class="pay-card-1">
 
@@ -1123,7 +1131,7 @@
 
 
                                                 <div class="modal fade bd-example-modal3-lg {{ $coform->id }}-modal3-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal3-lg">
+                                                    <div class="modal-dialog modal3-lg modal-dialog-centered">
                                                         <div class="modal-content">
 
                                                             <img id="image" src="{{ asset('user/assets/img/payment/'.$coform->image) }}" />
@@ -1619,7 +1627,7 @@ Auth::user()->status = Null )
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
                     <img style="vertical-align: middle;
-                height: 150px" src="{{asset('user/assets/img/congratulation.png')}}">
+                height: 150px" src="{{asset('user/assets/img/congratulations-congrats.gif')}}">
                 </div>
             </div>
         </div>
