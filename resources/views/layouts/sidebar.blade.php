@@ -49,11 +49,11 @@
             <span>Pin History</span></a>
     </li>
 
-    <li class="nav-item">
+    <!-- <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="fas fa-fw fa-table"></i>
             <span>Help History</span></a>
-    </li>
+    </li> -->
 
     <li class="nav-item">
 

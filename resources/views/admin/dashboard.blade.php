@@ -12,7 +12,7 @@
     }
 
     button {
-        width: 5%;
+       
         padding: 8px;
         border-radius: 5px;
         border: none;
@@ -23,10 +23,11 @@
         background-color: #4e73df;
         border-color: #4e73df;
         margin-top: 20px;
+        margin-bottom: 10px;
     }
 
     .btn1 {
-        width: 10%;
+       
         padding: 8px;
         border-radius: 5px;
         border: none;
@@ -232,7 +233,7 @@
         input.readOnly = false;
     }
 </script>
-<script>
+<!-- <script>
     $(document).ready(function() {
         $('#dashboardTable').DataTable({
             dom: 'lBfrtip',
@@ -242,7 +243,7 @@
             ]
         });
     });
-</script>
+</script> -->
 <script>
     function process(input) {
         let value = input.value;
