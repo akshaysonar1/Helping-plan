@@ -25,7 +25,25 @@
             border-color: #4e73df;
             margin-top: 20px;
         }
-            </style>
+        .button-res .dt-button{
+            width:auto !important;
+            padding: 12px 8px !important;
+
+
+        }
+        @media(max-width:767px){
+
+            .button-res .dt-buttons{
+                display:flex;
+                justify-content:center;
+                gap:8px;
+                flex-direction:row;
+                margin-bottom:20px
+                }
+        }
+
+
+           </style>
     </head>
 
     <body>
@@ -36,8 +54,8 @@
                         <h6 class="m-0 font-weight-bold text-primary">CUSTOMER DETAILS</h6>
                     </div>
 
-                    <div class="card-body p-6">
-                        <table id="customerDetails" class="table table-striped table-bordered" style="width:100%">
+                    <div class="card-body p-6 button-res table-responsive">
+                        <table id="customerDetails" class="table table-striped table-bordered " style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Sr.no</th>
@@ -49,7 +67,7 @@
                                     <th>Get Help</th>
                                     <th>Amount Received</th>
                                     <th>Amount Pending</th>
-                                   
+
                                     <th>Remark</th>
                                 </tr>
                             </thead>
@@ -96,7 +114,7 @@
                         </table>
 
                     </div>
-                    
+
                 </div>
             </div>
         </div>

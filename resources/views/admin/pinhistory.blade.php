@@ -75,6 +75,23 @@
        margin-top: 20px;
        margin-bottom: 10px;
    }
+        
+        .button-res .dt-button{
+            width:auto !important;
+            padding: 12px 8px !important;
+
+
+        }
+        @media(max-width:767px){
+
+            .button-res .dt-buttons{
+                display:flex;
+                justify-content:center;
+                gap:8px;
+                flex-direction:row;
+                margin-bottom:20px
+                }
+        }
     </style>
 
 </head>
@@ -143,7 +160,7 @@
                     <div class="card shadow mb-4">
 
                         <div class="card-body">
-                            <div class="table-responsive">
+                            <div class="table-responsive button-res">
                                 <table class="table table-bordered" id="pinHistoryTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -162,7 +179,7 @@
                                         @foreach ($data as $row)
                                         @if ($row->pin_status == '0')
                                         <tr>
-                                           
+
                                             <td>{{ $row->pin_sale_date }}</td>
                                             <td>{{ $row->pin_number }}</td>
                                             <td>{{ $row->pin_ammount }}</td>
@@ -199,4 +216,4 @@ $(document).ready(function() {
     } );
 } );
 </script>
-@endsection 
+@endsection

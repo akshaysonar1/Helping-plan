@@ -1,6 +1,27 @@
-<!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<style>
+     .main-sidebar #sidebarToggleTop{
+        display: none;
+     }
+    @media(max-width:567px) {
+        .main-sidebar {
+            position: fixed !important;
+            z-index: 1;
+        }
 
+        .main-sidebar #sidebarToggleTop{
+            display: block;
+            padding-left: 1.75rem;
+            padding-top: 0.875rem;
+        }
+    }
+</style>
+<!-- Sidebar -->
+
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion main-sidebar" id="accordionSidebar">
+
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars" style="color:#ffffff;"></i>
+    </button>
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
         <div class="sidebar-brand-icon rotate-n-15">
@@ -32,26 +53,26 @@
     <li class="nav-item">
 
         <a class="nav-link" href="{{ route('genratepin') }}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-key" style="color: #ffffff;"></i>
             <span>Pin Genrate</span></a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link" href="{{ route('customer_details.CustomerDetails') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-user" style="color: #ffffff;"></i>
             <span>Customer Details</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ route('pinhistory') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-fw fa-table" style="color: #ffffff;"></i>
             <span>Pin History</span></a>
     </li>
 
     <!-- <li class="nav-item">
         <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-hands-helping" style="color: #ffffff;"></i>
             <span>Help History</span></a>
     </li> -->
 
@@ -59,17 +80,17 @@
 
         <a class="nav-link" href="{{ route('helpswitch') }}">
 
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-cog" style="color: #ffffff;"></i>
             <span>Help Switch ON/OFF</span></a>
     </li> --}}
     <li class="nav-item">
         <a class="nav-link" href="{{ route('forgotpassword.forgotpassword') }}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-unlock-alt" style="color: #ffffff;"></i>
             <span>Forgot Password List</span></a>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('customer_details.contactdetails') }}">
-            <i class="fas fa-fw fa-table"></i>
+            <i class="fas fa-info-circle" style="color: #ffffff;"></i>
             <span>Contcat Details</span></a>
     </li>
 
@@ -79,3 +100,4 @@
 
 </ul>
 <!-- End of Sidebar -->
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
