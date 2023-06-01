@@ -55,11 +55,11 @@
                                 @endif
                                 <div class="col-12">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile">
+                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile" placeholder="Enter Mobile Number">
                                 </div>
                                 <div class="col-12">
                                     <label>Message</label>
-                                    <input type="text" class="form-control" name="message" id="message">
+                                    <input type="text" class="form-control" name="message" id="message" placeholder="Enter Message">
                                 </div>
                             </div>
 

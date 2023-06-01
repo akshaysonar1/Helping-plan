@@ -33,11 +33,15 @@
                                         <td>{{ $i }}</td>
                                         <td>{{ $row->mobile }}</td>
                                         <td>{{ $row->message }}</td>
-                                        {{-- <td><a class="examps"> helo</a></td> --}}
-                                        <td> <button type="button" class="btn btn-primary examps" data-toggle="modal"
+                                        <td>  {{-- <td><a class="examps"> helo</a></td> --}}
+                                        @if($row->password_status == 0)
+                                         <button type="button" class="btn btn-primary examps" data-toggle="modal"
                                                 data-target="#exampleModal" data-id="{{ $row->id }}"
-                                                data-mobile="{{ $row->mobile }} ">Reset Password</button></td>
-
+                                                data-mobile="{{ $row->mobile }} ">Reset Password</button>
+                                            @else
+                                            <button type="button" class="btn btn-success examps">Password Reseted</button>
+                                        @endif
+                                    </td>
                                         <div class="modal fade exampleModal" id="exampleModal" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">

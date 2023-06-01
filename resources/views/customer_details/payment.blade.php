@@ -105,7 +105,7 @@
                                                     class="name-para">{{ $conf->name }}</span></p>
                                             <p class="name-text mb-1"> Bank : <span
                                                     class="name-para">{{ $conf->bank_name }}</span></p>
-                                            <p class="name-text mb-1"> Mo.No : <span
+                                            <p class="name-text mb-1"> Mobile Number : <span
                                                     class="name-para">{{ $conf->mobile }}</span></p>
                                         </div>
                                     </div>

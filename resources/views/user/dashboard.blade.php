@@ -10,7 +10,7 @@
     }
 
     h6 {
-        color: red;
+        color: green;
         text-align: center;
     }
 </style>
@@ -24,7 +24,11 @@
     </div>
 </section>
 <marquee>
-    <h6>Note:- <span>{{$noteData->note}}</span></h6>
+    @if(!empty($noteData))
+    <h6>Notice :- <span>{{$noteData->note}}</span></h6>
+    @else
+    <h6>Notice <span></span></h6>
+    @endif
     @if(empty(Auth::user()->bank_name) && empty(Auth::user()->account_no) && empty(Auth::user()->ifsc_code))
     <h6>warning:- <span>Please Fill bank Details</span></h6>
     @else
@@ -52,7 +56,7 @@
 
                     <div class="profile-table collapse" id="table-information">
                         <table class="table">
-
+                        @if(!empty($pindeatils))
                             <tbody style="color: white">
                                 <tr>
                                     <th scope="row">Current Pin:</th>
@@ -81,6 +85,9 @@
 
                                 </tr>
                             </tbody>
+                            @else 
+
+                            @endif
                         </table>
                     </div>
 
@@ -156,7 +163,7 @@
                                                                 $user->receiverUser ? $user->receiverUser->bank_name :
                                                                 '' }}</span>
                                                         </p>
-                                                        <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                        <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                                 $user->receiverUser ? $user->receiverUser->mobile : ''
                                                                 }}</span>
                                                         </p>
@@ -180,7 +187,28 @@
                                                     {{-- <button type="button" onclick="importData()"
                                                         class="btn btn-payment">Payment
                                                         Image</button> --}}
+                                                        @if(!empty($user->image))
+                                                         {{-- image model --}}
+
+                                                    <button type="button" class="btn btn-payment" data-toggle="modal" data-target=".{{ $user->id }}-modal19-lg" data-id="{{ $user->show }}" data-image="{{ $user->image }}">View
+                                                        Image</button>
+
+
+                                                    <!-- Large modal -->
+
+
+                                                    <div class="modal fade bd-example-modal19-lg {{ $user->id }}-modal19-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal19-lg">
+                                                            <div class="modal-content">
+
+                                                                <img id="image" src="{{ asset('user/assets/img/payment/'.$user->image) }}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- Image model End --}}
+                                                        @else
                                                     <button type="button" class="btn btn-payment" data-toggle="modal" data-target="#exampleModal{{$user->id}}" data-whatever="@mdo">Payment Image</button>
+                                                    @endif
                                                     <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <form action="{{ route('user.payment') }}" method="POST" enctype="multipart/form-data">
@@ -315,7 +343,7 @@
                                                                 $show->receiverUser ? $show->receiverUser->bank_name :
                                                                 '' }}</span>
                                                         </p>
-                                                        <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                        <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                                 $show->receiverUser ? $show->receiverUser->mobile : ''
                                                                 }}</span>
                                                         </p>
@@ -474,7 +502,7 @@
                                                         <p class="name-text mb-1"> Bank : <span class="name-para">{{
                                                                 $coform->bank_name }}</span>
                                                         </p>
-                                                        <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                        <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                                 $coform->mobile }}</span></p>
                                                     </div>
                                                 </div>
@@ -621,10 +649,10 @@
                                 <div class="row">
                                     <div class="col-xl-6 form-adjust">
                                         <label>Name</label>
-                                        <input type="text" placeholder="Name by Bank name" class="form-control" name="name" value="{{ Auth::user()->name }}" id="name" oninput="validateInput(this)">
+                                        <input type="text" placeholder="Enter Your Name" class="form-control" name="name" value="{{ Auth::user()->name }}" id="name" oninput="validateInput(this)">
                                     </div>
                                     <div class="col-xl-6 mb-3 form-adjust">
-                                        <label>Mobile No.</label>
+                                        <label>Mobile Number</label>
                                         <input type="text" placeholder="10 digit mobile no." class="form-control" value="{{ Auth::user()->mobile }}" readonly>
                                     </div>
                                 </div>
@@ -649,17 +677,17 @@
                                     <div class="row">
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
                                             <label>Bank Name</label>
-                                            <input type="text" placeholder="Name by bank name" class="form-control" name="bank_name" value="{{ Auth::user()->bank_name }}">
+                                            <input type="text" placeholder="Enter Your Bank Name" class="form-control" name="bank_name" value="{{ Auth::user()->bank_name }}">
                                         </div>
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>A/C No.</label>
+                                            <label>Bank Account Number</label>
                                             <input type="text" placeholder="xxxxxxxxxxxxxxxx" class="form-control" name="account_no" value="{{ Auth::user()->account_no }}" oninput="process(this)" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>IFSC CODE</label>
-                                            <input type="text" placeholder="SBIN001992" class="form-control" name="ifsc_code" value="{{ Auth::user()->ifsc_code }}" onkeyup="
+                                            <label>IFSC Code</label>
+                                            <input type="text" placeholder="Enter Your IFSC Code" class="form-control" name="ifsc_code" value="{{ Auth::user()->ifsc_code }}" onkeyup="
                                         var start = this.selectionStart;
                                         var end = this.selectionEnd;
                                         this.value = this.value.toUpperCase();
@@ -667,18 +695,18 @@
                                       ">
                                         </div>
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Phone Pay No.</label>
-                                            <input type="text" placeholder="99854854589" class="form-control" name="phone_pay_no" value="{{ Auth::user()->phone_pay_no }}" oninput="process(this)" maxlength="10">
+                                            <label>Phone Pay Number</label>
+                                            <input type="text" placeholder="Enter PhonePe Number" class="form-control" name="phone_pay_no" value="{{ Auth::user()->phone_pay_no }}" oninput="process(this)" maxlength="10">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Google Pay No.</label>
-                                            <input type="text" placeholder="99854854589" class="form-control" name="google_pay_no" value="{{ Auth::user()->google_pay_no }}" oninput="process(this)" maxlength="10">
+                                            <label>Google Pay Number</label>
+                                            <input type="text" placeholder="Enter Google Pay Number" class="form-control" name="google_pay_no" value="{{ Auth::user()->google_pay_no }}" oninput="process(this)" maxlength="10">
                                         </div>
                                         <div class="col-xl-6 mb-3 form-class form-adjust">
-                                            <label>Upi Link</label>
-                                            <input type="text" placeholder="99854854589@ybl" class="form-control" name="upi_link" value="{{ Auth::user()->upi_link }}">
+                                            <label>UPI Link</label>
+                                            <input type="text" placeholder="Enter Your UPI Link" class="form-control" name="upi_link" value="{{ Auth::user()->upi_link }}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -720,7 +748,7 @@
                                                         $user->receiverUser->name : ''}}</span></p>
                                                 <p class="name-text mb-1"> Bank : <span class="name-para">{{$user->receiverUser ?
                                                         $user->receiverUser->bank_name :'' }}</span></p>
-                                                <p class="name-text mb-1"> Mo.No : <span class="name-para">{{$user->receiverUser ?
+                                                <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{$user->receiverUser ?
                                                         $user->receiverUser->mobile : ''}}</span></p>
                                             </div>
                                         </div>
@@ -738,6 +766,26 @@
                                         <div class="col-xl-12 d-flex justify-content-end gap-2">
                                             {{-- <button type="button" onclick="importData()"
                                                 class="btn btn-payment">Payment Image</button> --}}
+                                                @if(!empty($user->image))
+                                                {{-- image model --}}
+
+                                           <button type="button" class="btn btn-payment" data-toggle="modal" data-target=".{{ $user->id }}-modal20-lg" data-id="{{ $user->show }}" data-image="{{ $user->image }}">View
+                                               Image</button>
+
+
+                                           <!-- Large modal -->
+
+
+                                           <div class="modal fade bd-example-modal20-lg {{ $user->id }}-modal20-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                               <div class="modal-dialog modal20-lg">
+                                                   <div class="modal-content">
+
+                                                       <img id="image" src="{{ asset('user/assets/img/payment/'.$user->image) }}" />
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           {{-- Image model End --}}
+                                           @else
                                             <button type="button" class="btn btn-payment" data-toggle="modal" data-target="#exampleModal1" data-whatever="@mdo">Payment Image</button>
                                             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -771,6 +819,7 @@
                                                     </form>
                                                 </div>
                                             </div>
+                                            @endif
                                             <div class="dropdown">
                                                 <div class="details-tip">
                                                     <button type="button" class="btn btn-payment details-show dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Details</button>
@@ -862,7 +911,7 @@
                                                         $show->receiverUser->bank_name :
                                                         '' }}</span>
                                                 </p>
-                                                <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                         $show->receiverUser ?
                                                         $show->receiverUser->mobile : ''
                                                         }}</span>
@@ -1025,7 +1074,7 @@
                                                 <p class="name-text mb-1"> Bank : <span class="name-para">{{
                                                         $coform->bank_name }}</span>
                                                 </p>
-                                                <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                         $coform->mobile }}</span></p>
                                             </div>
                                         </div>
@@ -1188,7 +1237,7 @@
                                                                 $show->receiverUser->bank_name :
                                                                 '' }}</span>
                                                         </p>
-                                                        <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                        <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                                 $show->receiverUser ?
                                                                 $show->receiverUser->mobile : ''
                                                                 }}</span>
@@ -1318,7 +1367,7 @@
                                                         <p class="name-text mb-1"> Bank : <span class="name-para">{{
                                                                 $coform->bank_name }}</span>
                                                         </p>
-                                                        <p class="name-text mb-1"> Mo.No : <span class="name-para">{{
+                                                        <p class="name-text mb-1"> Mobile Number : <span class="name-para">{{
                                                                 $coform->mobile }}</span></p>
                                                     </div>
                                                 </div>
@@ -1367,6 +1416,7 @@
 
 
                                                         @if ($coform->tran_status == '1')
+                                                           
 
                                                         @else
 
@@ -1473,9 +1523,13 @@ Auth::user()->status = Null )
         <div class="modal-content ">
             <div class="modal-header header-modify">
                 <p class="text-center modal-head mb-0">Enter Pin</p>
-                <form action="{{ route('logout') }}" method="POST">
+                {{-- <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <p><button type="submit" class="btn">Logout</button></p>
+                </form> --}}
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn">Logout</button>
                 </form>
             </div>
             <div class="modal-body">
@@ -1512,10 +1566,14 @@ Auth::user()->status = Null )
         <div class="modal-content ">
             <div class="modal-header header-modify">
                 <p class="text-center modal-head mb-0">Enter Pin</p>
-                <form action="{{ route('logout') }}" method="POST">
+                {{-- <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     @method('post')
                     <p><button type="submit" class="btn">Logout</button></p>
+                </form> --}}
+                <form action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <button type="submit" class="btn">Logout</button>
                 </form>
             </div>
             <div class="modal-body">
@@ -1541,18 +1599,12 @@ Auth::user()->status = Null )
 <!-- popup rnter pin model -->
 
 <!-- congratulation popup start  -->
-{{-- {{ DD($data) }} --}}
+
 @if($data->status !=null && $data->get_help_ammount ==  $data->get_help_ammount && $data->ammount_pendding == 0)
-{{-- @if(!empty($congoPopUp)) --}}
-{{-- {{ dd($congoPopUp->pay_status == 1,$congoPopUp->ammount_pendding == 0,$congoPopUp->get_help_ammount == $congoPopUp->ammount_Received,Auth::user()->unique_pin == $congoPopUp->unique_id ) }} --}}
-{{-- @if($congoPopUp->pay_status == 1 && $congoPopUp->ammount_pendding == 0 && $congoPopUp->get_help_ammount == $congoPopUp->ammount_Received && Auth::user()->unique_pin == $congoPopUp->unique_id) --}}
+
 
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    @if (Session::has('error'))
-    <p class="alert {{ Session::get('alert-class', 'alert-info') }}" style="color: red">
-        {{ Session::get('error') }}
-    </p>
-    @endif
+    
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header header-modify header-position">
@@ -1724,8 +1776,6 @@ Auth::user()->status = Null )
                 },
                 account_no: {
                     required: true,
-                    maxlength: 20,
-                    minlength: 12,
                 },
                 ifsc_code: {
                     required: true,
@@ -1750,8 +1800,6 @@ Auth::user()->status = Null )
                 },
                 account_no: {
                     required: 'Please Enter The Account Number',
-                    maxlength: 'Not A Valid Account NUmber',
-                    minlength: 'Not A Valid Account NUmber',
                 },
                 ifsc_code: {
                     required: 'Please Enter The IFSC Code',

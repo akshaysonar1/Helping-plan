@@ -47,6 +47,9 @@
                                     <th>Mobile No.</th>
                                     <th>Provide Help</th>
                                     <th>Get Help</th>
+                                    <th>Amount Received</th>
+                                    <th>Amount Pending</th>
+                                   
                                     <th>Remark</th>
                                 </tr>
                             </thead>
@@ -54,15 +57,18 @@
                                 @php
                                     $i = 1;
                                 @endphp
+                                @if(!empty($users))
                                 @foreach ($users as $row)
                                     <tr>
                                         <td>{{ $i }}</td>
                                         <td>{{ $row->created_at}}</td>
-                                        <td>{{ $row->customer_id }}</td>
+                                        <td>{{ $row->unique_pin }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->mobile }}</td>
                                         <td>{{ $row->provide_help_ammount }}</td>
                                         <td>{{ $row->get_help_ammount }}</td>
+                                        <td>{{ $row->ammount_Received }}</td>
+                                        <td>{{ $row->ammount_pendding }}</td>
                                         <td>
                                             @if (empty($row->provide_help_ammount))
                                                 <button type="button" class="btn btn-danger"
@@ -82,6 +88,7 @@
                                     $i++;
                                 @endphp
                                 @endforeach
+                                @endif
 
                             </tbody>
                             <tfoot>

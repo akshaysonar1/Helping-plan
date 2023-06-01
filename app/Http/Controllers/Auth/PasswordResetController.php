@@ -20,7 +20,7 @@ class PasswordResetController extends Controller
         // $validatedData = $request->validate([
 
         // ]);
-        try {
+        
             $user = User::where('mobile', '=', $request->mobile)->first();
             if ($user === null) {
                 return redirect('auth/reset')->with('message', "This number is not exist");
@@ -29,14 +29,12 @@ class PasswordResetController extends Controller
 
                 $password->mobile = $request->mobile;
                 $password->message = $request->message;
-
+                $password->password_status = '0';
                 $password->save();
 
 
                 return redirect('auth/reset')->with('message', "Your Request are send");
             }
-        } catch (exception $e) {
-            return view('404');
-        }
+         
     }
 }

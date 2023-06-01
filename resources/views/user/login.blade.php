@@ -54,14 +54,15 @@
                             <div class="row mb-3">
                                 <div class="col-12">
                                     <label>Mobile Number</label>
-                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile">
+                                    <input type="text" class="form-control" name="mobile" oninput="process(this)" maxlength="10" id="mobile"
+                                    placeholder="Enter Mobile Number">
 
                                 </div>
                             </div>
                             <div class="row mb-1">
                                 <div class="col-12">
                                     <label>Password</label>
-                                    <input type="password" class="form-control" name="password" id="password">
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter Password">
                                 </div>
                             </div>
                             <div class="row justify-content-between mb-4">
