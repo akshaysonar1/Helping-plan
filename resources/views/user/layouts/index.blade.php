@@ -301,12 +301,16 @@
                     <div class="support_home_img position-relative wow fadeInUp" data-wow-delay="0.9s"
                         style="visibility: visible; animation-delay: 0.9s; animation-name: fadeInUp;">
                         <div class="chat-btn-wrapper">
+                            <div class="remove-hover">
                             <a href="{{ route('user.contact') }}" class="pos_btn btn-zigzag">
                                 <i class="fe-phone-call mr-2"></i> Get In Touch
                             </a>
+                           
                             <a href="" class="pos_btn btn-zigzag btn-whatsapp">
                                 <i class="mdi mdi-whatsapp mr-2"></i> 6354422335
+                            
                             </a>
+                            </div>
                         </div>
                         <img src="https://d4x1t8omwltix.cloudfront.net/52b58a1d-e117-4faa-b946-614e824af930/img/chat.png"
                             class="img-fluid" alt="images">

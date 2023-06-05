@@ -37,12 +37,13 @@ class DeshboardController extends Controller
              
                 $user = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('ammount_pendding', '>', 0)->where('user_id', '!=', (Auth::user()->id))->get();
                 // dd($users);
-                $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('image', '!=', null)->where('user_id', '!=', (Auth::user()->id))->get();
+                $conform = transection::join('users', 'users.id', '=', 'transections.user_id')->where('receiver_id', '=', Auth::user()->id)->where('user_id', '!=', (Auth::user()->id))->get();
                 $currentDate = Carbon::now();
                 $popup = transection::where('tran_status', '!=','2')->where('user_id', Auth::user()->id)->get();
                 $congoPopUp = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('pay_status','0')->where('user_id', Auth::user()->id)->where('user_payments.unique_id','=', Auth::user()->unique_pin)->first();
                   // for open congratulation pop up
                 $pindeatils= Provide_Help::join('users', 'users.id', '=', 'provide__helps.users_id')->where('users_id', Auth::user()->id)->first();
+                  
                 return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','noteData','congoPopUp','pindeatils'));
                
             } else {

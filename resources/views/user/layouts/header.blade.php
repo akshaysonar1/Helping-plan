@@ -10,12 +10,14 @@
                 @endif
                 <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">CONTACT US</a></li>
                 @if (empty(Auth::user()->id) || Auth::user()->user_type == '1')
-                    <li><span><a class="btn main-btn" href="{{ route('user.login') }}">LOGIN</a></span></li>
-                @else
-
+                    {{-- <li><span><a class="btn main-btn" href="{{ route('user.login') }}">LOGIN</a></span></li> --}}
+                    <li><a href="{{ route('user.login') }}"><button type="submit" class="btn btn-logout-1">Login</button></a></li>
+                    @else
+                <li>
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
-                <li>    <button type="submit" class="btn">Logout</button> </li>
+                    @method('Post')
+               <button type="submit" class="btn btn-logout-1">Logout</button></li>
                 </form>
                 {{-- <a class="btn main-btn" href="{{ route('user.login') }}">LOGOUT</a></span></li> --}}
                     {{-- <li><a class="nav-link scrollto"

@@ -78,6 +78,11 @@
        outline:none !important;
     }
 
+    .session-error{
+        background: #90EE90;
+        color: rgb(0, 0, 0);
+    }
+
     /* .btn-new{
         width: 30%;
         padding: 8px;
@@ -108,7 +113,7 @@
 
 
 
-                <div class="p-5">
+                <div class="p-4">
 
                         @if (Session::has('message'))
                         <p class="alert alert-info session-error">{{ Session::get('message') }}</p>

@@ -37,6 +37,7 @@ class User extends Authenticatable
 
     ];
 
+    protected $appends = ['checkRemainingTransctions'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -99,6 +100,21 @@ class User extends Authenticatable
             return $transactions;
         }
 
+        return 0;
+    }
+
+    public function senderTransactions()
+    {
+        return $this->hasMany(transection::class, 'sender_id');
+    }
+    public function getCheckRemainingTransctionsAttribute()
+    {
+        $transactions = $this->senderTransactions()->where('tran_status', '!=', '1')->get();
+        if(count($transactions) > 0){
+    
+            return 1;
+        }
+        
         return 0;
     }
 }
