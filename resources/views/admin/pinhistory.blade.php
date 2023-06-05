@@ -139,10 +139,17 @@
                                 </div>
                                 
                                 <div class="col-xl-3">
-                                    <div class="form-group">
-                                        <button type="submit" class="btn btn-primary w-auto px-4">Search</button>
-                                        <a href="{{ route('pinhistory') }}" class="btn btn-primary w-auto px-4">Clear</a>
+                                   
+                                   
+                                   
+                                    <div class="form-group d-flex " style="gap: 6px !important;">
                                        
+                                        <div class="">
+                                        <button type="submit" class="btn btn-primary w-auto px-4 mt-0">Search</button>
+                                    </div>
+                                        <div class="">
+                                        <a href="{{ route('pinhistory') }}" class="btn btn-primary w-auto px-4">Clear</a>
+                                    </div>
                                          
                                     </div>
                                 </div>

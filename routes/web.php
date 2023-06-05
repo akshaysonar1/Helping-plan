@@ -44,9 +44,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
-Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -58,6 +55,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/helpswitch', [HomeController::class, 'HelpSwitch'])->name('helpswitch');
     Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
     Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
+
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
+    Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
 
 });
 Route::get('/', [UserController::class, 'index'])->name('index');

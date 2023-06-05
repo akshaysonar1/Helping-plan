@@ -44,6 +44,10 @@
     label.error {
         color: red !important;
     }
+    .session-error{
+        background: #90EE90;
+        color: rgb(0, 0, 0);
+    }
 </style>
 
 
@@ -105,8 +109,10 @@
                                             <tr>
                                                 <th>Genrate Date </th>
                                                 <th>Pin </th>
+                                                <th>Name </th>
+                                                <th>Mobile </th>
                                                 <th>Pin Price </th>
-                                                <th>Sending Detail </th>
+                                              
                                                 <th>Status </th>
                                                 <th>Pin Use Status </th>
                                             </tr>
@@ -116,10 +122,12 @@
                                             @if (isset($data) && !empty($data) )
                                             @foreach ($data as $list)
                                             <tr>
-                                                <td>{{ $list->created_at }}</td>
+                                                <td>{{ $list->created_at->toDateString();   }}</td>
                                                 <td>{{ $list->pin_number }}</td>
+                                                <td>{{ $list->sale_name }}</td>
+                                                <td>{{ $list->sale_mobile }}</td>
                                                 <td>{{ $list->pin_ammount }}</td>
-                                                <td>{{ $list->updated_at }}</td>
+                                             
                                                 <td>
                                                     @if($list->sell_pin_status=='1')
                                                     <b style="color:rgb(80, 78, 78)">Pin Sold</b>
@@ -280,7 +288,7 @@
                     },
                     total_pin: {
                         required: 'Please Enter To Genrate Pin',
-                        maxlength: 'You Are Only Allow 1-10 Pins T0 Genrate',
+                        maxlength: 'You Are Only Allow 1-99 Pins To Genrate',
                     },
 
                 }

@@ -33,11 +33,11 @@
                         <div class="row">
                             <div class="col form-group">
                                 <input type="text" name="user_name" class="form-control"  
-                                    placeholder="Your Name" required oninput="validateInput(this)" maxlength="15">
+                                    placeholder="Enter Name" required oninput="validateInput(this)" maxlength="15">
                             </div>
                             <div class="col form-group">
                                 <input type="number" class="form-control" name="mobile"  
-                                    placeholder="Your Mobile Number" oninput="validateInput(this)" required maxlength="10">
+                                    placeholder="Enter Mobile Number" oninput="validateInput(this)" required maxlength="10">
                             </div>
                         </div>
                         <div class="form-group">
@@ -107,7 +107,7 @@
                         
                     },
                     subject: {
-                        required: 'Enter Subjct',
+                        required: 'Enter Subject',
                     },
                     user_message: {
                         required: 'Enter The Message',

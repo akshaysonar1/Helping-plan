@@ -22,7 +22,7 @@ class PaymentController extends Controller
         try{
             // $payment = transection::where('user_id', '=', Auth::user()->id)->first();
             $payment = transection::where('id', $request->transaction_id)->first();
-            // dd('heloo');
+     
             if(!empty(Auth::user()->bank_name) && !empty(Auth::user()->account_no) && !empty(Auth::user()->ifsc_code)){
                
                 if(isset($payment) && !empty($payment)){

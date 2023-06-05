@@ -86,7 +86,7 @@ class PinActiveController extends Controller
                        
                             foreach($users as $userlist){
                                 
-                                if($userlist->getHelpAmmount > $userlist->getAmmount && $helpAmmount > 0){
+                                if($userlist->getHelpAmmount > $userlist->getAmmount && $helpAmmount > 0 && $userlist->checkRemainingTransctions == 0){
                                     $totalGetAmmount = $userlist->getHelpAmmount-$userlist->getAmmount;
                                     
                                     $gethelpAmmount = $totalGetAmmount-$helpAmmount;

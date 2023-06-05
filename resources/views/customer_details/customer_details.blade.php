@@ -68,7 +68,7 @@
                                     <th>Amount Received</th>
                                     <th>Amount Pending</th>
 
-                                    <th>Remark</th>
+                                    <th>Payment Status</th>
                                 </tr>
                             </thead>
                             <tbody>
