@@ -113,11 +113,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>State</label>
-                                            <input class="form-control" name="state" id="state" placeholder="state" required oninput="validateInput(this)" maxlength="20">
+                                            <input class="form-control" name="state" id="state" placeholder="state" required oninput="validateInput(this)" value="{{ old('state') }}" maxlength="20">
                                         </div>
                                         <div class="col-md-6">
                                             <label>City</label>
-                                            <input class="form-control" name="city" placeholder="city" required oninput="validateInput(this)" maxlength="20">
+                                            <input class="form-control" name="city" placeholder="city" required oninput="validateInput(this)" value="{{ old('city') }}" maxlength="20">
                                         </div>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                             <div class="row mb-4">
                                 <div class="col-12">
                                     <label>Zip Code</label>
-                                    <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)" required maxlength="10">
+                                    <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)"  value="{{ old('pin_code') }}" required maxlength="10">
                                 </div>
                             </div>
                             <div class="row">
@@ -166,6 +166,7 @@
                 rules: {
                     name: {
                         required: true,
+                       
                     },
                     mobile: {
                         required: true,
@@ -194,6 +195,7 @@
                 messages: {
                     name: {
                         required: 'Please Enter Name',
+                        
                     },
                     mobile: {
                         required: 'Please Enter Mobile Number',

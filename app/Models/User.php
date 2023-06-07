@@ -111,10 +111,8 @@ class User extends Authenticatable
     {
         $transactions = $this->senderTransactions()->where('tran_status', '!=', '1')->get();
         if(count($transactions) > 0){
-    
             return 1;
         }
-        
         return 0;
     }
 }

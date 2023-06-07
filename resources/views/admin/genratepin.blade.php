@@ -122,7 +122,7 @@
                                             @if (isset($data) && !empty($data) )
                                             @foreach ($data as $list)
                                             <tr>
-                                                <td>{{ $list->created_at->toDateString();   }}</td>
+                                                <td>{{ $list->created_at->toDateString(); }}</td>
                                                 <td>{{ $list->pin_number }}</td>
                                                 <td>{{ $list->sale_name }}</td>
                                                 <td>{{ $list->sale_mobile }}</td>

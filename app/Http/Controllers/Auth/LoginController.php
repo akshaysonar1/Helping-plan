@@ -48,9 +48,16 @@ class LoginController extends Controller
   }
   public function logout(Request $request)
   {
-
+    
+    if($request->user_type =='1'){
     Auth::logout();
-    return redirect('/');
+    return redirect('/login');
+    }
+    else{
+      Auth::logout();
+    return redirect('/user/login');
+    }
+    // return view('user.login');
   }
 
 
@@ -76,7 +83,7 @@ class LoginController extends Controller
         }
       } else {
 
-        return redirect('user/login')->with('error', 'Mobile Number is Not Registered');
+        return redirect('user/login')->with('error', 'The Mobile Numer is Not Registered');
       }
       if (!Hash::check($pass, $user->password)) {
         return redirect('user/login')->with('error', 'Password is Wrong');
@@ -88,7 +95,7 @@ class LoginController extends Controller
 
           return redirect('user/dashboard');
         } else {
-          return redirect('user/login')->with('error', 'Mobile Number is Not Registered');
+          return redirect('user/login')->with('error', 'The Mobile Numer is Not Registered');
         }
       }
    

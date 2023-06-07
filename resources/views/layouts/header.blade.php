@@ -107,7 +107,7 @@
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
 
-
+                    <input type="hidden" name="user_type" value="{{ Auth::user()->user_type}}"> 
                     <button class="dropdown-item" href="" data-target="#logoutModal"> <i
                             class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</button>
 

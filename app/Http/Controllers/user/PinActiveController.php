@@ -19,10 +19,11 @@ class PinActiveController extends Controller
     public function pinactive($id, Request $request)
     {
        try{
-
+         
             $user = PinModel::where('pin_number', '=', $request->pin_number)->first();
            // $users = User::where('user_type', '0')->where('status', '!=', '1')->with(['userPayment', 'provideHelpUser'])->get();
-            // dd($users);
+            //   dd($user);
+        
             if (empty($user->pin_sale_user_id)) {
                 if (empty($user->pin_ammount)) {
                     return redirect('user/dashboard')->with('error', 'This Pin is not valid');
@@ -164,6 +165,8 @@ class PinActiveController extends Controller
             } else {
                 return redirect('user/dashboard')->with('error', 'This Pin Already Exsiste');
             }
+
+        
             return redirect('user/dashboard');
 
         }catch(Exception $e){

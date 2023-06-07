@@ -10,7 +10,7 @@
     }
 
     h6 {
-        color: green;
+        color: red;
         text-align: center;
     }
 </style>
@@ -35,7 +35,7 @@
 
     @endif
 </marquee> -->
-<section class="adjust-margin">
+<section class="adjust-margin section-color">
     <div class="container">
         <div class="row">
             <marquee class="mt-5">
@@ -410,7 +410,7 @@
                                                     <div class="">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                            <circle cx="10" cy="10" r="10" fill="#008000" />
                                                         </svg>
                                                     </div>
                                                     <div class="">
@@ -619,10 +619,18 @@
                                             <div class=" d-flex justify-content-between">
                                                 <div class="d-flex gap-3">
                                                     <div class="">
+                                                        @if ($coform->tran_status == '0')
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
+                                                    </svg>  
+                                                    @else
+
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                            <circle cx="10" cy="10" r="10" fill="#008000" />
                                                         </svg>
+                                                        @endif
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">{{ $coform->customer_id }}</p>
@@ -1125,7 +1133,7 @@
                                             <div class="">
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                    <circle cx="10" cy="10" r="10" fill="#008000" />
                                                 </svg>
                                             </div>
                                             <div class="">
@@ -1335,10 +1343,17 @@
                                     <div class=" d-flex justify-content-between">
                                         <div class="flex-amount">
                                             <div class="">
+                                                @if ($coform->tran_status == '0')
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
+                                                        <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
+                                                    </svg>  
+                                                    @else
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
-                                                    <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                    <circle cx="10" cy="10" r="10" fill="#008000" />
                                                 </svg>
+                                                @endif
                                             </div>
                                             <div class="">
                                                 <p class="id-text">{{ $coform->customer_id }}</p>
@@ -1517,8 +1532,9 @@
                             <div class="">
                                 <div class="row">
                                   @if(count($showusers)>0)
-                                    @foreach ($showusers as $show)
+                                   
                                     <div class="col-xl-6">
+                                        @foreach ($showusers as $show)
                                         {{-- mycode payment done after show this code --}}
 
                                         <div class="pay-card responsive-card">
@@ -1527,7 +1543,7 @@
                                                     <div class="">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                            <circle cx="10" cy="10" r="10" fill="#008000" />
                                                         </svg>
                                                     </div>
                                                     <div class="">
@@ -1680,18 +1696,18 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div><br>
 
-                                    </div><br>
-                                    @endforeach
+                                        @endforeach  </div><br>
+                                   
                                 @else
 
                                         <h3>History Data Not Found</h3>
                                 @endif
                                     {{-- my code Finish --}}
-                                    @foreach ($conform as $coform)
+                                  
                                     <div class="col-xl-6">
-                                    
+                                        @foreach ($conform as $coform)
                                         @if ($coform->tran_status == '1')
                                         <div class="pay-card-1">
 
@@ -1700,7 +1716,7 @@
                                                     <div class="">
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
-                                                            <circle cx="10" cy="10" r="10" fill="#7AE868" />
+                                                            <circle cx="10" cy="10" r="10" fill="#008000" />
                                                         </svg>
                                                     </div>
                                                     <div class="">
@@ -1839,11 +1855,12 @@
                                                 </form>
                                             </div>
                                             
-                                        </div>
+                                        </div><br>
                                         @else
+
                                         @endif
-                                    </div><br>
-                                    @endforeach
+                                   @endforeach  </div><br>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -1910,7 +1927,7 @@ Auth::user()->status = Null )
                     @csrf
                     <p><button type="submit" class="btn">Logout</button></p>
                 </form> --}}
-                <form action="{{ route('logout') }}" method="POST">
+                <form action="{{ route('logout') }}" method="POST" >
                     @csrf
                     <button type="submit" class="btn">Logout</button>
                 </form>
@@ -1921,7 +1938,7 @@ Auth::user()->status = Null )
                     {{ Session::get('error') }}
                 </p>
                 @endif
-                <form action="{{ route('user.pinactive', Auth::user()->id) }}" method="post">
+                <form action="{{ route('user.pinactive', Auth::user()->id) }}" id="pinpop" method="post">
                     @csrf
                     @method('POST')
                     <div class="row">
@@ -1929,9 +1946,7 @@ Auth::user()->status = Null )
                             <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
                             <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal"
-                                    aria-label="Close" data-bs-toggle="modal"
-                                    data-bs-target="#modal-2">Activate</button>
+                                <button type="submit" class="btn btn-form mt-3 w-100" >Activate</button>
                             </div>
                         </div>
                     </div>
@@ -1973,12 +1988,10 @@ Auth::user()->status = Null )
                     @method('POST')
                     <div class="row">
                         <div class="col-xl-12 mb-3 form-class form-adjust">
-                            <input class="form-control" placeholder="Please Enter a Pin" name="pin_number" required>
+                            <input class="form-control" placeholder="Please Enter a Pin" name="pin_number">
                             <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-form mt-3 w-100" data-bs-dismiss="modal"
-                                    aria-label="Close" data-bs-toggle="modal"
-                                    data-bs-target="#modal-2">Activate</button>
+                                <button type="submit" class="btn btn-form mt-3 w-100" >Activate</button>
                             </div>
                         </div>
                     </div>

@@ -49,18 +49,7 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 });
 
-Route::prefix('admin')->group(function () {
-    Route::get('/genratepin', [GenrateUniqueCodeController::class, 'generateUniqueCode'])->name('genratepin');
-    Route::post('/genratepin/data', [GenrateUniqueCodeController::class, 'storepin'])->name('genratepin.data');
-    Route::get('/helpswitch', [HomeController::class, 'HelpSwitch'])->name('helpswitch');
-    Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
-    Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
 
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
-    Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
-
-});
 Route::get('/', [UserController::class, 'index'])->name('index');
 
 Route::get('/user', [UserController::class, 'user'])->name('user');
@@ -78,6 +67,20 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     // Route::prefix('admin')->controller(DashboardController::class)->group(function () {
     //     Route::get('/dashboard', 'adminDashboard')->name('admin.dashboard');
     // });
+
+    Route::prefix('admin')->group(function () {
+        Route::get('/genratepin', [GenrateUniqueCodeController::class, 'generateUniqueCode'])->name('genratepin');
+        Route::post('/genratepin/data', [GenrateUniqueCodeController::class, 'storepin'])->name('genratepin.data');
+        Route::get('/helpswitch', [HomeController::class, 'HelpSwitch'])->name('helpswitch');
+        Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
+        Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
+    
+        Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+       
+        Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
+    
+    });
+    Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
     Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
         Route::get('/genratepin', 'generateUniqueCode')->name('genratepin');
         Route::post('/genratepin/data', 'storepin')->name('genratepin.data');
@@ -128,9 +131,11 @@ Route::name('user.')->prefix('user')->group(function () {
     Route::POST('contactus', [ContactController::class, 'contactus'])->name('contactus');
     Route::get('privacy', [UserController::class, 'privacy'])->name('privacy');
     Route::get('term', [UserController::class, 'term'])->name('term');
+   
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DeshboardController::class, 'dashboard'])->name('show');
     });
+
     Route::POST('profileupdate{id}', [ProfileController::class, 'profileupdate'])->name('profileupdate');
     Route::POST('pinactive{id}', [PinActiveController::class, 'pinactive'])->name('pinactive');
     Route::get('deactive/{userId}', [PinActiveController::class, 'deactive'])->name('deactive');
@@ -144,11 +149,12 @@ Route::name('user.')->prefix('user')->group(function () {
 });
 
 
-
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'auth'])->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
+        
     });
 });
+
 
 Route::get('run-seeder',function(){ 
     Artisan::call("db:seed");
