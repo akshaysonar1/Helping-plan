@@ -41,6 +41,7 @@ class HomeController extends Controller
     //this funtion store the note 
     public function storenote(Request $request)
     {
+     
         $validatedData = $request->validate([
             'note' => 'required|string',
         ]);

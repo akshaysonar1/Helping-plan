@@ -91,7 +91,7 @@
     <li class="nav-item">
         <a class="nav-link" href="{{ route('customer_details.contactdetails') }}">
             <i class="fas fa-info-circle" style="color: #ffffff;"></i>
-            <span>Contcat Details</span></a>
+            <span>Contact Details</span></a>
     </li>
 
 

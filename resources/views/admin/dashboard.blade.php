@@ -120,6 +120,7 @@
                         @endif
                         <form class="form-group pad-bg" method="post" action="{{ route('home') }}" id="Dashboard">
                             @csrf
+                            @method('POST')
                             <div class="form-group form-text">
                                 <br><label style="font-weight: 900;">Note:-</label></br>
                                 <textarea class="form-control" rows="5" name="note" id="note" placeholder="Enter The Note" id="numberInput" readonly> @if(isset($store->note) && !empty($store->note)){{$store->note}} @endif</textarea>
@@ -205,7 +206,7 @@
                                         @if (isset($pinData) && !empty($pinData))
                                         @foreach ($pinData as $list)
                                         <tr>
-                                            <td>{{ $list->created_at }}</td>
+                                        <td>{{ $list->created_at->toDateString(); }}</td>
                                             <td>{{ $list->pin_number }}</td>
                                             <td>{{ $list->pin_ammount }}</td>
                                             <td>@if(!empty($list->pin_sale_user_id) && $list->pin_status == 0) <p style="color: red"> PIN Used </p> @else <p style="color: rgb(29 149 29);"> PIN Not Used </p>@endif</td>
@@ -213,16 +214,7 @@
                                         @endforeach
                                         @endif
 
-                                        {{-- @else
-                                        @if (isset($data) && !empty($data))
-                                        @foreach ($data as $list)
-                                        <tr>
-                                            <td>{{ $list->created_at }}</td>
-                                            <td>{{ $list->pin_number }}</td>
-                                            <td>{{ $list->pin_ammount }}</td>
-                                        </tr>
-                                        @endforeach
-                                        @endif --}}
+                                        
                                         @endif
                                     </tbody>
                                 </table>

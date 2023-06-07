@@ -43,9 +43,9 @@ class DeshboardController extends Controller
                 $congoPopUp = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('pay_status','0')->where('user_id', Auth::user()->id)->where('user_payments.unique_id','=', Auth::user()->unique_pin)->first();
                   // for open congratulation pop up
                 $pindeatils= Provide_Help::join('users', 'users.id', '=', 'provide__helps.users_id')->where('users_id', Auth::user()->id)->first();
-                  
-                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','noteData','congoPopUp','pindeatils'));
                
+                return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers','popup','noteData','congoPopUp','pindeatils'));
+                 
             } else {
                 return redirect('user/login');
             }

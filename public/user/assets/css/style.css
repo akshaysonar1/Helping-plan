@@ -2075,7 +2075,7 @@ section {
 
 .pay-card {
   padding: 15px;
-  background-color: #FFA559;
+  background-color: rgb(255, 165, 89, 0.9);
   border-radius: 6px;
 }
 .pay-card:hover{
@@ -2086,7 +2086,7 @@ section {
 
 .pay-card-1 {
   padding: 15px;
-  background: rgba(122, 232, 104, 0.2);
+  background: rgba(122, 232, 104);
 }
 .pay-card-1:hover{
   box-shadow: 5px 5px 5px 5px rgb(34, 35, 40, 0.1);
@@ -2545,4 +2545,9 @@ tbody, td, tfoot, th, thead, tr{
   color: white !important;
 }
 
-
+.section-color{
+  background-color: #B4E4FF;
+}
+.btn-logout-1.active{
+  color: #ffffff !important;
+}
