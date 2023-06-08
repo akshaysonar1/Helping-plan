@@ -199,17 +199,17 @@
                     },
                     mobile: {
                         required: 'Please Enter Mobile Number',
-                        maxlength: 'Please Enter A Valid Mobile Number',
-                        minlength: 'Please Enter A Valid Mobile Number',
+                        maxlength: 'Please Enter Valid Mobile Number',
+                        minlength: 'Please Enter Valid Mobile Number',
                     },
                     password: {
                         required: 'Please Enter Password',
-                        minlength: 'Minimum Six Character Password Require',
+                        minlength: 'Minimum Six Characters Password Required',
 
                     },
                     password_confirmation: {
                         required: 'Please Enter Confirm Password',
-                        minlength: 'Minimum Six Character Password Require',
+                        minlength: 'Minimum Six Characters Password Required',
                         equalTo: 'Password Not Matched',
                     },
                     state: {

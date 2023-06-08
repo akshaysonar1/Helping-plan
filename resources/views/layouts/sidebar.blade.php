@@ -54,7 +54,7 @@
 
         <a class="nav-link" href="{{ route('genratepin') }}">
             <i class="fas fa-key" style="color: #ffffff;"></i>
-            <span>Pin Genrate</span></a>
+            <span>Pin Generate</span></a>
     </li>
 
     <!-- Nav Item - Utilities Collapse Menu -->

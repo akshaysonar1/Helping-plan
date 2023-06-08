@@ -2185,6 +2185,11 @@ section {
   z-index: 1000;
 }
 
+
+
+
+
+
 /* .tooltip-content::before {
   content: "";
   position: absolute;
@@ -2550,4 +2555,13 @@ tbody, td, tfoot, th, thead, tr{
 }
 .btn-logout-1.active{
   color: #ffffff !important;
+}
+
+/* .details-div{
+  position: relative;
+} */
+.btn-cancel{
+  position: absolute;
+  top: 0;
+  right: 0;
 }

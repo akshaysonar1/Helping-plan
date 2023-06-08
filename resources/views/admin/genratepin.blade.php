@@ -58,7 +58,7 @@
         <div class="card-body p-0">
            
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">PIN GENRATE</h6>
+                <h6 class="m-0 font-weight-bold text-primary">PIN GENERATE</h6>
             </div>
             @if (Session::has('message'))
                 <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
@@ -287,7 +287,7 @@
                         required: 'Please Enter Your Name',
                     },
                     total_pin: {
-                        required: 'Please Enter To Genrate Pin',
+                        required: 'Please Enter To Generate Pin',
                         maxlength: 'You Are Only Allow 1-99 Pins To Genrate',
                     },
 
