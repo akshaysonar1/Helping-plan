@@ -288,12 +288,14 @@
 })()
 
 // New Js
-$(document).ready(function(){
-  $(".details-show").click(function(){ 
-    $(this).parent().find(".details-div").show();
-  });
+// $(document).ready(function(){
+//   $(".details-show").click(function(){ 
+//     $(this).parent().find(".details-div").show();
+    
+//   });
+
   
-}); 
+// }); 
 
  
 

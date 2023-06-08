@@ -53,7 +53,7 @@
 
                     {{-- table info --}}
                     <div class="button-flex mb-3">
-                        <p class="mb-0 profile-name"> Name : {{ ucwords(Auth::user()->name) }}</p>
+                        <p class="mb-0 profile-name"> Name :<p class="mb-0 profile-name" style="width: 100px; word-wrap:break-word; ">{{ ucwords(Auth::user()->name) }}</p></p>
 
                         <div class="icon-tab">
                             <i class="fal fa-bars" style="color: #4260cb;" data-bs-toggle="collapse"
@@ -190,8 +190,8 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                            {{ $user->receiverUser ? $user->receiverUser->customer_id :
-                                                            '' }}
+                                                           U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
+                                                            '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -340,12 +340,14 @@
                                                         <div class="details-tip">
                                                             <button type="button"
                                                                 class="btn btn-payment details-show dropdown-toggle"
-                                                                type="button" id="dropdownMenuButton"
+                                                                id="dropdownMenuButton"
                                                                 data-bs-toggle="dropdown"
                                                                 aria-expanded="false">Details</button>
 
                                                             <div class="demo">
                                                                 <div class="tooltip-content dropdown-menu details-div">
+                                                                    {{-- <div class="cross-btn"><button type="button" class="btn-close details-hide" data-bs-dismiss="modal"
+                                                                        aria-label="Close" id="closeBtn"></button></div> --}}
                                                                     <p class="name-text mb-1"> Name : <span
                                                                             class="name-para">{{
                                                                             $user->receiverUser ?
@@ -415,8 +417,8 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                            {{ $show->receiverUser ? $show->receiverUser->customer_id :
-                                                            '' }}
+                                                            U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
+                                                             '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -544,9 +546,11 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-bs-toggle="dropdown"
                                                                 aria-expanded="false">Details</button>
-
+                                                            
                                                             <div class="demo">
+                                                                
                                                                 <div class="tooltip-content dropdown-menu details-div">
+                                                                    
                                                                     <p class="name-text mb-1"> Name : <span
                                                                             class="name-para">{{
                                                                             $show->receiverUser ?
@@ -633,7 +637,8 @@
                                                         @endif
                                                     </div>
                                                     <div class="">
-                                                        <p class="id-text">{{ $coform->customer_id }}</p>
+                                                      
+                                                        <p class="id-text">U-{{ substr($coform->customer_id,5,5) }}</p>
                                                         <p class="date-text">
                                                             {{ $coform->created_at->todatestring() }}
                                                         </p>
@@ -684,6 +689,8 @@
                                                             value="{{  $coform->get_ammount  }}">
                                                         <input type="hidden" name="receiver_id"
                                                             value="{{ Auth::user()->id }}">
+                                                            <input type="hidden" name="auth_pin"
+                                                            value="{{ Auth::user()->unique_pin }}">
                                                         <input type="hidden" name="unique_pin"
                                                             value="{{ $coform->unique_pin }}">
                                                             @if(!empty($coform->image))
@@ -931,8 +938,9 @@
                                             </div>
                                             <div class="">
                                                 <p class="id-text">
-                                                    {{ $user->receiverUser ?
-                                                    $user->receiverUser->customer_id :'' }}
+                                                   
+                                                      U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
+                                                     '',5,5)}}
                                                 </p>
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
                                                     $user->receiverUser->created_at :
@@ -1138,9 +1146,8 @@
                                             </div>
                                             <div class="">
                                                 <p class="id-text">
-                                                    {{ $show->receiverUser ?
-                                                    $show->receiverUser->customer_id :
-                                                    '' }}
+                                                    U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
+                                                     '',5,5)}}
                                                 </p>
                                                 {{-- {{ dd($user->receiverUser) }} --}}
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -1356,7 +1363,7 @@
                                                 @endif
                                             </div>
                                             <div class="">
-                                                <p class="id-text">{{ $coform->customer_id }}</p>
+                                                <p class="id-text"> U-{{ substr($coform->customer_id,5,5) }}</p>
                                                 <p class="date-text">
                                                     {{ $coform->created_at->todatestring() }}
                                                 </p>
@@ -1548,9 +1555,8 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                            {{ $show->receiverUser ?
-                                                            $show->receiverUser->customer_id :
-                                                            '' }}
+                                                            U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
+                                                             '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -1720,7 +1726,7 @@
                                                         </svg>
                                                     </div>
                                                     <div class="">
-                                                        <p class="id-text">{{ $coform->customer_id }}</p>
+                                                        <p class="id-text">U-{{ substr($coform->customer_id,5,5) }}</p>
                                                         <p class="date-text">
                                                             {{ $coform->created_at->todatestring() }}
                                                         </p>
@@ -2028,7 +2034,7 @@ Auth::user()->status = Null )
             <div class="modal-body">
                 <div class="d-flex justify-content-center">
                     <img style="vertical-align: middle;
-                height: 150px" src="{{asset('user/assets/img/congratulations-congrats.gif')}}">
+                height: 150px; width: 230px;" src="{{asset('user/assets/img/congratulations-congrats.gif')}}">
                 </div>
             </div>
         </div>
