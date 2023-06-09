@@ -115,6 +115,7 @@
                                               
                                                 <th>Status </th>
                                                 <th>Pin Use Status </th>
+                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -122,7 +123,7 @@
                                             @if (isset($data) && !empty($data) )
                                             @foreach ($data as $list)
                                             <tr>
-                                                <td>{{ $list->created_at->toDateString(); }}</td>
+                                                <td>{{ $list->created_at}}</td>
                                                 <td>{{ $list->pin_number }}</td>
                                                 <td>{{ $list->sale_name }}</td>
                                                 <td>{{ $list->sale_mobile }}</td>
@@ -229,7 +230,7 @@
         $(document).ready(function() {
             $('#short').DataTable({
                 "aaSorting": [
-                    [4, "asc"]
+                    [0, "dsc"]
                 ]
             });
         });

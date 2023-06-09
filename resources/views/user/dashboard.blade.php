@@ -53,7 +53,10 @@
 
                     {{-- table info --}}
                     <div class="button-flex mb-3">
-                        <p class="mb-0 profile-name"> Name :<p class="mb-0 profile-name" style="width: 100px; word-wrap:break-word; ">{{ ucwords(Auth::user()->name) }}</p></p>
+                        <p class="mb-0 profile-name"> Name :
+                        <p class="mb-0 profile-name" style="width: 100px; word-wrap:break-word; ">{{
+                            ucwords(Auth::user()->name) }}</p>
+                        </p>
 
                         <div class="icon-tab">
                             <i class="fal fa-bars" style="color: #4260cb;" data-bs-toggle="collapse"
@@ -132,6 +135,12 @@
                                     data-bs-toggle="tab" data-bs-target="#history-tab-pane" type="button" role="tab"
                                     aria-controls="home-tab-pane" aria-selected="true">History</button>
                             </li>
+                            <li class="nav-item">
+                                <button class="nav-link tab-text tab-padding w-100" id="changepassword-tab-pan"
+                                    data-bs-toggle="tab" data-bs-target="#changepassword-tab-pane" type="button"
+                                    role="tab" aria-controls="home-tab-pane" aria-selected="true">Change
+                                    Password</button>
+                            </li>
                         </ul>
                     </div>
                     <div class="Log-out-btn">
@@ -151,31 +160,35 @@
                             <div class="">
                                 <div class="row">
                                     @if (Session::has('message'))
-                                    <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
-                                      data-bs-keyboard="false" id="dataModel">
-                                    
+                                    <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true"
+                                        data-bs-backdrop="static" data-bs-keyboard="false" id="dataModel">
+
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                             <div class="modal-content ">
                                                 <div class="modal-header header-modify header-position">
                                                     <div class="cross-btn"></div>
                                                 </div>
                                                 <div class="modal-header header-modify">
-                                                    
-                                                    <p class="text-center modal-head mb-0" style="margin-left: 14px"> {{ Session::get('message') }}</p>
-                                                    
-                                                
+
+                                                    <p class="text-center modal-head mb-0" style="margin-left: 14px"> {{
+                                                        Session::get('message') }}</p>
+
+
                                                 </div>
                                                 <div class="modal-body">
-                                                    <button type="button" class="btn btn-danger float-end" data-bs-dismiss="modal"
-                                                    aria-label="Close" id="closeBtn">Close</button>
+                                                    <button type="button" class="btn btn-danger float-end"
+                                                        data-bs-dismiss="modal" aria-label="Close"
+                                                        id="closeBtn">Close</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{-- <p class="alert alert-info session-error">{{ Session::get('message') }}</p> --}}
+                                    {{-- <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
+                                    --}}
                                     @endif
 
                                     <div class="col-xl-6">
+
                                         @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                         @foreach ($users as $user)
                                         @if($user->tran_status != '2')
@@ -190,7 +203,8 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                           U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
+                                                            U-{{ substr($user->receiverUser ?
+                                                            $user->receiverUser->customer_id :
                                                             '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
@@ -254,21 +268,27 @@
                                                     <div class="modal fade bd-example-modal19-lg {{ $user->id }}-modal19-lg"
                                                         tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                         aria-hidden="true">
-                                                        
+
                                                         <div class="modal-dialog modal19-lg">
                                                             <div class="modal-content image-modal" style=" ">
                                                                 <div class="image-position">
                                                                     <img id="image"
-                                                                        src="{{ asset('user/assets/img/payment/'.$user->image) }}" style=" " />
+                                                                        src="{{ asset('user/assets/img/payment/'.$user->image) }}"
+                                                                        style=" " />
                                                                     <div class="cancel-button">
-                                                                        {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                        <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                    
-                                                                    
-                                                                    </div>    
-                                                        
-                                                                </div>    
-                                                             </div>
+                                                                        {{-- <i class="fad fa-window-close"
+                                                                            style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                            data-dismiss="modal"></i> --}}
+                                                                        <button type="button"
+                                                                            class="btn-close button-close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"></button>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     {{-- Image model End --}}
@@ -281,8 +301,8 @@
                                                         role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <form id="imageform" action="{{ route('user.payment') }}" method="POST"
-                                                                enctype="multipart/form-data">
+                                                            <form id="imageform" action="{{ route('user.payment') }}"
+                                                                method="POST" enctype="multipart/form-data">
                                                                 @csrf
                                                                 @method('post')
 
@@ -303,26 +323,31 @@
                                                                             <label for="formFileMultiple"
                                                                                 class="form-label">Payment Image</label>
                                                                             <input class="form-control" type="file"
-                                                                                name="image"  id="picture" required>
-                                                                                <p id="error1" style="display:none; color:#FF0000;">
-                                                                                    Invalid Image Format! Image Format Must Be JPG, JPEG, PNG or GIF.
-                                                                                    </p>
-                                                                                    <p id="error2" style="display:none; color:#FF0000;">
-                                                                                    Maximum File Size Limit is 2MB.
-                                                                                    </p>
-                                                                                    <p>
-                                                                            <input type="hidden" name="receiver_id"
-                                                                                value="{{ $user->receiverUser ? $user->receiverUser->id : '' }}">
-                                                                            <input type="hidden" name="transaction_id"
-                                                                                value="{{ $user->id }}">
-                                                                            <input type="hidden" name="get_amount"
-                                                                                value="{{ $user->get_ammount }}">
+                                                                                name="image" id="picture" required>
+                                                                            <p id="error1"
+                                                                                style="display:none; color:#FF0000;">
+                                                                                Invalid Image Format! Image Format Must
+                                                                                Be JPG, JPEG, PNG or GIF.
+                                                                            </p>
+                                                                            <p id="error2"
+                                                                                style="display:none; color:#FF0000;">
+                                                                                Maximum File Size Limit is 2MB.
+                                                                            </p>
+                                                                            <p>
+                                                                                <input type="hidden" name="receiver_id"
+                                                                                    value="{{ $user->receiverUser ? $user->receiverUser->id : '' }}">
+                                                                                <input type="hidden"
+                                                                                    name="transaction_id"
+                                                                                    value="{{ $user->id }}">
+                                                                                <input type="hidden" name="get_amount"
+                                                                                    value="{{ $user->get_ammount }}">
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-dismiss="modal">Close</button>
-                                                                        <button name="submit" type="submit" value="Submit" id="submit" 
+                                                                        <button name="submit" type="submit"
+                                                                            value="Submit" id="submit"
                                                                             class="btn btn-primary">Upload</button>
                                                                     </div>
                                                                 </div>
@@ -340,14 +365,15 @@
                                                         <div class="details-tip">
                                                             <button type="button"
                                                                 class="btn btn-payment details-show dropdown-toggle"
-                                                                id="dropdownMenuButton"
-                                                                data-bs-toggle="dropdown"
+                                                                id="dropdownMenuButton" data-bs-toggle="dropdown"
                                                                 aria-expanded="false">Details</button>
 
                                                             <div class="demo">
                                                                 <div class="tooltip-content dropdown-menu details-div">
-                                                                    {{-- <div class="cross-btn"><button type="button" class="btn-close details-hide" data-bs-dismiss="modal"
-                                                                        aria-label="Close" id="closeBtn"></button></div> --}}
+                                                                    {{-- <div class="cross-btn"><button type="button"
+                                                                            class="btn-close details-hide"
+                                                                            data-bs-dismiss="modal" aria-label="Close"
+                                                                            id="closeBtn"></button></div> --}}
                                                                     <p class="name-text mb-1"> Name : <span
                                                                             class="name-para">{{
                                                                             $user->receiverUser ?
@@ -417,8 +443,9 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                            U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
-                                                             '',5,5)}}
+                                                            U-{{ substr($show->receiverUser ?
+                                                            $show->receiverUser->customer_id :
+                                                            '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -476,21 +503,27 @@
                                                     <div class="modal fade bd-example-modal10-lg {{ $show->id }}-modal10-lg"
                                                         tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                         aria-hidden="true">
-                                                        
+
                                                         <div class="modal-dialog modal10-lg">
                                                             <div class="modal-content image-modal" style=" ">
                                                                 <div class="image-position">
                                                                     <img id="image"
-                                                                        src="{{ asset('user/assets/img/payment/'.$show->image) }}" style=" " />
+                                                                        src="{{ asset('user/assets/img/payment/'.$show->image) }}"
+                                                                        style=" " />
                                                                     <div class="cancel-button">
-                                                                        {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                        <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                    
-                                                                    
-                                                                    </div>    
-                                                        
-                                                                </div>    
-                                                             </div>
+                                                                        {{-- <i class="fad fa-window-close"
+                                                                            style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                            data-dismiss="modal"></i> --}}
+                                                                        <button type="button"
+                                                                            class="btn-close button-close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"></button>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     {{-- Image model End --}}
@@ -546,11 +579,11 @@
                                                                 type="button" id="dropdownMenuButton"
                                                                 data-bs-toggle="dropdown"
                                                                 aria-expanded="false">Details</button>
-                                                            
+
                                                             <div class="demo">
-                                                                
+
                                                                 <div class="tooltip-content dropdown-menu details-div">
-                                                                    
+
                                                                     <p class="name-text mb-1"> Name : <span
                                                                             class="name-para">{{
                                                                             $show->receiverUser ?
@@ -613,6 +646,9 @@
                                     @if(isset($showusers) && count($showusers) > 0 ) --}}
                                     <div class="col-xl-6">
                                         @foreach ($conform as $coform)
+                                        @if(Auth::user()->unique_pin == $coform->past_receiver_id)
+                                        {{-- {{ dD($coform) }} --}}
+
                                         {{-- {{ dd(Auth::user()->unique_pin,$coform->pin_number )}}
                                         {{ dd($conform) }} --}}
                                         {{-- @if(Auth::user()->unique_pin == $coform->pin_number) --}}
@@ -625,10 +661,10 @@
                                                     <div class="">
                                                         @if ($coform->tran_status == '0')
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
-                                                    </svg>  
-                                                    @else
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
+                                                        </svg>
+                                                        @else
 
                                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -637,7 +673,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="">
-                                                      
+
                                                         <p class="id-text">U-{{ substr($coform->customer_id,5,5) }}</p>
                                                         <p class="date-text">
                                                             {{ $coform->created_at->todatestring() }}
@@ -689,15 +725,15 @@
                                                             value="{{  $coform->get_ammount  }}">
                                                         <input type="hidden" name="receiver_id"
                                                             value="{{ Auth::user()->id }}">
-                                                            <input type="hidden" name="auth_pin"
+                                                        <input type="hidden" name="auth_pin"
                                                             value="{{ Auth::user()->unique_pin }}">
                                                         <input type="hidden" name="unique_pin"
                                                             value="{{ $coform->unique_pin }}">
-                                                            @if(!empty($coform->image))
+                                                        @if(!empty($coform->image))
                                                         <button type="submit" class="btn btn-payment">confirm</button>
-                                                            @else
+                                                        @else
 
-                                                            @endif
+                                                        @endif
                                                         @endif
 
                                                         {{-- image model --}}
@@ -708,31 +744,37 @@
                                                             data-id="{{ $coform->user_id }}"
                                                             data-image="{{ $coform->image }}">View
                                                             Image</button>
-                                                            @else
+                                                        @else
 
-                                                            @endif
+                                                        @endif
 
                                                         <!-- Large modal -->
 
 
                                                         <div class="modal fade bd-example-modal1-lg {{ $coform->id }}-modal1-lg"
-                                                            tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                                            aria-hidden="true">
-                                                            
+                                                            tabindex="-1" role="dialog"
+                                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
                                                             <div class="modal-dialog modal1-lg">
                                                                 <div class="modal-content image-modal" style=" ">
                                                                     <div class="image-position">
                                                                         <img id="image"
-                                                                            src="{{ asset('user/assets/img/payment/'.$coform->image) }}" style=" " />
+                                                                            src="{{ asset('user/assets/img/payment/'.$coform->image) }}"
+                                                                            style=" " />
                                                                         <div class="cancel-button">
-                                                                            {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                            <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                        
-                                                                        
-                                                                        </div>    
-                                                            
-                                                                    </div>    
-                                                                 </div>
+                                                                            {{-- <i class="fad fa-window-close"
+                                                                                style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                                data-dismiss="modal"></i> --}}
+                                                                            <button type="button"
+                                                                                class="btn-close button-close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close"></button>
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         {{-- image model end --}}
@@ -753,7 +795,6 @@
 
                                                                 <div class="demo">
                                                                     <div
-                                                                  
                                                                         class="tooltip-content dropdown-menu details-div">
                                                                         <p class="name-text mb-1"> Name : <span
                                                                                 class="name-para">{{
@@ -804,6 +845,9 @@
 
                                         </div><br>
                                         {{-- @endif --}}
+                                        @else
+
+                                        @endif
                                         @endforeach
                                     </div>
                                     {{-- @endif
@@ -938,9 +982,9 @@
                                             </div>
                                             <div class="">
                                                 <p class="id-text">
-                                                   
-                                                      U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
-                                                     '',5,5)}}
+
+                                                    U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
+                                                    '',5,5)}}
                                                 </p>
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
                                                     $user->receiverUser->created_at :
@@ -990,21 +1034,25 @@
                                             <div class="modal fade bd-example-modal20-lg {{ $user->id }}-modal20-lg"
                                                 tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                 aria-hidden="true">
-                                                
+
                                                 <div class="modal-dialog modal20-lg">
                                                     <div class="modal-content image-modal" style=" ">
                                                         <div class="image-position">
                                                             <img id="image"
-                                                                src="{{ asset('user/assets/img/payment/'.$user->image) }}" style=" " />
+                                                                src="{{ asset('user/assets/img/payment/'.$user->image) }}"
+                                                                style=" " />
                                                             <div class="cancel-button">
-                                                                {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                            
-                                                            
-                                                            </div>    
-                                                
-                                                        </div>    
-                                                     </div>
+                                                                {{-- <i class="fad fa-window-close"
+                                                                    style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                    data-dismiss="modal"></i> --}}
+                                                                <button type="button" class="btn-close button-close"
+                                                                    data-dismiss="modal" aria-label="Close"></button>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             {{-- Image model End --}}
@@ -1014,59 +1062,60 @@
                                             <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                   <form id="imageform1" action="{{ route('user.payment') }}" method="POST"
-                                                                enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('post')
+                                                    <form id="imageform1" action="{{ route('user.payment') }}"
+                                                        method="POST" enctype="multipart/form-data">
+                                                        @csrf
+                                                        @method('post')
 
-                                                                <!-- payment image modal -->
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-center modal-head mb-0"
-                                                                            id="exampleModalLabel">
-                                                                            Upload
-                                                                            Payment Image</h5>
-                                                                        <!-- <button type="button" class="close"
+                                                        <!-- payment image modal -->
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title text-center modal-head mb-0"
+                                                                    id="exampleModalLabel">
+                                                                    Upload
+                                                                    Payment Image</h5>
+                                                                <!-- <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
                                                                         </button> -->
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="form-group">
-                                                                            <label for="formFileMultiple"
-                                                                                class="form-label">Payment Image</label>
-                                                                            <input class="form-control" type="file"
-                                                                                name="image"  id="picture1" required>
-                                                                                <p id="error3" style="display:none; color:#FF0000;">
-                                                                                    Invalid Image Format! Image Format Must Be JPG, JPEG, PNG or GIF.
-                                                                                    </p>
-                                                                                    <p id="error4" style="display:none; color:#FF0000;">
-                                                                                    Maximum File Size Limit is 2MB.
-                                                                                    </p>
-                                                                                    <p>
-                                                                            <input type="hidden" name="receiver_id"
-                                                                                value="{{ $user->receiverUser ? $user->receiverUser->id : '' }}">
-                                                                            <input type="hidden" name="transaction_id"
-                                                                                value="{{ $user->id }}">
-                                                                            <input type="hidden" name="get_amount"
-                                                                                value="{{ $user->get_ammount }}">
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button name="submit" type="submit" value="Submit" id="submit1" 
-                                                                            class="btn btn-primary">Upload</button>
-                                                                    </div>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="formFileMultiple"
+                                                                        class="form-label">Payment Image</label>
+                                                                    <input class="form-control" type="file" name="image"
+                                                                        id="picture1" required>
+                                                                    <p id="error3" style="display:none; color:#FF0000;">
+                                                                        Invalid Image Format! Image Format Must Be JPG,
+                                                                        JPEG, PNG or GIF.
+                                                                    </p>
+                                                                    <p id="error4" style="display:none; color:#FF0000;">
+                                                                        Maximum File Size Limit is 2MB.
+                                                                    </p>
+                                                                    <p>
+                                                                        <input type="hidden" name="receiver_id"
+                                                                            value="{{ $user->receiverUser ? $user->receiverUser->id : '' }}">
+                                                                        <input type="hidden" name="transaction_id"
+                                                                            value="{{ $user->id }}">
+                                                                        <input type="hidden" name="get_amount"
+                                                                            value="{{ $user->get_ammount }}">
                                                                 </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close</button>
+                                                                <button name="submit" type="submit" value="Submit"
+                                                                    id="submit1" class="btn btn-primary">Upload</button>
+                                                            </div>
+                                                        </div>
 
-                                                                <!-- new modal -->
+                                                        <!-- new modal -->
 
 
 
 
 
-                                                            </form>
+                                                    </form>
                                                 </div>
                                             </div>
                                             @endif
@@ -1147,7 +1196,7 @@
                                             <div class="">
                                                 <p class="id-text">
                                                     U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
-                                                     '',5,5)}}
+                                                    '',5,5)}}
                                                 </p>
                                                 {{-- {{ dd($user->receiverUser) }} --}}
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -1211,24 +1260,28 @@
                                             <div class="modal fade bd-example-modal2-lg {{ $show->id }}-modal2-lg"
                                                 tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                 aria-hidden="true">
-                                                
+
                                                 <div class="modal-dialog modal2-lg">
                                                     <div class="modal-content image-modal" style=" ">
                                                         <div class="image-position">
                                                             <img id="image"
-                                                                src="{{ asset('user/assets/img/payment/'.$show->image) }}" style=" " />
+                                                                src="{{ asset('user/assets/img/payment/'.$show->image) }}"
+                                                                style=" " />
                                                             <div class="cancel-button">
-                                                                {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                            
-                                                            
-                                                            </div>    
-                                                
-                                                        </div>    
-                                                     </div>
+                                                                {{-- <i class="fad fa-window-close"
+                                                                    style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                    data-dismiss="modal"></i> --}}
+                                                                <button type="button" class="btn-close button-close"
+                                                                    data-dismiss="modal" aria-label="Close"></button>
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            
+
                                             {{-- Image model End --}}
 
                                             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -1351,11 +1404,11 @@
                                         <div class="flex-amount">
                                             <div class="">
                                                 @if ($coform->tran_status == '0')
-                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                        xmlns="http://www.w3.org/2000/svg">
-                                                        <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
-                                                    </svg>  
-                                                    @else
+                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <circle cx="10" cy="10" r="10" fill="#FF3D3D" />
+                                                </svg>
+                                                @else
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
                                                     <circle cx="10" cy="10" r="10" fill="#008000" />
@@ -1414,7 +1467,7 @@
                                                 <input type="hidden" name="receiver_id" value="{{ Auth::user()->id }}">
                                                 <input type="hidden" name="unique_pin"
                                                     value="{{ $coform->unique_pin }}">
-                                                    @if(!empty($coform->image))
+                                                @if(!empty($coform->image))
                                                 <button type="submit" class="btn btn-payment">confirm</button>
                                                 @else
                                                 @endif
@@ -1427,34 +1480,39 @@
                                                     data-id="{{ $coform->user_id }}"
                                                     data-image="{{ $coform->image }}">View
                                                     Image</button>
-                                                    @else
-                                                    @endif
+                                                @else
+                                                @endif
 
                                                 <!-- Large modal -->
 
 
-                                               
-                                            <div class="modal fade bd-example-modal3-lg {{ $coform->id }}-modal3-lg"
-                                                tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                                aria-hidden="true">
-                                                
-                                                <div class="modal-dialog modal3-lg">
-                                                    <div class="modal-content image-modal" style=" ">
-                                                        <div class="image-position">
-                                                            <img id="image"
-                                                                src="{{ asset('user/assets/img/payment/'.$coform->image) }}" style=" " />
-                                                            <div class="cancel-button">
-                                                                {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                            
-                                                            
-                                                            </div>    
-                                                
-                                                        </div>    
-                                                     </div>
+
+                                                <div class="modal fade bd-example-modal3-lg {{ $coform->id }}-modal3-lg"
+                                                    tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                                    aria-hidden="true">
+
+                                                    <div class="modal-dialog modal3-lg">
+                                                        <div class="modal-content image-modal" style=" ">
+                                                            <div class="image-position">
+                                                                <img id="image"
+                                                                    src="{{ asset('user/assets/img/payment/'.$coform->image) }}"
+                                                                    style=" " />
+                                                                <div class="cancel-button">
+                                                                    {{-- <i class="fad fa-window-close"
+                                                                        style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                        data-dismiss="modal"></i> --}}
+                                                                    <button type="button" class="btn-close button-close"
+                                                                        data-dismiss="modal"
+                                                                        aria-label="Close"></button>
+
+
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            
+
                                                 {{-- image model end --}}
 
 
@@ -1472,45 +1530,43 @@
                                                             aria-expanded="false">Details</button>
 
                                                         <div class="demo">
-                                                            <div
-                                                                  
-                                                                        class="tooltip-content dropdown-menu details-div">
-                                                                        <p class="name-text mb-1"> Name : <span
-                                                                                class="name-para">{{
-                                                                                $coform->name;
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Mobile No. : <span
-                                                                                class="name-para">{{
-                                                                                $coform->mobile
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Ifsc Code : <span
-                                                                                class="name-para">{{
-                                                                                $coform->ifsc_code
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Account No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->account_no
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Upi Link: <span
-                                                                                class="name-para">{{
-                                                                                $coform->upi_link
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Phone Pay No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->upi_link
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Google Pay No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->google_pay_no
-                                                                                }}</span>
-                                                                        </p>
-                                                                    </div>
+                                                            <div class="tooltip-content dropdown-menu details-div">
+                                                                <p class="name-text mb-1"> Name : <span
+                                                                        class="name-para">{{
+                                                                        $coform->name;
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Mobile No. : <span
+                                                                        class="name-para">{{
+                                                                        $coform->mobile
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Ifsc Code : <span
+                                                                        class="name-para">{{
+                                                                        $coform->ifsc_code
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Account No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->account_no
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Upi Link: <span
+                                                                        class="name-para">{{
+                                                                        $coform->upi_link
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Phone Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->upi_link
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Google Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->google_pay_no
+                                                                        }}</span>
+                                                                </p>
+                                                            </div>
 
                                                         </div>
                                                     </div>
@@ -1523,10 +1579,10 @@
                                     </div>
 
                                 </div><br>
-                                
+
                                 @endforeach
                                 @else
-                                        <h3> Get help Data Not Found</h3>
+                                <h3> Get help Data Not Found</h3>
                                 @endif
                             </div>
                         </div>
@@ -1538,8 +1594,8 @@
                         <div class="">
                             <div class="">
                                 <div class="row">
-                                  @if(count($showusers)>0)
-                                   
+                                    @if(count($showusers)>0)
+
                                     <div class="col-xl-6">
                                         @foreach ($showusers as $show)
                                         {{-- mycode payment done after show this code --}}
@@ -1555,8 +1611,9 @@
                                                     </div>
                                                     <div class="">
                                                         <p class="id-text">
-                                                            U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
-                                                             '',5,5)}}
+                                                            U-{{ substr($show->receiverUser ?
+                                                            $show->receiverUser->customer_id :
+                                                            '',5,5)}}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -1621,21 +1678,27 @@
                                                     <div class="modal fade bd-example-modal4-lg {{ $show->id }}-modal4-lg"
                                                         tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
                                                         aria-hidden="true">
-                                                        
+
                                                         <div class="modal-dialog modal4-lg">
                                                             <div class="modal-content image-modal" style=" ">
                                                                 <div class="image-position">
                                                                     <img id="image"
-                                                                        src="{{ asset('user/assets/img/payment/'.$show->image) }}" style=" " />
+                                                                        src="{{ asset('user/assets/img/payment/'.$show->image) }}"
+                                                                        style=" " />
                                                                     <div class="cancel-button">
-                                                                        {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                        <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                    
-                                                                    
-                                                                    </div>    
-                                                        
-                                                                </div>    
-                                                             </div>
+                                                                        {{-- <i class="fad fa-window-close"
+                                                                            style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                            data-dismiss="modal"></i> --}}
+                                                                        <button type="button"
+                                                                            class="btn-close button-close"
+                                                                            data-dismiss="modal"
+                                                                            aria-label="Close"></button>
+
+
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     {{-- Image model End --}}
@@ -1704,14 +1767,15 @@
                                             </div>
                                         </div><br>
 
-                                        @endforeach  </div><br>
-                                   
-                                @else
+                                        @endforeach
+                                    </div><br>
 
-                                        <h3>History Data Not Found</h3>
-                                @endif
+                                    @else
+
+                                    <h3>History Data Not Found</h3>
+                                    @endif
                                     {{-- my code Finish --}}
-                                  
+
                                     <div class="col-xl-6">
                                         @foreach ($conform as $coform)
                                         @if ($coform->tran_status == '1')
@@ -1780,23 +1844,29 @@
 
 
                                                         <div class="modal fade bd-example-modal5-lg {{ $coform->id }}-modal5-lg"
-                                                            tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-                                                            aria-hidden="true">
-                                                            
+                                                            tabindex="-1" role="dialog"
+                                                            aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
                                                             <div class="modal-dialog modal5-lg">
                                                                 <div class="modal-content image-modal" style=" ">
                                                                     <div class="image-position">
                                                                         <img id="image"
-                                                                            src="{{ asset('user/assets/img/payment/'.$coform->image) }}" style=" " />
+                                                                            src="{{ asset('user/assets/img/payment/'.$coform->image) }}"
+                                                                            style=" " />
                                                                         <div class="cancel-button">
-                                                                            {{-- <i class="fad fa-window-close" style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;" data-dismiss="modal" ></i> --}}
-                                                                            <button type="button" class="btn-close button-close" data-dismiss="modal" aria-label="Close"></button>
-                                                                        
-                                                                        
-                                                                        </div>    
-                                                            
-                                                                    </div>    
-                                                                 </div>
+                                                                            {{-- <i class="fad fa-window-close"
+                                                                                style="--fa-primary-color: #e01b24; --fa-secondary-color: #e01b24; --fa-secondary-opacity: 0.7;"
+                                                                                data-dismiss="modal"></i> --}}
+                                                                            <button type="button"
+                                                                                class="btn-close button-close"
+                                                                                data-dismiss="modal"
+                                                                                aria-label="Close"></button>
+
+
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         {{-- image model end --}}
@@ -1811,69 +1881,130 @@
                                                         <div class="details-tip">
                                                             <button type="button"
                                                                 class="btn btn-payment details-show">Details</button>
-                                                     
 
-                                                                <div
-                                                                  
-                                                                        class="tooltip-content dropdown-menu details-div">
-                                                                        <p class="name-text mb-1"> Name : <span
-                                                                                class="name-para">{{
-                                                                                $coform->name;
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Mobile No. : <span
-                                                                                class="name-para">{{
-                                                                                $coform->mobile
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Ifsc Code : <span
-                                                                                class="name-para">{{
-                                                                                $coform->ifsc_code
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Account No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->account_no
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Upi Link: <span
-                                                                                class="name-para">{{
-                                                                                $coform->upi_link
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Phone Pay No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->upi_link
-                                                                                }}</span>
-                                                                        </p>
-                                                                        <p class="name-text mb-1"> Google Pay No: <span
-                                                                                class="name-para">{{
-                                                                                $coform->google_pay_no
-                                                                                }}</span>
-                                                                        </p>
-                                                                    
+
+                                                            <div class="tooltip-content dropdown-menu details-div">
+                                                                <p class="name-text mb-1"> Name : <span
+                                                                        class="name-para">{{
+                                                                        $coform->name;
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Mobile No. : <span
+                                                                        class="name-para">{{
+                                                                        $coform->mobile
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Ifsc Code : <span
+                                                                        class="name-para">{{
+                                                                        $coform->ifsc_code
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Account No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->account_no
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Upi Link: <span
+                                                                        class="name-para">{{
+                                                                        $coform->upi_link
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Phone Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->upi_link
+                                                                        }}</span>
+                                                                </p>
+                                                                <p class="name-text mb-1"> Google Pay No: <span
+                                                                        class="name-para">{{
+                                                                        $coform->google_pay_no
+                                                                        }}</span>
+                                                                </p>
+
                                                             </div>
-                                                     
+
+
+
+                                                        </div>
+
                                                         @endif
-
                                                     </div>
-
                                                 </form>
                                             </div>
-                                            
+
                                         </div><br>
                                         @else
 
                                         @endif
-                                   @endforeach  </div><br>
-                                   
+                                        @endforeach
+                                    </div><br>
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    
+                    {{-- change password code --}}
+
+                    <div class="tab-pane fade" id="changepassword-tab-pane" role="tabpanel"
+                        aria-labelledby="changepassword-tab-pan" tabindex="0">
+                        <form action="{{ route('user.passwordupdate', Auth::user()->id) }}" method="POST"
+                            id="passwordresetform">
+                            @csrf
+                            @method('post')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row mb-5">
+                                        <div class="">
+                                            <div class="col-xl-12 ">
+                                                <h4 class="profile-tag">Change Password</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="row">
+                                                    <div class="col-xl-6 mb-3 form-adjust">
+                                                        <label>Old Password</label>
+                                                        <input type="text" placeholder="Enter Old Password"
+                                                            class="form-control " name="oldpassword" value=""
+                                                            id="oldpassword" maxlength="20">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 mb-3 form-class form-adjust">
+                                                <label>New Password</label>
+                                                <input class="form-control" name="password" value="" id="password"
+                                                    maxlength="20" placeholder="Enter New Password"></input>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 mb-3 form-class form-adjust">
+                                                <label>Confirm Password </label>
+                                                <input class="form-control" name="password_confirmation" value=""
+                                                    id="password_confirmation" maxlength="20"
+                                                    placeholder="Confirm Password"></input>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xl-6 d-flex" style="justify-content: center;">
+                                                {{-- <button type="button" class="btn btn-form">Edit</button> --}}
+                                                <button type="submit" class="btn btn-form-1">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+
             </div>
         </div>
+    </div>
+    </div>
     </div>
 </section>
 
@@ -1933,7 +2064,7 @@ Auth::user()->status = Null )
                     @csrf
                     <p><button type="submit" class="btn">Logout</button></p>
                 </form> --}}
-                <form action="{{ route('logout') }}" method="POST" >
+                <form action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="btn">Logout</button>
                 </form>
@@ -1952,7 +2083,7 @@ Auth::user()->status = Null )
                             <input class="form-control" placeholder="Please Enter a Pin" name="pin_number"></input>
                             <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-form mt-3 w-100" >Activate</button>
+                                <button type="submit" class="btn btn-form mt-3 w-100">Activate</button>
                             </div>
                         </div>
                     </div>
@@ -1997,7 +2128,7 @@ Auth::user()->status = Null )
                             <input class="form-control" placeholder="Please Enter a Pin" name="pin_number">
                             <input type='hidden' id='hasta' value='<?php echo date(' Y-m-d'); ?>' name="date">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btn btn-form mt-3 w-100" >Activate</button>
+                                <button type="submit" class="btn btn-form mt-3 w-100">Activate</button>
                             </div>
                         </div>
                     </div>
@@ -2191,7 +2322,7 @@ Auth::user()->status = Null )
 </script>
 
 <script>
-$('input[type="submit"]').prop("disabled", true);
+    $('input[type="submit"]').prop("disabled", true);
 var a=0;
 //binds to onchange event of your input field
 $('#picture').bind('change', function() {
@@ -2311,6 +2442,52 @@ if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
           $('#submit1').attr('disabled',true);
           }
     });
-    </script>
-    
+</script>
+
+<script>
+    $(document).ready(function() {
+        $("#passwordresetform").validate({
+            errorClass: "error fail-alert",
+            validClass: "valid success-alert",
+            rules: {
+              
+                oldpassword: {
+                    required: true,
+                 
+                    minlength: 6,
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                },
+                password_confirmation: {
+                    required: true,
+                    minlength: 6,
+                    equalTo: "#password"
+                },
+              
+            },
+            messages: {
+              
+                oldpassword: {
+                    required: 'Please Enter Old Password',
+                   
+                    minlength: 'Minimum Six Characters Password Required',
+                },
+                password: {
+                    required: 'Please Enter Password',
+                    minlength: 'Minimum Six Characters Password Required',
+
+                },
+                password_confirmation: {
+                    required: 'Please Enter Confirm Password',
+                    minlength: 'Minimum Six Characters Password Required',
+                    equalTo: 'Password Not Matched',
+                },
+                
+            }
+        });
+    });
+</script>
+
 @endsection

@@ -43,10 +43,11 @@ class PinActiveController extends Controller
                     }
                     $authUser = Auth::user();
                     $transaction = transection::orderBy('provide_help_id', 'desc')->first();
-                    $checkProviderHelperUser = Provide_Help::where('id', '>',  $transaction->user_id)->where('users_id', '!=', Auth::user()->id)->where('status', null)->get();
+                    $checkProviderHelperUser = Provide_Help::where('id', '>',  $transaction->user_id)->where('users_id', '!=', Auth::user()->id)->where('status', null)->where('provide_help_ammount','!=',null)->get();
                     $amountCheck = 0;
                     $mainUser = User::where('email', 'user1@gmail.com')->first();
                     $mainProvideHelp = Provide_Help::where('users_id', $mainUser->id)->first();
+                   
                     if (count($checkProviderHelperUser) > 0) {
                         foreach ($checkProviderHelperUser as $checkProviderUser) {
                             if ($amountCheck < $provide_help_ammount) {
@@ -82,11 +83,11 @@ class PinActiveController extends Controller
                         $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
                        
                         $helpAmmount = $transection->get_ammount;
-                        
                         if(isset($users) && count($users) > 0){
-                       
+                            
                             foreach($users as $userlist){
                                 
+                               // dd($userlist,$userlist->getHelpAmmount,$userlist->getAmmount,$helpAmmount,$userlist->checkRemainingTransctions);
                                 if($userlist->getHelpAmmount > $userlist->getAmmount && $helpAmmount > 0 && $userlist->checkRemainingTransctions == 0){
                                     $totalGetAmmount = $userlist->getHelpAmmount-$userlist->getAmmount;
                                     
@@ -99,10 +100,12 @@ class PinActiveController extends Controller
                                         $remainingHelpAmmount = abs($gethelpAmmount);
                                         $remainedAmt = $totalGetAmmount;
                                     }
+                                 
                                     $payment = new transection();
                                     $payment->user_id = $authUser->id;
                                     $payment->sender_id = $authUser->id;
                                     $payment->receiver_id = $userlist->id;
+                                    $payment->past_receiver_id = $userlist->unique_pin;
                                     $payment->provide_help_id = $userlist->provideHelpUser->id;
                                     // $payment->payment_success_date = $currentDate;
                                     $payment->tran_status = 0;
@@ -112,11 +115,12 @@ class PinActiveController extends Controller
                                     $payment->split_status = '1';
                                     $payment->pin_number = $transection->pin_number;
                                     $payment->save();
-
+                                    
                                     $helpAmmount = $remainingHelpAmmount;
                                 }
                             }
                         }
+                        
                         
                         if($helpAmmount > 0){
                             $defaultUser = User::where('user_type', '2')->first();
@@ -125,6 +129,7 @@ class PinActiveController extends Controller
                                 $defaultpayment->user_id = $authUser->id;
                                 $defaultpayment->sender_id = $authUser->id;
                                 $defaultpayment->receiver_id = $defaultUser->id;
+                                $defaultpayment->past_receiver_id = $defaultUser->unique_pin;
                                 $defaultpayment->provide_help_id = $defaultUser->provideHelpUser->id;
                                 // $defaultpayment->payment_success_date = $currentDate;
                                 $defaultpayment->tran_status = 0;
@@ -133,6 +138,7 @@ class PinActiveController extends Controller
                                 $defaultpayment->get_ammount = $helpAmmount;
                                 $defaultpayment->split_status = '1';
                                 $defaultpayment->pin_number = $transection->pin_number;
+                              
                                 $defaultpayment->save();
                             }
                         }
@@ -163,7 +169,7 @@ class PinActiveController extends Controller
                     
                 }
             } else {
-                return redirect('user/dashboard')->with('error', 'This Pin Already Exsiste');
+                return redirect('user/dashboard')->with('error', 'This Pin Already exist');
             }
 
         

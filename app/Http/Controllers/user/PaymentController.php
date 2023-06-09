@@ -114,7 +114,7 @@ class PaymentController extends Controller
         $transaction = transection::where('id', $request->user_id)->first();
 
         if (!$transaction) {
-            return redirect()->back()->with('error', "Transaction Not Fount");
+            return redirect()->back();
         }
 
         $transaction->tran_status = '1';

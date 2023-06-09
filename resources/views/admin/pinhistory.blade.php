@@ -187,7 +187,7 @@
                                         @if ($row->pin_status == '0')
                                         <tr>
 
-                                            <td>{{ $row->pin_sale_date }}</td>
+                                            <td>{{ $row->updated_at }}</td>
                                             <td>{{ $row->pin_number }}</td>
                                             <td>{{ $row->pin_ammount }}</td>
                                             <td>{{ $row->customer_id }}</td>

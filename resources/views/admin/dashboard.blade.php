@@ -206,7 +206,7 @@
                                         @if (isset($pinData) && !empty($pinData))
                                         @foreach ($pinData as $list)
                                         <tr>
-                                        <td>{{ $list->created_at->toDateString(); }}</td>
+                                        <td>{{ $list->created_at }}</td>
                                             <td>{{ $list->pin_number }}</td>
                                             <td>{{ $list->pin_ammount }}</td>
                                             <td>@if(!empty($list->pin_sale_user_id) && $list->pin_status == 0) <p style="color: red"> PIN Used </p> @else <p style="color: rgb(29 149 29);"> PIN Not Used </p>@endif</td>
