@@ -17,7 +17,7 @@ class GenrateUniqueCodeController extends Controller
 
         try {
             $data = PinSalesUser::rightJoin('pin_genrate_tabel', 'pin_genrate_tabel.id', '=', 'pin_sales_users.pin_id')
-                ->orderBy('pin_genrate_tabel.pin_sell_status', 'asc')
+                // ->orderBy('pin_genrate_tabel.created_at', 'desc')
                 ->get();
            
             return view('admin.genratepin', compact('data'));

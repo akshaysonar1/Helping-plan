@@ -137,10 +137,12 @@ Route::name('user.')->prefix('user')->group(function () {
     });
 
     Route::POST('profileupdate{id}', [ProfileController::class, 'profileupdate'])->name('profileupdate');
+
     Route::POST('pinactive{id}', [PinActiveController::class, 'pinactive'])->name('pinactive');
     Route::get('deactive/{userId}', [PinActiveController::class, 'deactive'])->name('deactive');
     Route::POST('payment', [PaymentController::class, 'payment'])->name('payment');
     Route::POST('conformetion/{id}', [PaymentController::class, 'conformetion'])->name('conformetion');
+    Route::POST('passwordupdate{id}', [ProfileController::class, 'passwordupdate'])->name('passwordupdate');
 
 
     Route::get('login', [UserController::class, 'login'])->name('login');

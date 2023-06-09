@@ -110,6 +110,7 @@ class User extends Authenticatable
     public function getCheckRemainingTransctionsAttribute()
     {
         $transactions = $this->senderTransactions()->where('tran_status', '!=', '1')->get();
+        // dd($transactions);
         if(count($transactions) > 0){
             return 1;
         }

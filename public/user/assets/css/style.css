@@ -2565,3 +2565,6 @@ tbody, td, tfoot, th, thead, tr{
   top: 0;
   right: 0;
 }
+.pass-text{
+  max-width: 150px !important;
+}

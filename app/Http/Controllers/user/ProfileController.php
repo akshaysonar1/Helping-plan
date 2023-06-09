@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
-
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     //
@@ -25,8 +25,23 @@ class ProfileController extends Controller
             $data['upi_link'] = $request->upi_link;
 
             User::find($user->id)->update($data);
-            return redirect()->back()->with('message',"Your Record has been Updated. Thank you!");
-         
+            return redirect()->back()->with('message',"Your Record has been Updated. Thank you!"); 
 
+    }
+
+
+    public function passwordupdate($id, Request $request)
+    {
+        $user = User::where('id', $id)->first();
+        if(Hash::check($request->oldpassword , $user->password)){
+            $data['password'] = Hash::make($request->password);
+            User::find($user->id)->update($data);
+            return redirect()->back()->with('message',"Your Password has been Updated. Thank you!"); 
+        }else
+        {
+            return redirect()->back()->with('message',"Old Password Not Matched."); 
+        }
+      
+        
     }
 }
