@@ -201,7 +201,8 @@ h6 {
 }
 
 #header .logo img {
-  max-height: 40px;
+  height: 55px;
+  width: 100%;
 }
 
 .scrolled-offset {
@@ -2267,13 +2268,19 @@ section {
 
 .btn-form-1 {
   padding: 8px 28px;
-  background-color: rgba(66, 96, 203, 1) !important;
+  background-color: #4260cb !important;
   font-family: 'Poppins', sans-serif;
 ;
   font-size: 15px;
   font-weight: 600;
   line-height: 22.5px;
   color: white;
+  border-radius: 6px;
+}
+
+.btn-form-1.active{
+  color: #fff !important;
+  border-color: #4260cb !important; 
 }
 
 .btn-form-1:hover {
@@ -2568,3 +2575,19 @@ tbody, td, tfoot, th, thead, tr{
 .pass-text{
   max-width: 150px !important;
 }
+@media(max-width:991px){
+  .btn-logout-1{
+    margin-left: 17px;
+    margin: 10px 0px !important;
+  }
+}
+.btn-form-1.active{
+  color: white !important;
+}
+
+.btn-effect .btn-form-1.active{
+  color: #ffffff !important;
+  }
+  .responsive-green{
+    margin-top: 20px;
+  }

@@ -187,7 +187,7 @@
                                     --}}
                                     @endif
 
-                                    <div class="col-xl-6">
+                                    <div class="col-xl-6 responsive-green">
 
                                         @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                         @foreach ($users as $user)
@@ -350,7 +350,7 @@
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-dismiss="modal">Close</button>
                                                                         <button name="submit" type="submit"
-                                                                            value="Submit" id="submit"
+                                                                            value="Submit" id="submit-btn"
                                                                             class="btn btn-primary">Upload</button>
                                                                     </div>
                                                                 </div>
@@ -876,12 +876,12 @@
                             @method('post')
                             <div class="row mb-5">
                                 <div class="">
-                                    <div class="col-xl-12">
+                                    <div class="col-xl-12 responsive-green">
                                         <h4 class="profile-tag">Personal Detail</h4>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xl-6 form-adjust">
+                                    <div class="col-xl-6 form-adjust mb-3">
                                         <label>Name</label>
                                         <input type="text" placeholder="Enter Your Name" class="form-control"
                                             name="name" value="{{ Auth::user()->name }}" id="name"
@@ -961,8 +961,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-12">
+                                            <div class="btn-effect">
                                             {{-- <button type="button" class="btn btn-form">Edit</button> --}}
-                                            <button type="submit" class="btn btn-form-1">Save</button>
+                                            <button type="submit" class="btn btn-form-1" style="color: #fff !important; border-color:#4260cb !important;">Save</button>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -972,7 +974,7 @@
                     <div class="tab-pane fade" id="provide-tab-pane" role="tabpanel" aria-labelledby="provide-tab"
                         tabindex="0">
                         <div class="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-6" style="">
                                 {{-- @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                 --}}
                                 @foreach ($users as $user)
@@ -1114,16 +1116,11 @@
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Close</button>
                                                                 <button name="submit" type="submit" value="Submit"
-                                                                    id="submit1" class="btn btn-primary">Upload</button>
+                                                                    id="submit-btn1" class="btn btn-primary">Upload</button>
                                                             </div>
                                                         </div>
 
                                                         <!-- new modal -->
-
-
-
-
-
                                                     </form>
                                                 </div>
                                             </div>
@@ -1407,7 +1404,7 @@
                     </div>
                     <div class="tab-pane fade" id="get-tab-pane" role="tabpanel" aria-labelledby="get-tab" tabindex="0">
                         <div class="row">
-                            <div class="col-xl-6">
+                            <div class="col-xl-6 responsive-green">
                                 @if(count($conform)>0)
                                 @foreach ($conform as $coform)
                                 <div class="pay-card-1">
@@ -1968,7 +1965,7 @@
                             @method('post')
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="row mb-5">
+                                    <div class="row mb-5 responsive-green"> 
                                         <div class="">
                                             <div class="col-xl-12 ">
                                                 <h4 class="profile-tag">Change Password</h4>
@@ -2341,16 +2338,21 @@ Auth::user()->status = Null )
 var a=0;
 //binds to onchange event of your input field
 $('#picture').bind('change', function() {
-if ($('input:submit').attr('disabled',false)){
-	$('input:submit').attr('disabled',true);
+if ($('#submit-btn').attr('disabled',false)){
+	$('#submit-btn').attr('disabled',true);
 	}
 var ext = $('#picture').val().split('.').pop().toLowerCase();
 if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
+    
+
 	$('#error1').slideDown("slow");
 	$('#error2').slideUp("slow");
    
 	a=0;
 	}else{
+     
+        // $('input:submit').prop('disabled',false);
+        $("#submit-btn").removeAttr("disabled");
             var picsize = (this.files[0].size);
             if (picsize > 5000000){
             $('#error2').slideDown("slow");
@@ -2360,7 +2362,6 @@ if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
             $('#error2').slideUp("slow");
             }
             $('#error1').slideUp("slow");
-       
 	
 }     if (a==0){
     
@@ -2431,8 +2432,8 @@ if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
     var a=0;
     //binds to onchange event of your input field
     $('#picture1').bind('change', function() {
-    if ($('input:submit').attr('disabled',false)){
-        $('input:submit').attr('disabled',true);
+    if ($('#submit-btn1').attr('disabled',false)){
+        $('#submit-btn1').attr('disabled',true);
         }
     var ext = $('#picture1').val().split('.').pop().toLowerCase();
     if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
@@ -2441,6 +2442,7 @@ if ($.inArray(ext, ['gif','png','jpg','jpeg']) == -1){
        
         a=0;
         }else{
+            $("#submit-btn1").removeAttr("disabled");
                 var picsize = (this.files[0].size);
                 if (picsize > 5000000){
                 $('#error4').slideDown("slow");

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class DemoController extends Controller
@@ -23,8 +24,9 @@ class DemoController extends Controller
             } else {
                 return view('auth.login');
             }
-        } catch (exception $e) {
-            return view('404');
+        } catch(Exception $e){
+            Log::error("demo controller error: ". $e->getMessage());
+            return redirect('user/dashboard')->with('error', 'Something went wrong');
         }
 
     }

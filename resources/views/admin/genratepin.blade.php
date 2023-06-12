@@ -220,6 +220,11 @@
                 $("#id").val(id);
 
             });
+            $('#exampleModal').on('hidden.bs.modal', function (e) {
+
+                $('#sale_name').val('');
+                $('#pin_number').val('');
+            })
         });
     </script>
     <script>
