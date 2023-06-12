@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function getGetHelpAmmountAttribute()
     {
-        // dd('hii');
+         
         $helpAmmountTotal = $this->provideHelp()->sum('get_help_ammount');
         return $helpAmmountTotal;
     }
@@ -110,18 +110,11 @@ class User extends Authenticatable
     public function getCheckRemainingTransctionsAttribute()
     {
         $transactions = $this->senderTransactions()->where('tran_status', '!=', '1')->get();
-        // dd($transactions);
+      
         if(count($transactions) > 0){
             return 1;
         }
         return 0;
     }
     
-    // function getPaymentdetails() {
-    //     $payments = $this->transactions;
-    //     if($payments && count($payments) > 0){
-    //         dd('hii');
-    //     }
-    //     dd($payments);
-    // }
 }

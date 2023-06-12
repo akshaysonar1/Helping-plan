@@ -10,7 +10,7 @@ use App\Models\Provide_Help;
 use App\Models\transection;
 use App\Models\User;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 use Illuminate\Support\Facades\Auth;
@@ -22,10 +22,9 @@ class PinActiveController extends Controller
        try{
          
             $user = PinModel::where('pin_number', '=', $request->pin_number)->first();
-           // $users = User::where('user_type', '0')->where('status', '!=', '1')->with(['userPayment', 'provideHelpUser'])->get();
-            //   dd($user);
+          
             $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
-            // dd($users);
+           
             if (empty($user->pin_sale_user_id)) {
                 if (empty($user->pin_ammount)) {
                     return redirect('user/dashboard')->with('error', 'This Pin is not valid');
@@ -46,6 +45,7 @@ class PinActiveController extends Controller
                     $authUser = Auth::user();
                     $transaction = transection::orderBy('provide_help_id', 'desc')->first();
                     $checkProviderHelperUser = Provide_Help::where('id', '>',  $transaction->user_id)->where('users_id', '!=', Auth::user()->id)->where('status', null)->where('provide_help_ammount','!=',null)->get();
+                 
                     $amountCheck = 0;
                     $mainUser = User::where('email', 'user1@gmail.com')->first();
                     $mainProvideHelp = Provide_Help::where('users_id', $mainUser->id)->first();
@@ -73,30 +73,27 @@ class PinActiveController extends Controller
                         $transection->user_id = $authUser->id;
                         $transection->get_ammount = $provide_help_ammount - $amountCheck;
                         $transection->sender_id = $authUser->id;
-                        // $transection->receiver_id = $mainUser ? $mainUser->id : null;
-                        // $transection->provide_help_id = $mainProvideHelp ? $mainProvideHelp->id : null;
+                        
                         $transection->tran_status = "0";
                         $transection->create_date = $currentDate;
                         $transection->end_date = $tomorrow;
                         $transection->pin_number = $request->pin_number;
 
                         // $transection->save();
-
                         
                        
                         $helpAmmount = $transection->get_ammount;
                         $totalProvideHelps = Provide_Help::where('status', '0')->with('getUsers')->where('users_id', '!=', $authUser->id)->get();
-                    //    dd($totalProvideHelps, $totalProvideHelps[4]->getUsers->user_type == "0", $totalProvideHelps[4]->getUsers->getHelpAmmount, $totalProvideHelps[4]->getUsers->getAmmount && $helpAmmount > 0 , $totalProvideHelps[4]->getUsers->checkRemainingTransctions == 0 , $totalProvideHelps[4]->transacted_status == '0'); 
+                     
                         if(isset($totalProvideHelps) && count($totalProvideHelps) > 0){
                             
                             foreach($totalProvideHelps as $userlist){
                                 $userPaymentId = user_payment::where('user_id', $userlist->getUsers->id)->where('pay_status', '0')->first();
-                               // dd($userlist->getUsers,$userlist->getUsers->getHelpAmmount,$userlist->getUsers->getAmmount,$helpAmmount,$userlist->getUsers->checkRemainingTransctions);
+                               
                                if($userlist->getUsers && !empty($userlist->getUsers)){
                                 if($userlist->getUsers->user_type == "0"){
-                                    if($userlist->getUsers->getHelpAmmount > $userlist->getUsers->getAmmount && $helpAmmount > 0 && $userlist->getUsers->checkRemainingTransctions == 0 && $userlist->transacted_status == '0'){
+                                    if($userlist->getUsers->getHelpAmmount > $userlist->getUsers->getAmmount && $helpAmmount > 0 && $userlist->getUsers->checkRemainingTransctions == 0 && ($userlist->transacted_status == '0' || $userlist->status == '0')){
                                         $totalGetAmmount = $userlist->getUsers->getHelpAmmount-$userlist->getUsers->getAmmount;
-                                        
                                         $gethelpAmmount = $totalGetAmmount-$helpAmmount;
                                         if($gethelpAmmount > 0){
                                             $remainingHelpAmmount = 0;
@@ -106,14 +103,14 @@ class PinActiveController extends Controller
                                             $remainingHelpAmmount = abs($gethelpAmmount);
                                             $remainedAmt = $totalGetAmmount;
                                         }
-                                     
+                                        $helpAmmount = $remainingHelpAmmount;
                                         $payment = new transection();
                                         $payment->user_id = $authUser->id;
                                         $payment->sender_id = $authUser->id;
                                         $payment->receiver_id = $userlist->getUsers->id;
                                         $payment->past_receiver_id = $userlist->getUsers->unique_pin;
                                         $payment->provide_help_id = $userlist->getUsers->provideHelpUser->id;
-                                        // $payment->payment_success_date = $currentDate;
+
                                         $payment->tran_status = 0;
                                         $payment->create_date = $currentDate;
                                         $payment->end_date = $tomorrow;
@@ -123,12 +120,10 @@ class PinActiveController extends Controller
                                         $payment->save();
                                         
                                         $receiverProvideHelp = Provide_Help::where('id', $userlist->id)->first();
-                                        if($remainingHelpAmmount == 0){
+                                        if($userlist->getUsers->getHelpAmmount == $userlist->getUsers->getAmmount)
                                             $receiverProvideHelp->transacted_status = '1';
                                             $receiverProvideHelp->update();
                                         }
-    
-                                        $helpAmmount = $remainingHelpAmmount;
                                     }
                                 }
                                } 
@@ -145,7 +140,7 @@ class PinActiveController extends Controller
                                 $defaultpayment->receiver_id = $defaultUser->id;
                                 $defaultpayment->past_receiver_id = $defaultUser->unique_pin;
                                 $defaultpayment->provide_help_id = $defaultUser->provideHelpUser->id;
-                                // $defaultpayment->payment_success_date = $currentDate;
+                             
                                 $defaultpayment->tran_status = 0;
                                 $defaultpayment->create_date = $currentDate;
                                 $defaultpayment->end_date = $tomorrow;
@@ -159,7 +154,7 @@ class PinActiveController extends Controller
                     }
 
                 
-                    // dd($provide_help_ammount);
+                   
                     $data = PinModel::where('id', $user->id)->first();
 
                     $data->provide_help_ammount = $provide_help_ammount;
@@ -170,7 +165,7 @@ class PinActiveController extends Controller
                     $data->update();
 
                     $providerHelp = Provide_Help::where('users_id', $request->id)->where('status', '0')->first();
-                    // dd($providerHelp);
+                     
                     if($providerHelp && !empty($providerHelp)){
                         $providerHelp = $providerHelp;
                     }else{
@@ -191,9 +186,10 @@ class PinActiveController extends Controller
                     $into->status = '1';
                     $into->update();
                     
-                    
+               
                 }
-            } else {
+            else
+            {
                 return redirect('user/dashboard')->with('error', 'This Pin Already exist');
             }
 
@@ -201,21 +197,28 @@ class PinActiveController extends Controller
             return redirect('user/dashboard');
 
         }catch(Exception $e){
-            dd($e);
+            Log::error("Pin active controller error: ". $e->getMessage());
+            return redirect('user/dashboard')->with('error', 'Something went wrong');
         }
     }
 
     public function deactive($id,Request $request){
-        $change = PinModel::where('pin_sale_user_id', '=', $id)->first();
-      
-            $change->pin_status = '1';
-       
-       
-        $updated = transection::where('user_id', '=', $id)->first();
-      
-            $updated->tran_status = '2';
-       
-        $updated->update();
-        return redirect()->route('user/dashboard');
+        try{
+                $change = PinModel::where('pin_sale_user_id', '=', $id)->first();
+            
+                    $change->pin_status = '1';
+            
+            
+                $updated = transection::where('user_id', '=', $id)->first();
+            
+                    $updated->tran_status = '2';
+            
+                $updated->update();
+                return redirect()->route('user/dashboard');
+                
+        }catch(Exception $e){
+            Log::error("Pin active controller error: ". $e->getMessage());
+            return redirect('user/dashboard')->with('error', 'Something went wrong');
+        }
     }
 }
