@@ -96,6 +96,7 @@ class RegisterController extends Controller
         $providerHelp = new Provide_Help;
         $providerHelp->users_id = $user->id;
         $providerHelp->customer_id = $user->customer_id;
+        $providerHelp->status = '0';
         $providerHelp->save();
         return $user;
 

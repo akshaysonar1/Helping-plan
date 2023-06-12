@@ -93,7 +93,7 @@ class User extends Authenticatable
         return $this->hasMany(transection::class, 'receiver_id');
     }
 
-    public function getGetAmmountAttribute()
+    public function getGetAmmountAttribute($id)
     {
         $transactions = $this->transactions()->sum('get_ammount');
         if($transactions){
@@ -116,4 +116,12 @@ class User extends Authenticatable
         }
         return 0;
     }
+    
+    // function getPaymentdetails() {
+    //     $payments = $this->transactions;
+    //     if($payments && count($payments) > 0){
+    //         dd('hii');
+    //     }
+    //     dd($payments);
+    // }
 }

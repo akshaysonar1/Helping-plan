@@ -33,6 +33,7 @@ class UserSeeder extends Seeder
                 'google_pay_no' => '1234567890',
                 'upi_link' => '1234567890ybl',
                 'unique_pin' => 'abcdefghi1',
+                'created_at' => '2023-06-10 20:58:14',
             ]);
         }else{
             $user->user_type = '2';

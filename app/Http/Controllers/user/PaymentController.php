@@ -65,7 +65,9 @@ class PaymentController extends Controller
         
         $data->update();
         
-        $providerHelp = Provide_Help::where('users_id', $id)->first();
+        $providerHelp = Provide_Help::where('users_id', $id)
+        // ->orWhere('status', null)
+        ->where('status', '0')->first();
         $user = User::where('id', $id)->first();
         
         $payment = new user_payment;
@@ -78,7 +80,9 @@ class PaymentController extends Controller
         $payment->pay_status = '0';
           
         $payment->save();
-        $provideamount = Provide_Help::where('users_id', '=',Auth::user()->id)->first();
+        $provideamount = Provide_Help::where('users_id', Auth::user()->id)
+        ->where('status', '0')
+        ->first();
         
         $change = user_payment::where('user_id', $request->receiver_id)->first();
         //  $updated = Provide_Help::where('users_id', '=', $data->receiver_id)->first();

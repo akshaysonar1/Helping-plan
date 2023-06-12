@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\user_payment;
 use Illuminate\Http\Request;
 use App\Models\admin\PinModel;
 use App\Models\Provide_Help;
@@ -23,7 +24,8 @@ class PinActiveController extends Controller
             $user = PinModel::where('pin_number', '=', $request->pin_number)->first();
            // $users = User::where('user_type', '0')->where('status', '!=', '1')->with(['userPayment', 'provideHelpUser'])->get();
             //   dd($user);
-        
+            $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
+            // dd($users);
             if (empty($user->pin_sale_user_id)) {
                 if (empty($user->pin_ammount)) {
                     return redirect('user/dashboard')->with('error', 'This Pin is not valid');
@@ -60,7 +62,7 @@ class PinActiveController extends Controller
                                 $transection->provide_help_id = $checkProviderUser->id;
                                 $transection->tran_status = "0";
                                 
-                                $transection->save();
+                                    
                             }
                         }
                     }
@@ -80,44 +82,56 @@ class PinActiveController extends Controller
 
                         // $transection->save();
 
-                        $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
+                        
                        
                         $helpAmmount = $transection->get_ammount;
-                        if(isset($users) && count($users) > 0){
+                        $totalProvideHelps = Provide_Help::where('status', '0')->with('getUsers')->where('users_id', '!=', $authUser->id)->get();
+                    //    dd($totalProvideHelps, $totalProvideHelps[4]->getUsers->user_type == "0", $totalProvideHelps[4]->getUsers->getHelpAmmount, $totalProvideHelps[4]->getUsers->getAmmount && $helpAmmount > 0 , $totalProvideHelps[4]->getUsers->checkRemainingTransctions == 0 , $totalProvideHelps[4]->transacted_status == '0'); 
+                        if(isset($totalProvideHelps) && count($totalProvideHelps) > 0){
                             
-                            foreach($users as $userlist){
-                                
-                               // dd($userlist,$userlist->getHelpAmmount,$userlist->getAmmount,$helpAmmount,$userlist->checkRemainingTransctions);
-                                if($userlist->getHelpAmmount > $userlist->getAmmount && $helpAmmount > 0 && $userlist->checkRemainingTransctions == 0){
-                                    $totalGetAmmount = $userlist->getHelpAmmount-$userlist->getAmmount;
-                                    
-                                    $gethelpAmmount = $totalGetAmmount-$helpAmmount;
-                                    if($gethelpAmmount > 0){
-                                        $remainingHelpAmmount = 0;
-                                        $gethelpAmmount = abs($gethelpAmmount);
-                                        $remainedAmt = $totalGetAmmount-$gethelpAmmount;
-                                    }else{
-                                        $remainingHelpAmmount = abs($gethelpAmmount);
-                                        $remainedAmt = $totalGetAmmount;
+                            foreach($totalProvideHelps as $userlist){
+                                $userPaymentId = user_payment::where('user_id', $userlist->getUsers->id)->where('pay_status', '0')->first();
+                               // dd($userlist->getUsers,$userlist->getUsers->getHelpAmmount,$userlist->getUsers->getAmmount,$helpAmmount,$userlist->getUsers->checkRemainingTransctions);
+                               if($userlist->getUsers && !empty($userlist->getUsers)){
+                                if($userlist->getUsers->user_type == "0"){
+                                    if($userlist->getUsers->getHelpAmmount > $userlist->getUsers->getAmmount && $helpAmmount > 0 && $userlist->getUsers->checkRemainingTransctions == 0 && $userlist->transacted_status == '0'){
+                                        $totalGetAmmount = $userlist->getUsers->getHelpAmmount-$userlist->getUsers->getAmmount;
+                                        
+                                        $gethelpAmmount = $totalGetAmmount-$helpAmmount;
+                                        if($gethelpAmmount > 0){
+                                            $remainingHelpAmmount = 0;
+                                            $gethelpAmmount = abs($gethelpAmmount);
+                                            $remainedAmt = $totalGetAmmount-$gethelpAmmount;
+                                        }else{
+                                            $remainingHelpAmmount = abs($gethelpAmmount);
+                                            $remainedAmt = $totalGetAmmount;
+                                        }
+                                     
+                                        $payment = new transection();
+                                        $payment->user_id = $authUser->id;
+                                        $payment->sender_id = $authUser->id;
+                                        $payment->receiver_id = $userlist->getUsers->id;
+                                        $payment->past_receiver_id = $userlist->getUsers->unique_pin;
+                                        $payment->provide_help_id = $userlist->getUsers->provideHelpUser->id;
+                                        // $payment->payment_success_date = $currentDate;
+                                        $payment->tran_status = 0;
+                                        $payment->create_date = $currentDate;
+                                        $payment->end_date = $tomorrow;
+                                        $payment->get_ammount = $remainedAmt;
+                                        $payment->split_status = '1';
+                                        $payment->pin_number = $transection->pin_number;
+                                        $payment->save();
+                                        
+                                        $receiverProvideHelp = Provide_Help::where('id', $userlist->id)->first();
+                                        if($remainingHelpAmmount == 0){
+                                            $receiverProvideHelp->transacted_status = '1';
+                                            $receiverProvideHelp->update();
+                                        }
+    
+                                        $helpAmmount = $remainingHelpAmmount;
                                     }
-                                 
-                                    $payment = new transection();
-                                    $payment->user_id = $authUser->id;
-                                    $payment->sender_id = $authUser->id;
-                                    $payment->receiver_id = $userlist->id;
-                                    $payment->past_receiver_id = $userlist->unique_pin;
-                                    $payment->provide_help_id = $userlist->provideHelpUser->id;
-                                    // $payment->payment_success_date = $currentDate;
-                                    $payment->tran_status = 0;
-                                    $payment->create_date = $currentDate;
-                                    $payment->end_date = $tomorrow;
-                                    $payment->get_ammount = $remainedAmt;
-                                    $payment->split_status = '1';
-                                    $payment->pin_number = $transection->pin_number;
-                                    $payment->save();
-                                    
-                                    $helpAmmount = $remainingHelpAmmount;
                                 }
+                               } 
                             }
                         }
                         
@@ -154,13 +168,24 @@ class PinActiveController extends Controller
                     $data->pin_sale_user_id = $request->id;
                     $data->pin_status = '0';
                     $data->update();
-                    $providerHelp = Provide_Help::where('users_id', $request->id)->first();
+
+                    $providerHelp = Provide_Help::where('users_id', $request->id)->where('status', '0')->first();
+                    // dd($providerHelp);
+                    if($providerHelp && !empty($providerHelp)){
+                        $providerHelp = $providerHelp;
+                    }else{
+                        $providerHelp = new Provide_Help();
+                    }
+
                     $providerHelp->provide_help_ammount = $provide_help_ammount;
                     $providerHelp->get_help_ammount = $get_help_ammount;
                     $providerHelp->ammount_Received = '0';
                     $providerHelp->ammount_pendding = $get_help_ammount;
+                    $providerHelp->customer_id = $authUser->customer_id;
                     $providerHelp->status = '0';
-                    $providerHelp->update();
+                    $providerHelp->users_id = $request->id;
+                    $providerHelp->save();
+
                     $into = User::where('id', $request->id)->first();
                     $into->unique_pin = $request->pin_number;
                     $into->status = '1';
