@@ -74,7 +74,7 @@
                             <tbody style="color: #4260cb">
                                 <tr>
                                     <th scope="row">Current Pin:</th>
-                                    <td>{{ $pindeatils->unique_pin }}</td>
+                                    <td>{{ Auth::user()->unique_pin }}</td>
 
                                 </tr>
                                 <tr>
@@ -206,6 +206,9 @@
                                                             U-{{ substr($user->receiverUser ?
                                                             $user->receiverUser->customer_id :
                                                             '',5,5)}}
+                                                        </p>
+                                                        <p class="date-text">
+                                                            {{ Auth::user()->created_at->todatestring() }}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -446,6 +449,9 @@
                                                             U-{{ substr($show->receiverUser ?
                                                             $show->receiverUser->customer_id :
                                                             '',5,5)}}
+                                                        </p>
+                                                        <p class="date-text">
+                                                            {{ Auth::user()->created_at->todatestring() }}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -986,6 +992,9 @@
                                                     U-{{ substr($user->receiverUser ? $user->receiverUser->customer_id :
                                                     '',5,5)}}
                                                 </p>
+                                                <p class="date-text">
+                                                    {{ Auth::user()->created_at->todatestring() }}
+                                                </p>
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
                                                     $user->receiverUser->created_at :
                                                     ""->todatestring()}}</p>--}}
@@ -1197,6 +1206,9 @@
                                                 <p class="id-text">
                                                     U-{{ substr($show->receiverUser ? $show->receiverUser->customer_id :
                                                     '',5,5)}}
+                                                </p>
+                                                <p class="date-text">
+                                                    {{ Auth::user()->created_at->todatestring() }}
                                                 </p>
                                                 {{-- {{ dd($user->receiverUser) }} --}}
                                                 {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -1614,6 +1626,9 @@
                                                             U-{{ substr($show->receiverUser ?
                                                             $show->receiverUser->customer_id :
                                                             '',5,5)}}
+                                                        </p>
+                                                        <p class="date-text">
+                                                            {{ Auth::user()->created_at->todatestring() }}
                                                         </p>
                                                         {{-- {{ dd($user->receiverUser) }} --}}
                                                         {{-- <p class="date-text">{{ $user->receiverUser ?
@@ -2143,7 +2158,7 @@ Auth::user()->status = Null )
 
 <!-- congratulation popup start  -->
 
-@if($data->status !=null && $data->get_help_ammount == $data->get_help_ammount && $data->ammount_pendding == 0)
+@if($data->status ==1 && $data->get_help_ammount == $data->get_help_ammount && $data->ammount_pendding == 0)
 
 
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"

@@ -50,6 +50,7 @@ class AdminSeeder extends Seeder
                 'phone_pay_no' => '1234567890',
                 'google_pay_no' => '1234567890',
                 'upi_link' => '1234567890ybl',
+                'created_at' => '2023-06-10 20:58:14',
             ]);
 
 

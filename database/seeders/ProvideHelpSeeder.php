@@ -27,8 +27,11 @@ class ProvideHelpSeeder extends Seeder
                 $provideHelp->ammount_Received = 0;
                 $provideHelp->ammount_pendding = 2000000;
                 $provideHelp->customer_id = time() . random_int(1000, 9999999999);
-                $provideHelp->status = "1";
+                $provideHelp->status = "0";
                 $provideHelp->users_id = $user->id;
+                $provideHelp->save();
+            }else{
+                $provideHelp->status = "0";
                 $provideHelp->save();
             }
         }
