@@ -33,9 +33,9 @@ class DeshboardController extends Controller
 
                     $showusers = transection::where('tran_status', '=', '1')->where('user_id', Auth::user()->id)->get();
 
-                    $data = Provide_Help::where('users_id', Auth::user()->id)->latest()->first();
-                    
-            
+                    $data = Provide_Help::where('users_id', Auth::user()->id)->where('status', '0')->where('transacted_status', '0')->first();
+                    // dd($data);
+                 
 
                     $user = user_payment::join('users', 'users.id', '=', 'user_payments.user_id')->where('ammount_pendding', '>', 0)->where('user_id', '!=', (Auth::user()->id))->get();
 
@@ -48,7 +48,7 @@ class DeshboardController extends Controller
                     $pindeatils =Provide_Help::where('users_id', Auth::user()->id)
                     ->where('status', '0')
                     ->first();
-
+                    
                     return view('user.dashboard', compact('userId', 'currentDate', 'data', 'user', 'conform', 'users', 'showusers', 'popup', 'noteData', 'congoPopUp', 'pindeatils'));
 
                 } else {

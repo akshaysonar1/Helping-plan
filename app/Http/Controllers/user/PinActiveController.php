@@ -22,7 +22,7 @@ class PinActiveController extends Controller
        try{
          
             $user = PinModel::where('pin_number', '=', $request->pin_number)->first();
-          
+            
             $users = User::where('user_type', '0')->where('status','1')->with(['userPayment', 'provideHelpUser'])->get();
            
             if (empty($user->pin_sale_user_id)) {
@@ -83,8 +83,9 @@ class PinActiveController extends Controller
                         
                        
                         $helpAmmount = $transection->get_ammount;
-                        $totalProvideHelps = Provide_Help::where('status', '0')->with('getUsers')->where('users_id', '!=', $authUser->id)->get();
-                     
+                        
+                        $totalProvideHelps = Provide_Help::where('status', '0')->where('transacted_status', '0')->with('getUsers')->where('users_id', '!=', $authUser->id)->get();
+                    //  dd($totalProvideHelps);
                         if(isset($totalProvideHelps) && count($totalProvideHelps) > 0){
                             
                             foreach($totalProvideHelps as $userlist){
@@ -92,7 +93,7 @@ class PinActiveController extends Controller
                                
                                if($userlist->getUsers && !empty($userlist->getUsers)){
                                 if($userlist->getUsers->user_type == "0"){
-                                    if($userlist->getUsers->getHelpAmmount > $userlist->getUsers->getAmmount && $helpAmmount > 0 && $userlist->getUsers->checkRemainingTransctions == 0 && ($userlist->transacted_status == '0' || $userlist->status == '0')){
+                                    if($userlist->getUsers->getHelpAmmount > $userlist->getUsers->getAmmount && $helpAmmount > 0 && $userlist->getUsers->checkRemainingTransctions == 0){
                                         $totalGetAmmount = $userlist->getUsers->getHelpAmmount-$userlist->getUsers->getAmmount;
                                         $gethelpAmmount = $totalGetAmmount-$helpAmmount;
                                         if($gethelpAmmount > 0){
@@ -164,7 +165,7 @@ class PinActiveController extends Controller
                     $data->pin_status = '0';
                     $data->update();
 
-                    $providerHelp = Provide_Help::where('users_id', $request->id)->where('status', '0')->first();
+                    $providerHelp = Provide_Help::where('users_id', $request->id)->where('status', '0')->where('transacted_status', '0')->first();
                      
                     if($providerHelp && !empty($providerHelp)){
                         $providerHelp = $providerHelp;

@@ -187,7 +187,7 @@
                                     --}}
                                     @endif
 
-                                    <div class="col-xl-6 responsive-green">
+                                    <div class="col-xl-6">
 
                                         @if(isset($users) && count($users) > 0 && Auth::user()->status==1)
                                         @foreach ($users as $user)
@@ -2155,7 +2155,7 @@ Auth::user()->status = Null )
 
 <!-- congratulation popup start  -->
 
-@if($data->status ==1 && $data->get_help_ammount == $data->get_help_ammount && $data->ammount_pendding == 0)
+@if($data->transacted_status ==1 && $data->get_help_ammount == $data->get_help_ammount && $data->ammount_pendding == 0)
 
 
 <div class="modal fade pop-modal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static"
