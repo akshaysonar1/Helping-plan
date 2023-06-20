@@ -128,6 +128,16 @@
                                     <input type="text" name="pin_code" id="pin_code" placeholder="Enter Zip Code" class="form-control" oninput="process(this)"  value="{{ old('pin_code') }}" required maxlength="10">
                                 </div>
                             </div>
+                           <div class="row">
+                            <div class="col-12">
+                                <div class="form-check terms">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                   <p> I agree with  &nbsp;<a href="" data-bs-toggle="modal" data-bs-target="#terms-modal">Terms & Conditions<a> </p> 
+                                    </label>
+                                  </div>
+                            </div>
+                           </div>
                             <div class="row">
                                 <div class="col-12">
                                     <button type="submit">Submit</button>
@@ -228,7 +238,25 @@
     </script>
     <!-- Jquery Validation End -->
 
+    {{-- terms & condition modal --}}
 
+    <div class="modal fade" id="terms-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+             
+              <button type="button" class="btn btn-primary">I Agree</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <!-- Vendor JS Files -->
 

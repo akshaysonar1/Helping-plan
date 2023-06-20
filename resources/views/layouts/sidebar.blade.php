@@ -94,6 +94,12 @@
             <span>Contact Details</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('UsersDetails') }}">
+            <i class="fas fa-user" style="color: #ffffff;"></i>
+            <span>Users Details</span></a>
+    </li>
+
 
 
 

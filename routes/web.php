@@ -74,6 +74,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/helpswitch', [HomeController::class, 'HelpSwitch'])->name('helpswitch');
         Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
         Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
+        Route::get('UsersDetails', [CustomerDetailsController::class, 'UsersDetails'])->name('UsersDetails');
+      
     
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
        
@@ -104,7 +106,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('contactdetails', [CustomerDetailsController::class, 'contactdetails'])->name('contactdetails');
 
         Route::get('payconfarm', [CustomerDetailsController::class, 'payconfarm'])->name('payconfarm');
-
+       
     });
     Route::name('forgotpassword.')->prefix('forgotpassword')->group(function () {
         Route::get('forgotpassword', [ForgotPasswordController::class, 'forgotpassword'])->name('forgotpassword');
@@ -161,4 +163,9 @@ Route::middleware(['auth', 'auth'])->group(function () {
 Route::get('run-seeder',function(){ 
     Artisan::call("db:seed");
     return 'Seeder run successfully !'; 
+});
+
+Route::get('/migrate', function(){
+    \Artisan::call('migrate');
+    return 'Migration ran successfully !';
 });

@@ -307,7 +307,7 @@
                             </a>
                            
                             <a href="" class="pos_btn btn-zigzag btn-whatsapp">
-                                <i class="mdi mdi-whatsapp mr-2"></i> 6354422335
+                                <i class="mdi mdi-whatsapp mr-2"></i> 9726699782
                             
                             </a>
                             </div>

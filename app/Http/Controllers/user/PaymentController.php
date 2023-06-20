@@ -59,6 +59,7 @@ class PaymentController extends Controller
     public function conformetion($id, Request $request)
     {
         try{
+            
                 $data = transection::where('user_id', $id)->where('receiver_id', $request->receiver_id)->where('pin_number', $request->unique_pin)->first();
                 
                 $data->tran_status = '1';
@@ -67,12 +68,18 @@ class PaymentController extends Controller
                 
                 $data->update();
                 
-                $providerHelp = Provide_Help::where('users_id', $id)
-            
-                ->where('status', '0')->first();
+                $providerHelp = Provide_Help::where('users_id', $id)->where('status', '0')->first();
+                
                 $user = User::where('id', $id)->first();
                 
-                $payment = new user_payment;
+                $existUser = user_payment::where("user_id",$providerHelp->users_id)->where("pay_status","0")->first();
+                
+                if(isset($existUser) && $existUser != NULL){
+                    $payment = $existUser;
+                }
+                else{
+                    $payment = new user_payment;   
+                }
                 $payment->user_id = $providerHelp->users_id;
                 $payment->provide_help_ammount = $providerHelp->provide_help_ammount;
                 $payment->get_help_ammount = $providerHelp->get_help_ammount;
@@ -85,8 +92,7 @@ class PaymentController extends Controller
                 $provideamount = Provide_Help::where('users_id', Auth::user()->id)
                 ->where('status', '0')
                 ->first();
-                
-                $change = user_payment::where('user_id', $request->receiver_id)->first();
+                $change = user_payment::where('user_id', $request->receiver_id)->where('ammount_pendding', '!=', '0')->where('pay_status', '0')->first();
                 
                 if(!empty($change->get_help_ammount)){
 
@@ -151,7 +157,7 @@ class PaymentController extends Controller
             
                 $data->save();
 
-                return redirect('user/dashboard');
+                // return redirect('user/dashboard');
 
         }catch(Exception $e){
             Log::error("Payment controller error: ". $e->getMessage());

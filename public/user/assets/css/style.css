@@ -2591,3 +2591,9 @@ tbody, td, tfoot, th, thead, tr{
   .responsive-green{
     margin-top: 20px;
   }
+  .terms p a{
+    text-decoration: none;
+  }
+  .terms p{
+    font-size: 12px !important;
+  }

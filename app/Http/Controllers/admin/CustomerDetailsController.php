@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProvideHelp;
 use Illuminate\Http\Request;
 use App\Models\Provide_Help;
 use App\Models\user_payment;
+use App\Models\User;
 use DB;
 use Auth;
 use Exception;
@@ -42,5 +44,14 @@ class CustomerDetailsController extends Controller
         $contact = ContactUs::orderBy('id', 'DESC')->get();
         
         return view('customer_details.contactus', compact('contact'));
+    }
+
+    public function UsersDetails(){
+        $user=User::where('unique_pin','!=','Null')->get();
+       
+        $details= Provide_Help::join('users','users.id','=', 'provide__helps.users_id')->orwhere('users.unique_pin',Null)->orwhere('provide__helps.get_help_ammount','==','provide__helps.ammount_Received')
+     ->get() ;
+        
+        return view('admin.UsersDetails', compact('details'));
     }
 }
