@@ -1,7 +1,7 @@
 @extends('layouts.master')
 @section('content')
     <div class="container">
-
+        <input type="hidden" id="csrf-token" value="{{ csrf_token() }}">
         <div class="card o-hidden border-0 shadow-lg my-5">
             @if (Session::has('message'))
             <p class="alert alert-info session-error">{{ Session::get('message') }}</p>
@@ -18,9 +18,9 @@
                             <thead>
                                 <tr>
                                     <th>Sr.no</th>
+                                    <th>Name</th>
                                     <th>Mobile</th>
-                                    <th>Message</th>
-                                    <th>Reset Password</th>
+                                    <th>Delete</th>
 
                                 </tr>
                             </thead>
@@ -34,54 +34,15 @@
                                         <td>{{ $row->name }}</td>
                                         <td>{{ $row->mobile }}</td>
                                         <td>  {{-- <td><a class="examps"> helo</a></td> --}}
-                                        @if($row->password_status == 0)
-                                         <button type="button" class="btn btn-primary examps" data-toggle="modal"
-                                                data-target="#exampleModal" data-id="{{ $row->id }}"
-                                                data-mobile="{{ $row->mobile }} ">Reset Password</button>
-                                            @else
-                                            <b>Password Reseted</b>
-                                            <b><p>{{ $row->created_at }}</p> </b>
+                                        
+                                        <a href="" style="text-decoration: none"> <button
+                                            class="btn btn-danger show_confirm" data-id="{{$row['users_id']}}"
+                                            data-status="0">Delete</button></a>
+                                            
                                             {{-- <button type="button" class="btn btn-success examps"></button> --}}
-                                        @endif
+                                       
                                     </td>
-                                        <div class="modal fade exampleModal" id="exampleModal" tabindex="-1" role="dialog"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">Reset Password</h5>
-                                                        <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ route('forgotpassword.passwordupdate') }}"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('POST')
-                                                            <div class="form-group">
-                                                                <label for="mobile" class="col-form-label">Mobile</label>
-                                                                <input type="text" class="form-control" name="mobile"
-                                                                    id="mobile" value="{{ $row->mobile }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="recipient-name" class="col-form-label">New
-                                                                    Password</label>
-                                                                <input type="text" class="form-control" name="password">
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close</button>
-                                                                <button type="submit"
-                                                                    class="btn btn-primary">Reset</button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
 
                                     </tr>
                                     @php
@@ -131,4 +92,47 @@ $(document).ready(function() {
             });
         });
         </script>
+
+{{-- delete button script --}}
+
+<script type="text/javascript">
+    $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var id = $(this).data('id'); 
+           
+           
+          
+            event.preventDefault();
+            swal({
+                
+                title: `Are you sure you want to change Status of this record?`,
+                // text: "If you change status this, it will be gone forever.",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: "{{ route('userDelete') }}",
+                        type: "POST",
+                        data: {
+                            id: id,
+                            "_token": $("#csrf-token").val(),
+                        },
+                        success: function (response) {
+                            console.log(response.message);
+                            swal({
+                                text: response.message,
+                                icon: "success",
+                                button: "Ok",
+                            }).then(function() {
+                                location.reload();
+                            });
+                        }
+                    });
+                }
+            }); 
+        });
+</script>
 @endsection

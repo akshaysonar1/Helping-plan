@@ -75,6 +75,7 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
         Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
         Route::get('UsersDetails', [CustomerDetailsController::class, 'UsersDetails'])->name('UsersDetails');
+        Route::post('userDelete', [CustomerDetailsController::class, 'userDelete'])->name('userDelete');
       
     
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -47,11 +47,17 @@ class CustomerDetailsController extends Controller
     }
 
     public function UsersDetails(){
-        $user=User::where('unique_pin','!=','Null')->get();
+        // $details=User::where('unique_pin',Null)->where('user_type' ,'==','0')->get();
        
-        $details= Provide_Help::join('users','users.id','=', 'provide__helps.users_id')->orwhere('users.unique_pin',Null)->orwhere('provide__helps.get_help_ammount','==','provide__helps.ammount_Received')
+        $details= Provide_Help::join('users','users.id','=', 'provide__helps.users_id')->orwhere('users.unique_pin',Null)
      ->get() ;
         
         return view('admin.UsersDetails', compact('details'));
+    }
+
+    public function userDelete(Request $request){
+        $user=User::where('id',$request->id)->first();
+        $user->delete();
+        return response()->json(['message' => "record are deleted"]);
     }
 }
