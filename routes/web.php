@@ -53,12 +53,11 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/', [UserController::class, 'index'])->name('index');
 
 Route::get('/user', [UserController::class, 'user'])->name('user');
-
+Route::get('/terms-and-condition', [UserController::class, 'termsCondition'])->name('terms.and.condition');
 Route::get('/demo', [DemoController::class, 'demo']);
 Route::name('auth.')->prefix('auth')->group(function () {
     Route::get('/reset', [PasswordResetController::class, 'reset'])->name('reset');
     Route::POST('/store', [PasswordResetController::class, 'store'])->name('store');
-
 });
 
 
@@ -75,12 +74,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('status/change/{user_Id}', [HomeController::class, 'UserStatus'])->name('status');
         Route::get('/pinhistory', [PinHistoryController::class, 'SearchPin'])->name('pinhistory');
         Route::get('UsersDetails', [CustomerDetailsController::class, 'UsersDetails'])->name('UsersDetails');
-      
-    
+
+
         Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-       
+
         Route::get('/home/search', [App\Http\Controllers\HomeController::class, 'dashboardPinData'])->name('home.search');
-    
     });
     Route::post('/home', [App\Http\Controllers\HomeController::class, 'storenote'])->name('home');
     Route::prefix('admin')->controller(GenrateUniqueCodeController::class)->group(function () {
@@ -91,7 +89,6 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('/helpswitch', 'HelpSwitch')->name('helpswitch');
         Route::get('status/change/{user_Id}', 'UserStatus')->name('status');
         Route::post('pinsale', [PinSaleController::class, 'pinsale'])->name('pinsale');
-       
     });
 
     Route::name('admin.')->prefix('admin')->group(function () {
@@ -106,15 +103,11 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
         Route::get('contactdetails', [CustomerDetailsController::class, 'contactdetails'])->name('contactdetails');
 
         Route::get('payconfarm', [CustomerDetailsController::class, 'payconfarm'])->name('payconfarm');
-       
     });
     Route::name('forgotpassword.')->prefix('forgotpassword')->group(function () {
         Route::get('forgotpassword', [ForgotPasswordController::class, 'forgotpassword'])->name('forgotpassword');
         Route::POST('passwordupdate', [ForgotPasswordController::class, 'passwordupdate'])->name('passwordupdate');
-
     });
-
-
 });
 
 /*
@@ -127,13 +120,12 @@ Route::name('user.')->prefix('user')->group(function () {
     Route::name('layouts.')->prefix('layouts')->group(function () {
         Route::get('index', [UserController::class, 'index'])->name('index');
         Route::get('error', [UserController::class, 'error'])->name('error');
-
     });
     Route::get('contact', [UserController::class, 'contact'])->name('contact');
     Route::POST('contactus', [ContactController::class, 'contactus'])->name('contactus');
     Route::get('privacy', [UserController::class, 'privacy'])->name('privacy');
     Route::get('term', [UserController::class, 'term'])->name('term');
-   
+
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('/', [DeshboardController::class, 'dashboard'])->name('show');
     });
@@ -155,17 +147,16 @@ Route::name('user.')->prefix('user')->group(function () {
 
 Route::middleware(['auth', 'auth'])->group(function () {
     Route::name('user.')->prefix('user')->group(function () {
-        
     });
 });
 
 
-Route::get('run-seeder',function(){ 
+Route::get('run-seeder', function () {
     Artisan::call("db:seed");
-    return 'Seeder run successfully !'; 
+    return 'Seeder run successfully !';
 });
 
-Route::get('/migrate', function(){
+Route::get('/migrate', function () {
     \Artisan::call('migrate');
     return 'Migration ran successfully !';
 });

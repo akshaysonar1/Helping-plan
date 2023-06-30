@@ -35,9 +35,9 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto" href="{{ route('index') }}">HOME</a></li>
-            
+
                     <li><a class="nav-link scrollto" href="{{ route('user.contact') }}">CONTACT US</a></li>
-                  
+
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
@@ -133,14 +133,14 @@
                                 <div class="form-check terms">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
-                                   <p> I agree with  &nbsp;<a href="" data-bs-toggle="modal" data-bs-target="#terms-modal">Terms & Conditions<a> </p> 
+                                   <p> I agree with  &nbsp;<a href="{{ route('terms.and.condition') }}">Terms & Conditions<a> </p>
                                     </label>
                                   </div>
                             </div>
                            </div>
                             <div class="row">
                                 <div class="col-12">
-                                    <button type="submit">Submit</button>
+                                    <button type="submit" id="form_submit_btn" disabled>Submit</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -176,7 +176,7 @@
                 rules: {
                     name: {
                         required: true,
-                       
+
                     },
                     mobile: {
                         required: true,
@@ -205,7 +205,7 @@
                 messages: {
                     name: {
                         required: 'Please Enter Name',
-                        
+
                     },
                     mobile: {
                         required: 'Please Enter Mobile Number',
@@ -235,6 +235,15 @@
                 }
             });
         });
+
+        $('#flexCheckDefault').on('change', function(){
+            console.log('hii');
+            if($(this).is(':checked')){
+                $('#form_submit_btn').prop('disabled', false);
+            }else{
+                $('#form_submit_btn').prop('disabled', true);
+            }
+        })
     </script>
     <!-- Jquery Validation End -->
 
@@ -251,7 +260,7 @@
               ...
             </div>
             <div class="modal-footer">
-             
+
               <button type="button" class="btn btn-primary">I Agree</button>
             </div>
           </div>

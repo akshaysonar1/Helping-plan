@@ -43,4 +43,8 @@ class UserController extends Controller
     {
         return view('404');
     }
+
+    function termsCondition() {
+        return view('user.terms-condition');
+    }
 }

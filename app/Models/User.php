@@ -69,14 +69,14 @@ class User extends Authenticatable
     }
     public function userPayment()
     {
-        return $this->hasMany(user_payment::class,'user_id');
+        return $this->hasMany(user_payment::class, 'user_id');
     }
 
     public function getPaymentAmmountArttribute()
     {
         $helpAmmount = $this->provideHelp()->sum('get_help_ammount');
         $ammountReceived = $this->provideHelp()->sum('ammount_received');
-        if($helpAmmount <= $ammountReceived){
+        if ($helpAmmount <= $ammountReceived) {
             return 1;
         }
         return 0;
@@ -84,7 +84,7 @@ class User extends Authenticatable
 
     public function getGetHelpAmmountAttribute()
     {
-         
+
         $helpAmmountTotal = $this->provideHelp()->sum('get_help_ammount');
         return $helpAmmountTotal;
     }
@@ -95,8 +95,8 @@ class User extends Authenticatable
 
     public function getGetAmmountAttribute($id)
     {
-        $transactions = $this->transactions()->sum('get_ammount');
-        if($transactions){
+        $transactions = $this->transactions()->where('tran_status', '!=', '2')->sum('get_ammount');
+        if ($transactions) {
             return $transactions;
         }
 
@@ -109,12 +109,11 @@ class User extends Authenticatable
     }
     public function getCheckRemainingTransctionsAttribute()
     {
-        $transactions = $this->senderTransactions()->where('tran_status', '!=', '1')->get();
-      
-        if(count($transactions) > 0){
+        $transactions = $this->senderTransactions()->where('tran_status', '0')->get();
+
+        if (count($transactions) > 0) {
             return 1;
         }
         return 0;
     }
-    
 }

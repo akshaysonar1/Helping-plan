@@ -8,13 +8,7 @@
                         <div class=" banner-text pt-5">
                             <h1 class="banner-text">Welcome to <span class="span-text">umoney help</span></h1>
                             <div class="banner-para">
-                                <h2>Lorem Ipsum is simply dummy text of the printing and typesetting industry.Ullamco
-                                    laboris nisi ut
-                                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                    velit esse cillum
-                                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                    culpa qui
-                                    officia deserunt mollit anim id est laborum</h2>
+                                <h2>Making a difference to every day - empowering our clients, young and old, to live life to the full. Invested in working together in the management of Litter and protecting the world we all share.</h2>
                             </div>
                             <div class="pt-3">
                                 {{-- <button type="button" class="btn btn-form-1 p-3">Know More</button> --}}
@@ -35,6 +29,28 @@
 
         <!-- ======= About Section ======= -->
         <section id="about" class="about section-bg">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>About</h2>
+                    <h3>Find Out More <span>About Us</span></h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6" data-aos="fade-right" data-aos-delay="100">
+                        <img src="{{ asset('user/assets/img/about-us-img.png') }}" class="img-fluid w-100" alt="">
+                    </div>
+                    <div class="col-lg-6 pt-4 pt-lg-0 content d-flex flex-column justify-content-center" data-aos="fade-up"
+                        data-aos-delay="100">
+                        <p class="fst-italic">
+                            Umoney Help Company By offering financial guidance and support through an India-based company, the user actively assists individuals in maximizing their wealth. Through strategic collaborations and leveraging the opportunities provided by the company, the user is able to generate increased financial returns, further solidifying their own prosperity.
+                        </p>
+                        <p>
+                            By partnering with an India-based company, the user leverages the expertise and market potential of the region to amplify their financial gains. Through their collaborative efforts, the user taps into the thriving Indian market, capitalizing on its dynamic economy and unlocking new avenues for wealth creation. As a result, the user experiences exponential growth in their finances, propelled by strategic partnerships and the opportunities presented by the India-based company.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {{-- <section id="about" class="about section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>About</h2>
@@ -84,7 +100,8 @@
                     </div>
                 </div>
             </div>
-        </section><!-- End About Section -->
+        </section> --}}
+        <!-- End About Section -->
         <!-- ======= Counts Section ======= -->
         <!-- <section id="counts" class="counts">
             <div class="container" data-aos="fade-up">
@@ -305,10 +322,10 @@
                             <a href="{{ route('user.contact') }}" class="pos_btn btn-zigzag">
                                 <i class="fe-phone-call mr-2"></i> Get In Touch
                             </a>
-                           
+
                             <a href="" class="pos_btn btn-zigzag btn-whatsapp">
                                 <i class="mdi mdi-whatsapp mr-2"></i> 9726699782
-                            
+
                             </a>
                             </div>
                         </div>
